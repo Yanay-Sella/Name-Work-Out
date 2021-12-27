@@ -1,18 +1,17 @@
 "use strict";
 
-const addFirstWorkoutBtn = document.querySelector(".add_first_workout_btn");
-const workoutName = document.querySelector(".workout_name");
-const workoutBody = document.querySelector(".workout_body");
-const workoutNameP = document.querySelector(".workout_name_p");
-const set = document.querySelector(".set");
-const workoutBodyMain = document.querySelector(".workout_body_main");
-const workoutBodyEnd = document.querySelector(".workout_body_end");
-const exreciseNameBtn = document.querySelector(".exrecise_name_btn");
-const exreciseName = document.querySelector(".exrecise_name");
+let addFirstWorkoutBtn = document.querySelector(".add_first_workout_btn");
+let workoutName = document.querySelector(".workout_name");
+let workoutBody = document.querySelector(".workout_body");
+let workoutNameP = document.querySelector(".workout_name_p");
+let set = document.querySelector(".set");
+let workoutBodyMain = document.querySelector(".workout_body_main");
+let workoutBodyEnd = document.querySelector(".workout_body_end");
+let exreciseNameBtn = document.querySelector(".exrecise_name_btn");
 let addSetBtn = document.querySelector(".add_set_btn");
-const allSetsSame = document.querySelector(".all_sets_same");
-const addFirstSetBtn = document.querySelector(".first_add_set_btn");
-const addExreciseBtn = document.querySelector(".add_exercise_btn");
+let allSetsSame = document.querySelector(".all_sets_same");
+let addFirstSetBtn = document.querySelector(".first_add_set_btn");
+let addExreciseBtn = document.querySelector(".add_exercise_btn");
 
 let allWorkouts = [];
 const setHtml = `
@@ -80,13 +79,15 @@ class Workout {
 
   addExrecise(exrecise) {
     this.exrecises.push(exrecise);
+    return this;
   }
 }
 
 class Exrecise {
-  constructor(name) {
+  constructor(name, div) {
     this.name = name;
     this.sets = [];
+    this.div = div;
   }
 
   addSet(set) {
@@ -94,50 +95,71 @@ class Exrecise {
   }
 }
 
-addFirstWorkoutBtn.addEventListener("click", addWorkout);
+addFirstWorkoutBtn.addEventListener("click", addWorkout.bind(this));
 
 addSetBtn.addEventListener("click", addSet);
 
-exreciseNameBtn.addEventListener("click", createExrecice);
+exreciseNameBtn.addEventListener("click", showWorkoutBody);
 
 allSetsSame.addEventListener("click", toggleAllSetsTheSame);
 
 addExreciseBtn.addEventListener("click", function (e) {
   e.preventDefault();
   this.parentElement.parentElement.insertAdjacentHTML("afterend", exreciseHtml);
+  createExrecice.call(this);
+  updateNewExrecise();
+  updateAddSetBtn();
 });
 
 function toggleAllSetsTheSame(e) {
+  const closestWorkoutBody = this.closest(".workout_body");
   if (this.checked) {
-    document.querySelector(".sets").classList.remove("hidden");
-    document.querySelector(".first_add_set_btn").classList.add("hidden");
-    document.querySelector(".first_add_set_btn").disabled = true;
+    closestWorkoutBody.querySelector(".sets").classList.remove("hidden");
+    closestWorkoutBody
+      .querySelector(".first_add_set_btn")
+      .classList.add("hidden");
+    closestWorkoutBody.querySelector(".first_add_set_btn").disabled = true;
 
-    document.querySelectorAll(".set").forEach((set) => {
+    closestWorkoutBody.querySelectorAll(".set").forEach((set) => {
       if (!set.classList.contains("first_set")) set.remove();
       console.log(set);
     });
   } else {
-    document.querySelector(".first_reps").classList.add("reps");
-    document.querySelector(".first_weight").classList.add("weight");
-    document.querySelector(".first_rest").classList.add("rest");
+    closestWorkoutBody.querySelector(".first_reps").classList.add("reps");
+    closestWorkoutBody.querySelector(".first_weight").classList.add("weight");
+    closestWorkoutBody.querySelector(".first_rest").classList.add("rest");
 
-    document.querySelector(".sets").classList.add("hidden");
-    document.querySelector(".first_add_set_btn").classList.remove("hidden");
-    document.querySelector(".first_add_set_btn").disabled = false;
+    closestWorkoutBody.querySelector(".sets").classList.add("hidden");
+    closestWorkoutBody
+      .querySelector(".first_add_set_btn")
+      .classList.remove("hidden");
+    closestWorkoutBody.querySelector(".first_add_set_btn").disabled = false;
   }
 }
 
-function createExrecice(e) {
+function createExrecice() {
+  let workoutBody = this.closest(".workout_body");
+  let exreciseName = workoutBody.querySelector(".exrecise_name");
+  updateNewExrecise();
+  updateAddSetBtn();
   if (exreciseName.value) {
     let exName = exreciseName.value;
-    const ex = new Exrecise(exName);
+    const ex = new Exrecise(exName, this.closest(".workout_body"));
     curExe = ex;
-    allWorkouts.find((v) => v == curWorkout).exrecises.push(curExe);
-
-    workoutBodyMain.classList.remove("hidden");
-    workoutBodyEnd.classList.remove("hidden");
+    allWorkouts.find((v) => v == curWorkout).addExrecise(curExe);
+    console.log(workoutBody);
+    workoutBody.querySelector(".exercise_number").textContent =
+      allWorkouts.find((v) => v == curWorkout).exrecises.indexOf(curExe) +
+      1 +
+      ".";
   } else alert("enter exrecise name");
+}
+
+function showWorkoutBody() {
+  workoutBodyMain =
+    this.closest(".workout_body").querySelector(".workout_body_main");
+  workoutBodyMain.classList.remove("hidden");
+  workoutBodyEnd.classList.remove("hidden");
 }
 
 function addWorkout(e) {
@@ -152,23 +174,31 @@ function addWorkout(e) {
 
     workoutNameP.classList.remove("hidden");
     workoutNameP.textContent = w.name;
+    createExrecice.bind(this);
+    showWorkoutBody.bind(this);
   } else alert("enter the workout name");
 }
 
 function addSet(e) {
   e.preventDefault();
 
-  //   allWorkouts.find(curWorkout).addExrecise(ex);
+  workoutBodyMain =
+    this.closest(".workout_body").querySelector(".workout_body_main");
 
-  const reps = document.querySelector(".reps");
-  const weight = document.querySelector(".weight");
-  const rest = document.querySelector(".rest");
+  const reps = workoutBodyMain.querySelector(".reps");
+  const weight = workoutBodyMain.querySelector(".weight");
+  const rest = workoutBodyMain.querySelector(".rest");
 
   const repsV = reps.value;
   const weightV = weight.value;
   const restV = rest.value;
 
-  const set = { reps: repsV, weight: weightV, rest: restV };
+  const set = {
+    reps: repsV,
+    weight: weightV,
+    rest: restV,
+    div: this.parentElement,
+  };
 
   allWorkouts
     .find((v) => v == curWorkout)
@@ -189,10 +219,22 @@ function addSet(e) {
 function updateAddSetBtn() {
   let curAddSetBtn = document.querySelector(".add_set_btn");
   curAddSetBtn.addEventListener("click", addSet);
+  document
+    .querySelectorAll(".add_set_btn")
+    .forEach((btn) => btn.addEventListener("click", addSet));
 }
 
 function hiddeAddSetBtn(btn) {
   btn.classList.add("hidden");
   btn.disabled = true;
   btn.classList.remove("add_set_btn");
+}
+
+function updateNewExrecise() {
+  document
+    .querySelectorAll(".exrecise_name_btn")
+    .forEach((btn) => btn.addEventListener("click", createExrecice));
+  document
+    .querySelectorAll(".add_exercise_btn")
+    .forEach((btn) => btn.addEventListener("click", createExrecice));
 }

@@ -1,5 +1,6 @@
 .workout {
-  display: box;
+  display: grid;
+  width: fit-content;
 }
 .workout_header {
   box-sizing: border-box;
