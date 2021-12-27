@@ -22,19 +22,40 @@
       <div class="workout_body hidden">
         <div class="workout_body_header">
           <h2 class="exercise_number">1.</h2>
-          <input type="text" placeholder="Exercise Name" />
-          <button>search</button>
+          <input
+            class="exrecise_name"
+            list="exercises"
+            placeholder="Exerecise Name"
+          />
+          <datalist id="exercises">
+            <option value="Bench Press"></option>
+            <option value="Bicep Curl"></option>
+            <option value="Pullup"></option>
+            <option value="Overhead Press"></option>
+            <option value="Squat"></option>
+          </datalist>
+
+          <button class="exrecise_name_btn">search</button>
+          <label class="switch">
+            all sets the same
+            <input class="all_sets_same" type="checkbox" />
+            <span class="slider round"></span>
+          </label>
         </div>
-        <div class="workout_body_main">
-          <div class="set">
-            <button class="add_set_btn">+</button>
-            <input class="reps" type="number" placeholder="reps" />
-            <input class="weight" type="number" placeholder="weight" />
-            <input class="rest" type="number" placeholder="rest" />
-            <input class="sets" type="number" placeholder="sets" />
+        <div class="workout_body_main hidden">
+          <div class="set first_set">
+            <button class="add_set_btn first_add_set_btn">+</button>
+            <input class="reps first_reps" type="number" placeholder="reps" />
+            <input
+              class="weight first_weight"
+              type="number"
+              placeholder="weight"
+            />
+            <input class="rest first_rest" type="number" placeholder="rest" />
+            <input class="sets hidden" type="number" placeholder="sets" />
           </div>
         </div>
-        <div class="workout_body_end">
+        <div class="workout_body_end hidden">
           <button
             class="add_exercise_btn"
             style="font-size: 20px; width: fit-content; height: fit-content"

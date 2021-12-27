@@ -1,4 +1,5 @@
 .workout {
+  display: box;
 }
 .workout_header {
   box-sizing: border-box;
@@ -54,4 +55,8 @@
   box-sizing: border-box;
   width: fit-content;
   height: fit-content;
+}
+
+.switch {
+  float: right;
 }
