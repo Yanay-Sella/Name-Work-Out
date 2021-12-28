@@ -4,10 +4,67 @@
     <meta charset="UTF-8" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link href="style.css" rel="stylesheet" />
     <title>Document</title>
   </head>
   <body>
-    <h1>NAME WORKOUT!!!!!!</h1>
-    <h2>omer ssssss</h2>
+    <div class="workout">
+      <div class="workout_header">
+        <button class="add_first_workout_btn">+</button>
+        <input
+          class="workout_name"
+          type="text"
+          placeholder="Name Of The Workout"
+        />
+        <p class="workout_name_p hidden"></p>
+        <button>open/close</button>
+      </div>
+      <div class="workout_body hidden">
+        <div class="workout_body_header">
+          <h2 class="exercise_number">1.</h2>
+          <input
+            class="exrecise_name"
+            list="exercises"
+            placeholder="Exerecise Name"
+          />
+          <datalist id="exercises">
+            <option value="Bench Press"></option>
+            <option value="Bicep Curl"></option>
+            <option value="Pullup"></option>
+            <option value="Overhead Press"></option>
+            <option value="Squat"></option>
+          </datalist>
+
+          <button class="exrecise_name_btn">search</button>
+          <label class="switch">
+            all sets the same
+            <input class="all_sets_same" type="checkbox" />
+            <span class="slider round"></span>
+          </label>
+        </div>
+        <div class="workout_body_main hidden">
+          <div class="set first_set">
+            <button class="add_set_btn first_add_set_btn">+</button>
+            <input class="reps first_reps" type="number" placeholder="reps" />
+            <input
+              class="weight first_weight"
+              type="number"
+              placeholder="weight"
+            />
+            <input class="rest first_rest" type="number" placeholder="rest" />
+            <input class="sets hidden" type="number" placeholder="sets" />
+          </div>
+        </div>
+        <div class="workout_body_end hidden">
+          <button
+            class="add_exercise_btn"
+            style="font-size: 20px; width: fit-content; height: fit-content"
+          >
+            +
+          </button>
+        </div>
+      </div>
+    </div>
+    <script src="script.js"></script>
   </body>
 </html>

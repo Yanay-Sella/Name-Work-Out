@@ -1,0 +1,63 @@
+.workout {
+  display: grid;
+  width: fit-content;
+}
+.workout_header {
+  box-sizing: border-box;
+  padding: 20px;
+  width: fit-content;
+  border: 2px solid black;
+  display: flex;
+  gap: 20px;
+}
+
+.workout_body {
+  box-sizing: border-box;
+  padding: 20px;
+  margin: 0;
+  display: inline-block;
+  border: 2px solid black;
+}
+
+.exercise_number {
+  display: inline-block;
+  padding: 0;
+  margin: 0;
+  box-sizing: border-box;
+  width: fit-content;
+  height: fit-content;
+}
+
+.workout_body_header {
+  margin-bottom: 1.5rem;
+}
+
+.workout_body_main {
+  box-sizing: border-box;
+  padding: 0;
+  margin: 20px;
+  margin-left: 1rem;
+}
+
+.workout_body_end {
+  text-align: center;
+}
+
+.hidden {
+  opacity: 0%;
+  width: 0;
+  height: 0;
+}
+
+.set {
+  margin-bottom: 20px;
+  display: flex;
+  padding: 0;
+  box-sizing: border-box;
+  width: fit-content;
+  height: fit-content;
+}
+
+.switch {
+  float: right;
+}
