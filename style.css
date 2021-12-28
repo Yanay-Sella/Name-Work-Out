@@ -61,3 +61,24 @@
 .switch {
   float: right;
 }
+
+
+/************for home page **********/
+
+#footer{
+  text-align: center;
+  margin-top: 5rem;
+}
+
+.title-image{
+  max-width: 100%;
+  height: auto;
+}
+
+.foot-icon{
+  margin: 0.5rem;
+}
+
+.navi-bar{
+  margin-bottom: 3rem;
+}
