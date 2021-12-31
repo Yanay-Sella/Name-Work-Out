@@ -61,3 +61,56 @@
 .switch {
   float: right;
 }
+
+
+/************for home page **********/
+
+#title{
+  background-color: #BBE1FA;
+}
+
+#workout-features{
+  background-color: #3282B8;
+}
+
+#meal-features{
+  background-color:#BBE1FA ;
+}
+
+#footer{
+  text-align: center;
+  margin-top: 5rem;
+}
+
+.title-image{
+  max-width: 100%;
+  height: auto;
+  padding: 0 2rem 2rem 0
+}
+
+.workout-image{
+  max-width: 100%;
+  height: auto;
+  padding: 2rem 0 2rem 2rem
+}
+
+.meal-image{
+  max-width: 100%;
+  height: auto;
+  padding: 2rem 2rem 2rem 0;
+}
+
+.foot-icon{
+  margin: 0.5rem;
+}
+
+.navi-bar{
+  margin-bottom: 3rem;
+}
+
+.main-title{
+  font-family: 'Dosis', sans-serif;
+  margin-left: 2.5rem;
+  padding-right: 15rem;
+  font-size: 4rem;
+}
