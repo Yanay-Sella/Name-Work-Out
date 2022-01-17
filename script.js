@@ -90,26 +90,23 @@ class Exrecise {
     this.sets.push(set);
   }
 }
-createWorkout.call(document.body);
+createWorkout.call(document.querySelector(".navbar"));
 addEventListener;
 
 function createWorkout() {
   let newWorkout;
-  if (this === document.body) {
-    this.insertAdjacentHTML("afterbegin", workoutHtml);
-    this.querySelector(".new_workout_btn").addEventListener(
-      "click",
-      createWorkout
-    );
+  if (this === document.querySelector(".navbar")) {
+    this.insertAdjacentHTML("afterend", workoutHtml);
+    document
+      .querySelector(".new_workout_btn")
+      .addEventListener("click", createWorkout);
     newWorkout = this.querySelector(".workout");
-    this.querySelector(".create_workout_btn").addEventListener(
-      "click",
-      createExercise
-    );
-    this.querySelector(".open_close_btn").addEventListener(
-      "click",
-      setupOpenCloseBtn
-    );
+    document
+      .querySelector(".create_workout_btn")
+      .addEventListener("click", createExercise);
+    document
+      .querySelector(".open_close_btn")
+      .addEventListener("click", setupOpenCloseBtn);
     // newWorkout.querySelector(".new_workout_btn").remove();
   } else if (this.classList.contains("new_workout_btn")) {
     this.closest(".workout").insertAdjacentHTML("afterend", workoutHtml);
