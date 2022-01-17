@@ -25,7 +25,7 @@ const exreciseHtml = `
               <option value="Squat"></option>
             </datalist>
 
-            <button class="add_set_btn">+</button>
+            <button class="add_set_btn">new set</button>
             <label class="switch">
               all sets the same
               <input class="all_sets_same" type="checkbox" />
@@ -39,7 +39,7 @@ const exreciseHtml = `
               class="add_exercise_btn"
               style="font-size: 20px; width: fit-content; height: fit-content"
             >
-              +
+              new exercise
             </button>
           </div>
           `;
@@ -47,17 +47,20 @@ const exreciseHtml = `
 const workoutHtml = `
   <div class="workout">
       <div class="workout_header">
-        <button class="create_workout_btn">+</button>
+        <button class="create_workout_btn">create workout</button>
         <input
           class="workout_name"
           type="text"
           placeholder="Name Of The Workout"
         />
         <p class="workout_name_p hidden"></p>
-        <button>open/close</button>
+        <button class = "open_close_btn">open/close</button>
       </div>
-      <div class="workout_body">
+      <div class="workout_body hidden ">
       </div
+      <div> 
+      <button class="new_workout_btn" style="font-size: 20px; width: fit-content; height: fit-content" > new workout </button>
+      </div>
     </div>
     `;
 
@@ -87,25 +90,54 @@ class Exrecise {
     this.sets.push(set);
   }
 }
-createWorkout(document.body);
+createWorkout.call(document.body);
 addEventListener;
 
-function createWorkout(el) {
-  el.insertAdjacentHTML("afterbegin", workoutHtml);
-  el.querySelector(".create_workout_btn").addEventListener(
-    "click",
-    createExercise
-  );
+function createWorkout() {
+  let newWorkout;
+  if (this === document.body) {
+    this.insertAdjacentHTML("afterbegin", workoutHtml);
+    this.querySelector(".new_workout_btn").addEventListener(
+      "click",
+      createWorkout
+    );
+    newWorkout = this.querySelector(".workout");
+    this.querySelector(".create_workout_btn").addEventListener(
+      "click",
+      createExercise
+    );
+    this.querySelector(".open_close_btn").addEventListener(
+      "click",
+      setupOpenCloseBtn
+    );
+    // newWorkout.querySelector(".new_workout_btn").remove();
+  } else if (this.classList.contains("new_workout_btn")) {
+    this.closest(".workout").insertAdjacentHTML("afterend", workoutHtml);
+    newWorkout = this.closest(".workout").nextElementSibling;
+    newWorkout
+      .querySelector(".new_workout_btn")
+      .addEventListener("click", createWorkout);
+    newWorkout
+      .querySelector(".create_workout_btn")
+      .addEventListener("click", createExercise);
+    newWorkout
+      .querySelector(".open_close_btn")
+      .addEventListener("click", setupOpenCloseBtn);
 
-  allWorkouts.push({
-    name: el.querySelector(".workout_name").value,
-    exercises: [],
-    div: el.querySelector(".workout"),
-  });
+    this.remove();
+  }
+
+  // allWorkouts.push({
+  //   name: newWorkout.querySelector(".workout_name").value,
+  //   exercises: [],
+  //   div: newWorkout.querySelector(".workout"),
+  // });
 }
 
 function createExercise() {
-  let workoutBody = this.closest(".workout_body");
+  console.log(this);
+  let workoutBody = this.closest(".workout").querySelector(".workout_body");
+  workoutBody.classList.remove("hidden");
   if (!workoutBody) {
     workoutBody = this.closest(".workout").querySelector(".workout_body");
   }
@@ -133,13 +165,13 @@ function createExercise() {
 
   setExerciseNumber(curExerciseDiv);
 
-  allWorkouts
-    .find((el) => el.div === this.closest(".workout"))
-    .exercises.push({
-      name: getCurValue(workoutBody, "exercise_name", ".exercise"),
-      div: curExerciseDiv,
-      sets: [],
-    });
+  // allWorkouts
+  //   .find((el) => el.div === this.closest(".workout"))
+  //   .exercises.push({
+  //     name: getCurValue(workoutBody, "exercise_name", ".exercise"),
+  //     div: curExerciseDiv,
+  //     sets: [],
+  //   });
 
   this.remove();
 }
@@ -155,15 +187,15 @@ function createSet() {
   let curWeight = getCurValue(exerciseBodyMain, "weight");
   let curRest = getCurValue(exerciseBodyMain, "rest");
 
-  allWorkouts
-    .find((el) => el.div === exerciseBodyMain.closest(".workout"))
-    .exercises.find((el) => el.div === exerciseBodyMain.closest(".exercise"))
-    .sets.push({
-      reps: curReps,
-      weight: curWeight,
-      rest: curRest,
-      div: curSetDiv,
-    });
+  // allWorkouts
+  //   .find((el) => el.div === exerciseBodyMain.closest(".workout"))
+  //   .exercises.find((el) => el.div === exerciseBodyMain.closest(".exercise"))
+  //   .sets.push({
+  //     reps: curReps,
+  //     weight: curWeight,
+  //     rest: curRest,
+  //     div: curSetDiv,
+  //   });
 
   setupAllSetsSameBtn.bind(this);
 }
@@ -209,7 +241,15 @@ function setExerciseNumber(ex) {
   let numExercises = ex
     .closest(".workout_body")
     .querySelectorAll(".exercise").length;
-  console.log(numExercises);
-  console.log(ex);
   ex.querySelector(".exercise_number").textContent = numExercises + ".";
+}
+
+function setupOpenCloseBtn() {
+  const workoutBody = this.closest(".workout").querySelector(".workout_body");
+
+  if (workoutBody.style.display === "none") {
+    workoutBody.style.display = "block";
+  } else {
+    workoutBody.style.display = "none";
+  }
 }
