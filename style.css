@@ -1,10 +1,13 @@
 .workout {
+  box-sizing: border-box;
   display: grid;
   width: fit-content;
+  margin: 10px;
 }
 .workout_header {
   box-sizing: border-box;
   padding: 20px;
+  margin-top: 10px;
   width: fit-content;
   border: 2px solid black;
   display: flex;
@@ -13,9 +16,11 @@
 
 .workout_body {
   box-sizing: border-box;
-  padding: 20px;
-  margin: 0;
+  padding: 0px;
+  margin-bottom: 10px;
   display: inline-block;
+  width: fit-content;
+  height: fit-content;
   border: 2px solid black;
 }
 
@@ -26,10 +31,12 @@
   box-sizing: border-box;
   width: fit-content;
   height: fit-content;
+  margin: 10px;
 }
 
 .workout_body_header {
-  margin-bottom: 1.5rem;
+  box-sizing: border-box;
+  margin: 10px;
 }
 
 .workout_body_main {
@@ -41,6 +48,8 @@
 
 .workout_body_end {
   text-align: center;
+  box-sizing: border-box;
+  margin: 10px;
 }
 
 .hidden {
@@ -50,7 +59,7 @@
 }
 
 .set {
-  margin-bottom: 20px;
+  margin: 10px;
   display: flex;
   padding: 0;
   box-sizing: border-box;
@@ -62,54 +71,53 @@
   float: right;
 }
 
-
 /************for home page **********/
 
-#title{
-  background-color: #BBE1FA;
+#title {
+  background-color: #bbe1fa;
 }
 
-#workout-features{
-  background-color: #3282B8;
+#workout-features {
+  background-color: #3282b8;
 }
 
-#meal-features{
-  background-color:#BBE1FA ;
+#meal-features {
+  background-color: #bbe1fa;
 }
 
-#footer{
+#footer {
   text-align: center;
   margin-top: 5rem;
 }
 
-.title-image{
+.title-image {
   max-width: 100%;
   height: auto;
-  padding: 0 2rem 2rem 0
+  padding: 0 2rem 2rem 0;
 }
 
-.workout-image{
+.workout-image {
   max-width: 100%;
   height: auto;
-  padding: 2rem 0 2rem 2rem
+  padding: 2rem 0 2rem 2rem;
 }
 
-.meal-image{
+.meal-image {
   max-width: 100%;
   height: auto;
   padding: 2rem 2rem 2rem 0;
 }
 
-.foot-icon{
+.foot-icon {
   margin: 0.5rem;
 }
 
-.navi-bar{
+.navi-bar {
   margin-bottom: 3rem;
 }
 
-.main-title{
-  font-family: 'Dosis', sans-serif;
+.main-title {
+  font-family: "Dosis", sans-serif;
   margin-left: 2.5rem;
   padding-right: 15rem;
   font-size: 4rem;
