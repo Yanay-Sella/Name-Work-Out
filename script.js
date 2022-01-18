@@ -1,20 +1,37 @@
 "use strict";
-
+{/* <div class="form-floating">
+<label for="floatingInput">reps</label>
+</div> */}
 let allWorkouts = [];
+
 const setHtml = `
-          <div class="set">
-            <input class="reps" type="number" placeholder="reps" />
-            <input class="weight" type="number" placeholder="weight" />
-            <input class="rest" type="number" placeholder="rest" />
-            <input class="sets hidden" type="number" placeholder="sets" />
-          </div>`;
+          <form class="set form-floating">
+            <div class="form-floating">
+              <input class="reps form-control" id="floatingInput" type="number" placeholder="reps" />
+              <label for="floatingInput">reps</label>
+            </div>
+            <div class="form-floating">
+              <input class="weight form-control" id="floatingInput" type="number" placeholder="weight" />
+              <label for="floatingInput">weight</label>
+            </div>
+            <div class="form-floating">
+              <input class="rest form-control" id="floatingInput" type="number" placeholder="rest" />
+              <label for="floatingInput">rest</label>
+            </div>
+            <div class="form-floating hidden">
+              <input class="sets form-control" id="floatingInput" type="number" placeholder="sets" />
+              <label for="floatingInput">sets</label>
+            </div>
+          </form>`; //need to fix this ^ (the last one omer, THE LAST!!!!)
 const exreciseHtml = `
-        <div class="exercise">
+        <div class="exercise form-floating">
           <div class="exercise_body_header">
             <h2 class="exercise_number">1.</h2>
+            <label for="exDataList" class="form-label"></label>
             <input
-              class="exercise_name"
+              class="form-control exercise_name"
               list="exercises_options"
+              id="exDataList"
               placeholder="Exerecise Name"
             />
             <datalist id="exercises_options">
@@ -25,18 +42,18 @@ const exreciseHtml = `
               <option value="Squat"></option>
             </datalist>
 
-            <button class="add_set_btn">new set</button>
-            <label class="switch">
-              all sets the same
-              <input class="all_sets_same" type="checkbox" />
-              <span class="slider round"></span>
-            </label>
+            <button class="add_set_btn btn btn-dark">new set</button>
+            <label for="allSame" class="switch form-check-label">
+                all sets the same
+                <span class="slider round"></span>
+                <input class="all_sets_same form-check-input" id="allSame" type="checkbox" />
+              </label>
           </div>
           <div class="exercise_body_main">
           </div>
           <div class="exercise_body_end ">
             <button
-              class="add_exercise_btn"
+              class="add_exercise_btn btn btn-dark"
               style="font-size: 20px; width: fit-content; height: fit-content"
             >
               new exercise
@@ -47,19 +64,19 @@ const exreciseHtml = `
 const workoutHtml = `
   <div class="workout">
       <div class="workout_header">
-        <button class="create_workout_btn">create workout</button>
+        <button class="create_workout_btn btn btn-dark">create workout</button>
         <input
           class="workout_name"
           type="text"
           placeholder="Name Of The Workout"
         />
         <p class="workout_name_p hidden"></p>
-        <button class = "open_close_btn">open/close</button>
+        <button class = "open_close_btn btn btn-dark">open/close</button>
       </div>
       <div class="workout_body hidden ">
       </div
       <div> 
-      <button class="new_workout_btn" style="font-size: 20px; width: fit-content; height: fit-content" > new workout </button>
+      <button class="new_workout_btn btn btn-dark" style="font-size: 20px; width: fit-content; height: fit-content" > new workout </button>
       </div>
     </div>
     `;
@@ -159,7 +176,7 @@ function createExercise() {
   let curExerciseDiv = [...workoutBody.querySelectorAll(".exercise")].slice(
     -1
   )[0];
-
+  //createSet.call(workoutBody);
   setExerciseNumber(curExerciseDiv);
 
   // allWorkouts
@@ -238,7 +255,7 @@ function setExerciseNumber(ex) {
   let numExercises = ex
     .closest(".workout_body")
     .querySelectorAll(".exercise").length;
-  ex.querySelector(".exercise_number").textContent = numExercises + ".";
+  ex.querySelector(".exercise_number").textContent = "Exercise number " + numExercises;
 }
 
 function setupOpenCloseBtn() {
@@ -250,3 +267,4 @@ function setupOpenCloseBtn() {
     workoutBody.style.display = "none";
   }
 }
+

@@ -56,6 +56,7 @@
   opacity: 0%;
   width: 0;
   height: 0;
+  display: none;
 }
 
 .set {
@@ -69,6 +70,14 @@
 
 .switch {
   float: right;
+}
+
+.btn{
+  margin: 10px;
+}
+
+.form-control{
+  display: inline;
 }
 
 /************for home page **********/
