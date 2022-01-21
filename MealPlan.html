@@ -31,7 +31,10 @@
         <!--End Navigation Bar-->
 
         <!--open modal button-->
-        <button class="btn btn-dark" data-bs-toggle="modal" data-bs-target="#mealModal" id="openModal">Launch Modal</button>
+        <div class="container-fluid input-group mb-3">
+            <button class="btn btn-dark" data-bs-toggle="modal" data-bs-target="#mealModal" id="openModal">Creat daily plan</button>
+            <input type="text" class="form-control dailyName" placeholder="Daily Plan Name" aria-describedby="openModal">
+        </div>
         <!--open modal button-->
 
         <div class="modal fade" id="mealModal" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="mealModalLabel" aria-hidden="true">
@@ -42,7 +45,10 @@
                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
                 <!--~~~~~modal-body~~~~~-->
-                <div class="modal-body" id="modalBody"> 
+                <div class="modal-body" id="modalBody">
+                <div class="mealsContainer">
+                    <!--to add with js-->
+                </div>
                 <Button class="btn btn-dark" id="addMeal">Add Meal!</Button>
                 </div>
                 <!--~~~~~modal-body~~~~~-->
@@ -54,6 +60,7 @@
             </div>
         </div>
         <!--More stuff-->
+        
         <!-- food div-->
 
         <!--dish div-->
@@ -68,9 +75,8 @@
                 <option value="Bread">
             </datalist>
         </div>
+        <img class = "workout-image" src="images/theStone.gif" alt="demo">
     <script src="meal.js"></script>
-
-
 </body>
 </html>
 
