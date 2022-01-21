@@ -1,22 +1,23 @@
 var meals = 0;
 
-$("button").click(function(e){
-    if($(this).is("#openModal")){ //if opening a new daily plan
-        const title = $(".modal-title").text($(".dailyName").val());
-        if(meals === 0){
-            addMealPlan();
-        }
+$("button").click(function (e) {
+  if ($(this).is("#openModal")) {
+    //if opening a new daily plan
+    const title = $(".modal-title").text($(".dailyName").val());
+    if (meals === 0) {
+      addMealPlan();
     }
-    if($(this).is("#addMeal")){ // if adding a meal
-        addMealPlan();
-    }
-    // if($(this).hasClass("add-dish")){ // if adding a dish (not using id because its not unique)
-    //     addDish.call(this);
-    // }
+  }
+  if ($(this).is("#addMeal")) {
+    // if adding a meal
+    addMealPlan();
+  }
+  // if($(this).hasClass("add-dish")){ // if adding a dish (not using id because its not unique)
+  //     addDish.call(this);
+  // }
 });
 
-
-let dishHtml =`
+let dishHtml = `
     <div class="container-fluid dishDiv input-group mb-3" id="dish">
         <label for="dishList" class="form-label"></label>
         <input class="form-control" list="datalistOptions" id="dishList" placeholder="Search dish...">
@@ -46,18 +47,20 @@ let mealHtml = `
     </div>
     `;
 
-function addMealPlan(){
-    meals++;
-    const meal = $(mealHtml);
-    meal.find(".mealName").val(`meal ${meals}`)
-    $(".mealsContainer").append(meal);
-    $(".add-dish").off("click").click(function(){ //detecting a click for one button!
-        addDish(this);
+function addMealPlan() {
+  meals++;
+  const meal = $(mealHtml);
+  meal.find(".mealName").val(`meal ${meals}`);
+  $(".mealsContainer").append(meal);
+  $(".add-dish")
+    .off("click")
+    .click(function () {
+      //detecting a click for one button!
+      addDish(this);
     });
 }
-function addDish(button){
-
-    button.closest(".mealDiv").insertAdjacentHTML("beforeend",dishHtml); // adding the dishDiv html
+function addDish(button) {
+  button.closest(".mealDiv").insertAdjacentHTML("beforeend", dishHtml); // adding the dishDiv html
 }
 
 // var myModal = document.getElementById('myModal')

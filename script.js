@@ -1,7 +1,9 @@
 "use strict";
-{/* <div class="form-floating">
+{
+  /* <div class="form-floating">
 <label for="floatingInput">reps</label>
-</div> */}
+</div> */
+}
 let allWorkouts = [];
 
 const setHtml = `
@@ -255,7 +257,8 @@ function setExerciseNumber(ex) {
   let numExercises = ex
     .closest(".workout_body")
     .querySelectorAll(".exercise").length;
-  ex.querySelector(".exercise_number").textContent = "Exercise number " + numExercises;
+  ex.querySelector(".exercise_number").textContent =
+    "Exercise number " + numExercises;
 }
 
 function setupOpenCloseBtn() {
@@ -267,4 +270,3 @@ function setupOpenCloseBtn() {
     workoutBody.style.display = "none";
   }
 }
-
