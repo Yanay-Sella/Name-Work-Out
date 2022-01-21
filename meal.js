@@ -1,13 +1,16 @@
-var meals = 0;
 $("button").click(function(e){
-    
     if($(this).is("#openModal")){ //if opening a new daily plan
-        addMealPlan.call($(".modal-body"));
+        addMealPlan();
     }
     if($(this).is("#addMeal")){ // if adding a meal
-        addMealPlan.call($("#modalBody"));
+        addMealPlan();
     }
+    // if($(this).hasClass("add-dish")){ // if adding a dish (not using id because its not unique)
+    //     addDish.call(this);
+    // }
 });
+
+
 
 let mealHtml = `
     <div class="container-fluid mealDiv">
@@ -15,7 +18,7 @@ let mealHtml = `
     </div>
 `;
 
-let dishHtml = `
+let dishHtml =`
     <div class="container-fluid dishDiv" id="dish">
     <label for="dishList" class="form-label"></label>
     <input class="form-control" list="datalistOptions" id="dishList" placeholder="Type to search...">
@@ -30,21 +33,16 @@ let dishHtml = `
 `;
 
 function addMealPlan(){
-    meals++; // adding a meal
-    console.log(meals);
-    $(this).append(mealHtml); // adding the html
-    $(".add-dish").addClass("meal-"+meals);
-    $(".mealDiv").addClass("mealDiv-"+meals);
-    $("button").click(function(e){ //listening to buttons
-        for(var i=1;i<=meals;i++){
-            if($(this).hasClass("add-dish") && $(this).hasClass("meal-"+i)){ // if adding a dish (not using id because its not unique)
-                addDish.call($(".mealDiv-"+meals));
-            }
-        }
+    $(".modal-body").prepend(mealHtml);
+
+    $(".add-dish").click(function(e){
+        addDish(this);
     });
 }
-function addDish(){
-    $(this).append(dishHtml);
+function addDish(button){
+    // $(this).append(dishHtml);
+    // this.closest(".mealDiv").append(dishDiv);
+    button.closest(".mealDiv").insertAdjacentHTML("beforeend",dishHtml); // adding the dishDiv html
 }
 
 // var myModal = document.getElementById('myModal')
