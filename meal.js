@@ -101,7 +101,7 @@ let planDataHtml = `
         >
           open/close
         </button>
-        <div class="container-fluid planDataBody" id="collapseExample">
+        <div class="collapse container-fluid planDataBody" id="collapseExample">
           <!-- <div class="collapse container-fluid planDataBody" id="collapseExample"> -->
           
         </div>
@@ -153,10 +153,9 @@ function addMealPlan() {
 function addDish(button) {
   button.closest(".mealDiv").insertAdjacentHTML("beforeend", dishHtml); // adding the dishDiv html
 }
-
 function saveChanges() {
   let planName = $(".modal-title").text();
-  const allMealsDivs = $(".mealDiv");
+  const allMealsDivs = $(".mealDiv"); //this is an array
   const allMeals = allMealsDivs.map((_, mealDiv) => {
     return new Meal(
       $(mealDiv).find(".mealName").val(),
@@ -164,9 +163,10 @@ function saveChanges() {
     );
   });
 
-  console.log(allMeals);
   allPlans.push(new Plan(planName, "", allMeals));
+  createPlanData();
   console.log(allPlans);
+  $("#mealModal").modal("hide");
 }
 
 function dishDivArrToDataDishArr(divArr) {
@@ -178,4 +178,56 @@ function dishDivArrToDataDishArr(divArr) {
         $(div).find(".dishUnit").val()
       )
   );
+}
+
+function createPlanData() {
+  // const planDataElement = $(planDataHtml);
+  // const mealDataElement = $(mealDataHtml);
+  // const dishDataElement = $(dishDataHtml);
+
+  // mealDataElement.append(dishDataElement);
+  // planDataElement.find(".planDataBody").append(mealDataElement);
+  // $(".allPlansContainer").append(planDataElement);
+  allPlans.forEach((plan) =>
+    $(".allPlansContainer").append(createPlanDiv(plan))
+  );
+}
+
+createPlanData();
+
+function createPlanDiv(plan) {
+  const name = plan.name;
+  const meals = plan.meals.map((_, meal) => createMealDiv(meal));
+
+  const planDataElement = $(planDataHtml);
+  planDataElement.find(".planDataName").val(name);
+  Array(...meals).forEach((mealDiv) =>
+    planDataElement.find(".planDataBody").append(mealDiv)
+  );
+  return planDataElement;
+}
+
+function createMealDiv(meal) {
+  const name = meal.name;
+  const dishes = meal.dishes.map((_, dish) => $(createDishDiv(dish)));
+  console.log(Array(...dishes));
+
+  const mealDataElement = $(mealDataHtml);
+  mealDataElement.find(".mealDataName").val(name);
+  Array(...dishes).forEach((dishDiv) => mealDataElement.append(dishDiv));
+
+  return mealDataElement;
+}
+
+function createDishDiv(dish) {
+  const name = dish.name;
+  const amount = dish.amount;
+  const unit = dish.unit;
+
+  const dishDataElement = $(dishDataHtml);
+  dishDataElement.find(".dishDataName").val(name);
+  dishDataElement.find(".dishDataAmountUnit").val(`${amount} ${unit}`);
+
+  console.log();
+  return dishDataElement;
 }
