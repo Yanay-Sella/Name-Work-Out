@@ -35,27 +35,25 @@ class Macros {
   }
 }
 
-$("button").click(function (e) {
-  if ($(this).is("#openModal")) {
-    //if opening a new daily plan
-    const title = $(".modal-title").text($(".dailyName").val());
-    if (meals === 0) {
-      addMealPlan();
-    }
-  }
-  if ($(this).is("#addMeal")) {
-    // if adding a meal
+//daily plan modal button
+$("#openModal").click(function(e){
+  const title = $(".modal-title").text($(".dailyName").val());
+  if (meals === 0) {
     addMealPlan();
-  }
-  // if($(this).hasClass("add-dish")){ // if adding a dish (not using id because its not unique)
-  //     addDish.call(this);
-  // }
-
-  if ($(this).hasClass("savePlanBtn")) {
-    saveChanges();
   }
 });
 
+//add meal to daily plan button
+$("#addMeal").click(function(e){
+  addMealPlan();
+});
+
+//save daily changes button
+$(".savePlanBtn").click(function (e) {
+    saveChanges();
+});
+
+//~~~~~~~~Dish Div
 let dishHtml = `
     <div class="container-fluid dishDiv input-group mb-3" id="dish">
         <label for="dishList" class="form-label"></label>
@@ -78,6 +76,9 @@ let dishHtml = `
         </datalist>
     </div>
 `;
+//~~~~~~~~Dish Div
+
+//~~~~~~~~Meal Div
 let mealHtml = `
     <div class="container-fluid mealDiv">
         <input type="text" class="form-control mealName" placeholder="meal name" style="border: none">
@@ -85,74 +86,82 @@ let mealHtml = `
         ${dishHtml}
     </div>
     `;
+//~~~~~~~~Meal Div
+
+//~~~~~~~~~~~~~~Daily description scrolldown
 let planDataHtml = `
 <div class="container-fluid planData">
       <div class="row container-fluid planDataHeader">
-        <div class="col planDataName form-control">name</div>
-        <div class="col planDataMacros form-control">macros</div>
-        <div class="col planDataDate form-control">date</div>
-        <button
-          class="col btn btn-dark"
-          type="button"
-          data-bs-toggle="collapse"
-          data-bs-target="#collapseExample"
-          aria-expanded="false"
-          aria-controls="collapseExample"
-        >
-          open/close
-        </button>
-        <div class="collapse container-fluid planDataBody" id="collapseExample">
-          <!-- <div class="collapse container-fluid planDataBody" id="collapseExample"> -->
-          
+        <div class="col-3 planDataName desTitle">name</div>
+        <div class="col-3 planDataMacros desTitle">macros</div>
+        <div class="col-3 planDataDate desTitle">date</div>
+        <div class="col-2 desTitle">
+          <button
+            class="btn btn-dark collapseB"
+            type="button"
+            data-bs-toggle="collapse"
+            data-bs-target="#collapseDes"
+            aria-expanded="false"
+            aria-controls="collapseDes"
+          >
+            open/close
+          </button>
+          <button
+                class="btn btn-dark col-1"
+                style="width: auto; float: right;"
+              >
+                edit
+              </button>
         </div>
+        <div class="collapse" id="collapseDes">
+            <div class="container-fluid planDataBody" style="padding: 0;">
+            </div>
+        </div>
+        
       </div>
-      <div class="planDataFooter container-fluid">
-        <button
-          class="btn btn-dark float-right"
-          style="width: auto; float: right"
-        >
-          edit
-        </button>
-      </div>
+      
     </div>`;
 
 let mealDataHtml = `
             <div class="mealData container-fluid">
-              <h2 class="text-center form-control mealDataName">meal name</h2>
+              <h2 class="text-center mealDataName">meal name</h2>
             </div>
+            <hr>
 `;
 let dishDataHtml = `
               <div class="dishData container px-4">
                 <div class="row gx-5">
                   <div class="col">
-                    <div class="dishDataName p-3 border bg-light col">
+                    <div class="dishDataName p-3 dishDes">
                       dish name
                     </div>
                   </div>
                   <div class="col">
-                    <div class="dishDataAmountUnit p-3 border bg-light col">
+                    <div class="dishDataAmountUnit p-3 dishDes">
                       amount and unit
                     </div>
                   </div>
                 </div>
               </div>
 `;
+//~~~~~~~~~~~~~~Daily description scrolldown
 
 function addMealPlan() {
   meals++;
   const meal = $(mealHtml);
   meal.find(".mealName").val(`meal ${meals}`);
   $(".mealsContainer").append(meal);
-  $(".add-dish")
+  $(".add-dish")// add dish button
     .off("click")
     .click(function () {
-      //detecting a click for one button!
       addDish(this);
-    });
+    }); 
 }
+
 function addDish(button) {
   button.closest(".mealDiv").insertAdjacentHTML("beforeend", dishHtml); // adding the dishDiv html
 }
+
 function saveChanges() {
   let planName = $(".modal-title").text();
   const allMealsDivs = $(".mealDiv"); //this is an array
@@ -162,11 +171,14 @@ function saveChanges() {
       dishDivArrToDataDishArr($(mealDiv).find(".dishDiv"))
     );
   });
-
   allPlans.push(new Plan(planName, "", allMeals));
   createPlanData();
   console.log(allPlans);
   $("#mealModal").modal("hide");
+  setTimeout(()=> {
+    meals = 0;
+    $(".mealsContainer").html("");
+  },130);
 }
 
 function dishDivArrToDataDishArr(divArr) {
@@ -181,13 +193,6 @@ function dishDivArrToDataDishArr(divArr) {
 }
 
 function createPlanData() {
-  // const planDataElement = $(planDataHtml);
-  // const mealDataElement = $(mealDataHtml);
-  // const dishDataElement = $(dishDataHtml);
-
-  // mealDataElement.append(dishDataElement);
-  // planDataElement.find(".planDataBody").append(mealDataElement);
-  // $(".allPlansContainer").append(planDataElement);
   allPlans.forEach((plan) =>
     $(".allPlansContainer").append(createPlanDiv(plan))
   );
@@ -197,10 +202,10 @@ createPlanData();
 
 function createPlanDiv(plan) {
   const name = plan.name;
-  const meals = plan.meals.map((_, meal) => createMealDiv(meal));
+  const meals = plan.meals.map((_, meal) => createMealDiv(meal)); //array
 
   const planDataElement = $(planDataHtml);
-  planDataElement.find(".planDataName").val(name);
+  planDataElement.find(".planDataName").html(name);
   Array(...meals).forEach((mealDiv) =>
     planDataElement.find(".planDataBody").append(mealDiv)
   );
@@ -213,8 +218,10 @@ function createMealDiv(meal) {
   console.log(Array(...dishes));
 
   const mealDataElement = $(mealDataHtml);
-  mealDataElement.find(".mealDataName").val(name);
-  Array(...dishes).forEach((dishDiv) => mealDataElement.append(dishDiv));
+  mealDataElement.find(".mealDataName").html(name);
+  Array(...dishes).forEach((dishDiv) => {
+    mealDataElement.append(dishDiv);
+  });
 
   return mealDataElement;
 }
@@ -225,8 +232,8 @@ function createDishDiv(dish) {
   const unit = dish.unit;
 
   const dishDataElement = $(dishDataHtml);
-  dishDataElement.find(".dishDataName").val(name);
-  dishDataElement.find(".dishDataAmountUnit").val(`${amount} ${unit}`);
+  dishDataElement.find(".dishDataName").html(name);
+  dishDataElement.find(".dishDataAmountUnit").html(`${amount} ${unit}`);
 
   console.log();
   return dishDataElement;
