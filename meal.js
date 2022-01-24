@@ -95,7 +95,7 @@ let planDataHtml = `
         <div class="col-3 planDataName desTitle">name</div>
         <div class="col-3 planDataMacros desTitle">macros</div>
         <div class="col-3 planDataDate desTitle">date</div>
-        <div class="col-2 desTitle">
+        <div class="col-3 desTitle">
           <button
             class="btn btn-dark collapseB"
             type="button"
@@ -107,14 +107,15 @@ let planDataHtml = `
             open/close
           </button>
           <button
-                class="btn btn-dark col-1"
-                style="width: auto; float: right;"
-              >
-                edit
-              </button>
+              class="btn btn-dark"
+              style="width: auto; float: right;"
+          >
+              edit
+          </button>
         </div>
         <div class="collapse" id="collapseDes">
             <div class="container-fluid planDataBody" style="padding: 0;">
+              
             </div>
         </div>
         
@@ -123,26 +124,31 @@ let planDataHtml = `
     </div>`;
 
 let mealDataHtml = `
-            <div class="mealData container-fluid">
+            <div>
               <h2 class="text-center mealDataName">meal name</h2>
+              <table class="table table-striped">
+                <tbody class="mealData">
+
+                </tbody>
+              </table>
             </div>
-            <hr>
 `;
+
 let dishDataHtml = `
-              <div class="dishData container px-4">
-                <div class="row gx-5">
-                  <div class="col">
+              
+                <tr class="dishData">
+                  <td>
                     <div class="dishDataName p-3 dishDes">
                       dish name
                     </div>
-                  </div>
-                  <div class="col">
+                  </td>
+                  <td>
                     <div class="dishDataAmountUnit p-3 dishDes">
                       amount and unit
                     </div>
-                  </div>
-                </div>
-              </div>
+                  </td>
+                </tr>
+              
 `;
 //~~~~~~~~~~~~~~Daily description scrolldown
 
@@ -205,7 +211,12 @@ function createPlanDiv(plan) {
   const meals = plan.meals.map((_, meal) => createMealDiv(meal)); //array
 
   const planDataElement = $(planDataHtml);
-  planDataElement.find(".planDataName").html(name);
+  if(name === ""){
+    planDataElement.find(".planDataName").html("Daily plan #"+Number(allPlans.length));
+  }
+  else{
+    planDataElement.find(".planDataName").html(name);
+  }
   Array(...meals).forEach((mealDiv) =>
     planDataElement.find(".planDataBody").append(mealDiv)
   );
@@ -220,9 +231,9 @@ function createMealDiv(meal) {
   const mealDataElement = $(mealDataHtml);
   mealDataElement.find(".mealDataName").html(name);
   Array(...dishes).forEach((dishDiv) => {
-    mealDataElement.append(dishDiv);
+    console.log(mealDataElement.find(".mealData"));
+    mealDataElement.find(".mealData").append(dishDiv);
   });
-
   return mealDataElement;
 }
 
