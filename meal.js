@@ -3,11 +3,12 @@ let meals = 0;
 let allPlans = [];
 
 class Plan {
-  constructor(name, macros, meals) {
+  constructor(name, macros, meals, placeNumber = 0) {
     this.name = name;
     this.macros = macros;
     this.date = new Date();
     this.meals = meals; //array
+    this.placeNumber = placeNumber;
   }
 }
 
@@ -176,7 +177,7 @@ function saveChanges() {
       dishDivArrToDataDishArr($(mealDiv).find(".dishDiv"))
     );
   });
-  allPlans.push(new Plan(planName, "", allMeals));
+  allPlans.push(new Plan(planName, "", allMeals, allPlans.length + 1));
   createPlanData();
   $("#mealModal").modal("hide");
   setTimeout(() => {
@@ -197,8 +198,8 @@ function dishDivArrToDataDishArr(divArr) {
 }
 
 function createPlanData() {
-  allPlans.forEach((plan ,i) => {
-    if (i >= allPlans.length) {
+  allPlans.forEach((plan) => {
+    if (plan.placeNumber >= allPlans.length) {
       console.log(plan.placeNumber);
       $(".allPlansContainer").append(createPlanDiv(plan));
     }
