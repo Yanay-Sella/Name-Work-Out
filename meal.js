@@ -91,14 +91,14 @@ let mealHtml = `
 
 //~~~~~~~~~~~~~~Daily description scrolldown
 let planDataHtml = `
-<div class="container-fluid planData">
-      <div class="row container-fluid planDataHeader">
-        <div class="col-3 planDataName desTitle">name</div>
-        <div class="col-3 planDataMacros desTitle">macros</div>
-        <div class="col-3 planDataDate desTitle">date</div>
+    <div class="container-fluid planData">
+      <div class="row container-fluid planDataHeader bg-dark">
+        <div class="col-3 planDataName desTitle"><p class="centerW">name</p></div>
+        <div class="col-3 planDataMacros desTitle"><p class="centerW">macros</p></div>
+        <div class="col-3 planDataDate desTitle"><p class="centerW">date</p></div>
         <div class="col-3 desTitle">
           <button
-            class="btn btn-dark collapseB"
+            class="btn btn-light collapseB"
             type="button"
             data-bs-toggle="collapse"
             data-bs-target= ""
@@ -107,35 +107,38 @@ let planDataHtml = `
             open/close
           </button>
           <button
-              class="btn btn-dark"
-              style="width: auto; float: right;"
+              class="btn btn-light" 
           >
               edit
           </button>
         </div>
-        <div class="collapse  first">
+      </div>
+        <div class="collapse window row first">
             <div class="container-fluid planDataBody" style="padding: 0;">
               
             </div>
         </div>
         
-      </div>
+      
       
     </div>`;
 
 let mealDataHtml = `
-            <div>
+            <div class="mealData">
               <h2 class="text-center mealDataName">meal name</h2>
-              <table class="table table-striped">
-                <tbody class="mealData">
-
+              <table class="table table-striped" style="margin-bottom:0">
+              <thead>
+              <th scope="col">Dish</th>
+              <th scope="col">Amount</th>
+              </thead>
+              <tbody class="mealTable">
+                
                 </tbody>
               </table>
             </div>
 `;
 
-let dishDataHtml = `
-              
+let dishDataHtml = `  
                 <tr class="dishData">
                   <td>
                     <div class="dishDataName p-3 dishDes">
@@ -147,8 +150,7 @@ let dishDataHtml = `
                       amount and unit
                     </div>
                   </td>
-                </tr>
-              
+                </tr>             
 `;
 //~~~~~~~~~~~~~~Daily description scrolldown
 
@@ -206,8 +208,6 @@ function createPlanData() {
   });
 }
 
-// createPlanData();
-
 function createPlanDiv(plan) {
   const name = plan.name;
   const meals = plan.meals.map((_, meal) => createMealDiv(meal)); //array
@@ -215,7 +215,7 @@ function createPlanDiv(plan) {
   const planDataElement = $(planDataHtml);
   if (name === "") {
     planDataElement
-      .find(".planDataName")
+      .find(".planDataName").find("p")
       .html("Daily plan #" + Number(allPlans.length));
   } else {
     planDataElement.find(".planDataName").html(name);
@@ -225,21 +225,33 @@ function createPlanDiv(plan) {
     .find(".collapseB")
     .attr("data-bs-target", `.collapse${plan.placeNumber}`);
   planDataElement.find(".collapse").addClass(`collapse${plan.placeNumber}`);
-
-  Array(...meals).forEach((mealDiv) =>
-    planDataElement.find(".planDataBody").append(mealDiv)
-  );
+  
+  // appending each mealDiv in the meals array to plandatabody and setting classes for colors
+  Array(...meals).forEach((mealDiv ,i) =>{ 
+    planDataElement.find(".planDataBody").append(mealDiv);
+    if(i%2===0){
+      if(i===0){
+        $(planDataElement.find(".mealData")[i]).addClass("mealDataDarkFirst");
+      }
+      if(i===meals.length-1){
+        $(planDataElement.find(".mealData")[i]).addClass("mealDataDarkLast");
+      }
+      else{
+        $(planDataElement.find(".mealData")[i]).addClass("mealDataDark");
+      }
+    }
+  });
   return planDataElement;
 }
 
 function createMealDiv(meal) {
   const name = meal.name;
   const dishes = meal.dishes.map((_, dish) => $(createDishDiv(dish)));
-
-  const mealDataElement = $(mealDataHtml);
+  const mealDataElement = $(mealDataHtml); //class mealData
   mealDataElement.find(".mealDataName").html(name);
   Array(...dishes).forEach((dishDiv) => {
-    mealDataElement.find(".mealData").append(dishDiv);
+    mealDataElement.find(".mealTable").append(dishDiv);
+
   });
   return mealDataElement;
 }

@@ -144,16 +144,58 @@
 
 .planDataBody {
   padding: 0;
+  border: 1px black solid;
+  border-radius: 0.5rem;
 }
 
 .desTitle{
-  background-color: #9ec5df;
   text-align: center;
+  position: relative;
 }
 
-.dishDes{
-  /* background-color: #402fd449; */
-  border: 2px black solid
+.mealData{
+  /* border: 1px black solid;
+  border-radius: 0.5rem; */
+}
+
+.mealDataDark{
+  background-color: rgb(187, 218, 215);
+  /* border-radius: 0.5rem; */
+}
+.mealDataDarkFirst{
+  background-color: rgb(187, 218, 215);;
+  border-radius:0.5rem 0.5rem 0 0;
+}
+.mealDataDarkLast{
+  background-color: rgb(187, 218, 215);;
+  border-radius: 0 0 0.5rem 0.5rem;
+}
+
+.planDataHeader{
+  border: 1px black solid;
+  border-radius: 0.2rem;
+  color: white;
+}
+.window{
+  width: 67%;
+}
+
+.containerW {
+  height: 200px;
+  position: relative;
+  border: 3px solid green;
+}
+
+.centerW {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  -ms-transform: translate(-50%, -50%);
+  transform: translate(-50%, -50%);
+}
+
+.mealDataName{
+  text-align: center;
 }
 
 #collapseDes{
