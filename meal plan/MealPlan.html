@@ -51,14 +51,10 @@
 
     <!--open modal button-->
     <div class="container-fluid input-group mb-3">
-      <button
-        class="btn btn-dark"
-        data-bs-toggle="modal"
-        data-bs-target="#mealModal"
-        id="openModal"
-      >
+      <button class="btn btn-dark" data-bs-target="#mealModal" id="openModal">
         Creat daily plan
       </button>
+      <!-- data-bs-toggle="modal" -->
       <input
         type="text"
         class="form-control dailyName"
@@ -94,7 +90,7 @@
             <div class="mealsContainer">
               <!--to add with js-->
             </div>
-            <button class="btn btn-dark" id="addMeal">Add Meal!</button>
+            <button class="btn btn-dark addMeal">Add Meal!</button>
           </div>
           <!--~~~~~modal-body~~~~~-->
           <div class="modal-footer">

@@ -28,7 +28,7 @@ let mealHtml = `
     <div class="container-fluid mealDiv">
         <input type="text" class="form-control mealName" placeholder="meal name" style="border: none">
         <button class="btn btn-primary add-dish">add dish</button>
-        ${dishHtml}
+        
     </div>
     `;
 //~~~~~~~~Meal Div
@@ -39,7 +39,7 @@ let planDataHtml = `
       <div class="row container-fluid planDataHeader bg-dark">
         <div class="col-3 planDataName desTitle"><p class="centerW">name</p></div>
         <div class="col-3 planDataMacros desTitle"><p class="centerW">macros</p></div>
-        <div class="col-3 planDataDate desTitle"><p class="centerW">date</p></div>
+        <div class="col-3 planDataDate desTitle"><p class="centerW planDataDate">date</p></div>
         <div class="col-3 desTitle">
           <button
             class="btn btn-light collapseB"
@@ -51,7 +51,7 @@ let planDataHtml = `
             open/close
           </button>
           <button
-              class="btn btn-light" 
+              class="btn btn-light planEditBtn" 
           >
               edit
           </button>
