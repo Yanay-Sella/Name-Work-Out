@@ -63,9 +63,7 @@ function saveChanges() {
   }
   updatePlans();
   $("#mealModal").modal("hide");
-  setTimeout(() => {
-    $(".mealsContainer").html("");
-  }, 130);
+  cleanModal(); // cleaning the modal
 
   $(".dailyName").val("");
 }
@@ -90,6 +88,13 @@ function updatePlans() {
     $(".allPlansContainer").append(createPlanDiv(plan));
   });
   setupClickHandlers();
+}
+
+//cleans the modal to use when closing/saving the modal
+function cleanModal(){
+  setTimeout(() => {
+    $(".mealsContainer").html("");
+  }, 130);
 }
 
 function editPlan() {
@@ -137,6 +142,7 @@ function setupClickHandlers() {
 
   //save daily changes button
   $(".savePlanBtn").off("click").click(saveChanges);
+  $(".closeModalBtn").off("click").click(()=>cleanModal());
 
   $(".planEditBtn").off("click").click(editPlan);
 
