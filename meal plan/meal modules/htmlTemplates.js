@@ -1,5 +1,4 @@
-//~~~~~~~~Dish Div
-let dishHtml = `
+export let dishHtml = `
     <div class="container-fluid dishDiv input-group mb-3" id="dish">
         <label for="dishList" class="form-label"></label>
         <input class="form-control dishName" list="datalistOptions" id="dishList" placeholder="Search dish...">
@@ -24,7 +23,7 @@ let dishHtml = `
 //~~~~~~~~Dish Div
 
 //~~~~~~~~Meal Div
-let mealHtml = `
+export let mealHtml = `
     <div class="container-fluid mealDiv">
         <input type="text" class="form-control mealName" placeholder="meal name" style="border: none">
         <button class="btn btn-primary add-dish">add dish</button>
@@ -34,7 +33,7 @@ let mealHtml = `
 //~~~~~~~~Meal Div
 
 //~~~~~~~~~~~~~~Daily description scrolldown
-let planDataHtml = `
+export let planDataHtml = `
     <div class="container-fluid planData">
       <div class="row container-fluid planDataHeader bg-dark">
         <div class="col-3 planDataName desTitle"><p class="centerW">name</p></div>
@@ -67,7 +66,7 @@ let planDataHtml = `
       
     </div>`;
 
-let mealDataHtml = `
+export let mealDataHtml = `
             <div class="mealData">
               <h2 class="text-center mealDataName">meal name</h2>
               <table class="table table-striped" style="margin-bottom:0">
@@ -82,7 +81,7 @@ let mealDataHtml = `
             </div>
 `;
 
-let dishDataHtml = `  
+export let dishDataHtml = `  
                 <tr class="dishData">
                   <td>
                     <div class="dishDataName p-3 dishDes">
@@ -96,5 +95,3 @@ let dishDataHtml = `
                   </td>
                 </tr>             
 `;
-
-export { mealHtml, mealDataHtml, dishHtml, dishDataHtml, planDataHtml };
