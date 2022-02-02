@@ -14,7 +14,6 @@ function addMeal(name, dishes = []) {
   else addDish.call(meal);
 
   $(".mealsContainer").append(meal);
-  console.log(name);
   if (name === undefined) {
     name = `meal ${$(".mealDiv").length}`;
   }
@@ -43,17 +42,16 @@ function saveChanges() {
       mealDiv
     );
   });
-
-  const curPlan = allPlans.find((pName) => pName.name === planName);
+  const placeNumber = $(".modal").attr(`class`).search("planNumber-") + 11;
+  const index = $(".modal")
+    .attr(`class`)
+    .slice(placeNumber, placeNumber + 1);
+  console.log(index);
+  const curPlan = allPlans[index];
+  console.log(curPlan);
   if (!curPlan) {
     allPlans.push(
-      new classes.Plan(
-        planName,
-        "",
-        allMeals,
-        allPlans.length + 1,
-        $(".mealDiv")
-      )
+      new classes.Plan(planName, "", allMeals, allPlans.length, $(".mealDiv"))
     );
   } else {
     curPlan.name = planName;
@@ -62,6 +60,8 @@ function saveChanges() {
     allPlans[allPlans.findIndex((p) => p === curPlan)] = curPlan;
   }
   updatePlans();
+  $(".modal").removeClass(`planNumber-${index}`);
+  $(".modal-title").val("");
   $("#mealModal").modal("hide");
   cleanModal(); // cleaning the modal
 }
@@ -89,7 +89,7 @@ function updatePlans() {
 }
 
 //cleans the modal to use when closing/saving the modal
-function cleanModal(){
+function cleanModal() {
   setTimeout(() => {
     $(".mealsContainer").html("");
   }, 130);
@@ -98,8 +98,9 @@ function cleanModal(){
 function editPlan() {
   const planData = getCurPlanData(this);
   $("#mealModal").modal("toggle");
+  $(".modal").addClass(`planNumber-${planData.placeNumber}`);
   $(".mealDiv").each((_, m) => m.remove());
-  $(".modal-title").text(planData.name);
+  $(".modal-title").val(planData.name);
   $("#mealModal").find(".mealsContainer").append(planData.div);
   setupClickHandlers();
   // Array(...planData.meals).forEach((meal) =>
@@ -109,7 +110,6 @@ function editPlan() {
 
 function getCurPlanData(el) {
   const curPlanDiv = el.closest(".planData");
-  console.log(curPlanDiv);
   const plansList = Array(...$(".planData"));
   const curPlanIndex = plansList.findIndex((p) => p === curPlanDiv);
   const curPlanData = allPlans[curPlanIndex];
@@ -121,8 +121,8 @@ function createPlan() {
   if (allPlans.find((p) => p.name === planName)) {
     alert(`can't use the same plan name twice`);
   } else {
-    console.log(planName);
     $(".modal").modal("show");
+    $(".modal").addClass(`planNumber-${allPlans.length}`);
     $(".modal-title").text($(".dailyName").val());
     if ($(".mealDiv").length === 0) {
       addMeal();
@@ -140,7 +140,9 @@ function setupClickHandlers() {
 
   //save daily changes button
   $(".savePlanBtn").off("click").click(saveChanges);
-  $(".closeModalBtn").off("click").click(()=>cleanModal());
+  $(".closeModalBtn")
+    .off("click")
+    .click(() => cleanModal());
 
   $(".planEditBtn").off("click").click(editPlan);
 
