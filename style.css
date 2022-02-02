@@ -153,10 +153,6 @@
   position: relative;
 }
 
-.mealData{
-  /* border: 1px black solid;
-  border-radius: 0.5rem; */
-}
 
 .mealDataDark{
   background-color: rgb(187, 218, 215);
@@ -196,6 +192,19 @@
 
 .mealDataName{
   text-align: center;
+}
+
+.welcome{
+  text-align: center;
+}
+
+.bi-plus-circle{
+  font-size: 60px;
+}
+
+#openModal{
+  background-color: white;
+  border: white;
 }
 
 #collapseDes{

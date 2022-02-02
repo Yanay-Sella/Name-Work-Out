@@ -34,7 +34,7 @@ function addDish(dish = new classes.Dish()) {
 }
 
 function saveChanges() {
-  let planName = $(".modal-title").text();
+  let planName = $(".modal-title").val();
   const allMealsDivs = $(".mealDiv"); //this is an array
   const allMeals = allMealsDivs.map((_, mealDiv) => {
     return new classes.Meal(
@@ -64,8 +64,6 @@ function saveChanges() {
   updatePlans();
   $("#mealModal").modal("hide");
   cleanModal(); // cleaning the modal
-
-  $(".dailyName").val("");
 }
 
 function dishDivArrToDataDishArr(divArr) {
