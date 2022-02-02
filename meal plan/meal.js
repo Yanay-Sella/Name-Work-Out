@@ -31,6 +31,7 @@ function addDish(dish = new classes.Dish()) {
   dishDiv.find(".dishUnit").val(dish.unit);
 
   $(this).closest(".mealDiv").append(dishDiv); // adding the dishDiv html
+  setupClickHandlers();
 }
 
 function saveChanges() {
@@ -91,7 +92,7 @@ function updatePlans() {
 }
 
 //cleans the modal to use when closing/saving the modal
-function cleanModal(){
+function cleanModal() {
   setTimeout(() => {
     $(".mealsContainer").html("");
   }, 130);
@@ -142,12 +143,23 @@ function setupClickHandlers() {
 
   //save daily changes button
   $(".savePlanBtn").off("click").click(saveChanges);
-  $(".closeModalBtn").off("click").click(()=>cleanModal());
+  $(".closeModalBtn")
+    .off("click")
+    .click(() => cleanModal());
 
   $(".planEditBtn").off("click").click(editPlan);
 
   $(".add-dish") // add dish button
     .off("click")
     .click(addDish);
+
+  $(".delBtn").off("click").click(deleteDiv);
+}
+
+function deleteDiv() {
+  console.log(this);
+  if (this.classList.contains("delMeal")) this.closest(".mealDiv").remove();
+  if (this.classList.contains("delDish")) this.closest(".dishDiv").remove();
+  setupClickHandlers();
 }
 export { allPlans };

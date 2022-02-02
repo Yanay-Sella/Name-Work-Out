@@ -1,6 +1,7 @@
 export let dishHtml = `
     <div class="container-fluid dishDiv input-group mb-3" id="dish">
         <label for="dishList" class="form-label"></label>
+        <button class="btn btn-primary delBtn delDish">X</button>
         <input class="form-control dishName" list="datalistOptions" id="dishList" placeholder="Search dish...">
         <datalist id="datalistOptions">
             <option value="Tomato">
@@ -25,9 +26,19 @@ export let dishHtml = `
 //~~~~~~~~Meal Div
 export let mealHtml = `
     <div class="container-fluid mealDiv">
-        <input type="text" class="form-control mealName" placeholder="meal name" style="border: none">
+      <table class="table table-striped" style="margin-bottom:0">
+        <thead>
+          <th scope="col">
+            <input type="text" class="form-control mealName" placeholder="meal name" style="border: none">  
+          </th>
+          <th scope="col">
+            <button class="btn btn-primary delBtn delMeal" style="float: right;">X</button>
+          </th>
+        </thead>
+      </table>
+      <div>
         <button class="btn btn-primary add-dish">add dish</button>
-        
+      </div>
     </div>
     `;
 //~~~~~~~~Meal Div
