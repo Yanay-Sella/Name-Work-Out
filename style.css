@@ -153,6 +153,13 @@
   position: relative;
 }
 
+.planData{
+  margin: 25px 0 25px 0;
+}
+
+.dayName{
+  font-weight: 600;
+}
 
 .mealDataDark{
   background-color: rgb(187, 218, 215);
@@ -192,6 +199,12 @@
 
 .mealDataName{
   text-align: center;
+  padding: 10px 0 10px 0;
+}
+
+.header{
+  /* font-family: 'Josefin Sans', sans-serif;
+  font-family: 'Merriweather', serif; */
 }
 
 .welcome{

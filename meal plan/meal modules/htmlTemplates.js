@@ -37,8 +37,25 @@ let mealHtml = `
 let planDataHtml = `
     <div class="container-fluid planData">
       <div class="row container-fluid planDataHeader bg-dark">
-        <div class="col-3 planDataName desTitle"><p class="centerW">name</p></div>
-        <div class="col-3 planDataMacros desTitle"><p class="centerW">macros</p></div>
+        <div class="col-3 planDataName desTitle"><p class="centerW dayName">name</p></div>
+        <div class="col-3 planDataMacros desTitle">
+          <div class="dropdown">
+            <button
+              class="btn btn-dark dropdown-toggle"
+              type="button"
+              id="modalMacroMenu"
+              data-bs-toggle="dropdown"
+              aria-expanded="false"
+            >
+              macros
+            </button>
+            <ul class="dropdown-menu" aria-labelledby="modalMacroMenu">
+              <li><span class="dropdown-item-text">Calories:</span></li>
+              <li><span class="dropdown-item-text">Proteins:</span></li>
+              <li><span class="dropdown-item-text">Carbs:</span></li>
+            </ul>
+          </div>
+        </div>
         <div class="col-3 planDataDate desTitle"><p class="centerW planDataDate">date</p></div>
         <div class="col-3 desTitle">
           <button
@@ -69,6 +86,7 @@ let planDataHtml = `
 
 let mealDataHtml = `
             <div class="mealData">
+              <hr style="margin: 0;">
               <h2 class="text-center mealDataName">meal name</h2>
               <table class="table table-striped" style="margin-bottom:0">
               <thead>

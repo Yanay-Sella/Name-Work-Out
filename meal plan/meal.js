@@ -64,6 +64,9 @@ function saveChanges() {
   $(".modal-title").val("");
   $("#mealModal").modal("hide");
   cleanModal(); // cleaning the modal
+  if(allPlans.length===1){
+    $(".header").html("Name Workout");
+  }
 }
 
 function dishDivArrToDataDishArr(divArr) {

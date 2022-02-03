@@ -16,13 +16,13 @@ const createPlanDiv = function (plan) {
     planDataElement
       .find(".planDataName")
       .find("p")
-      .html("Daily plan #" + Number(allPlans.length));
+      .html("Nameless plan...");
   } else {
-    planDataElement.find(".planDataName").html(name);
+    planDataElement.find(".planDataName").find("p").html(name);
   }
 
   planDataElement
-    .find(".planDataDate")
+    .find(".planDataDate").find("p")
     .text(plan.date.toLocaleDateString("en-GB"));
 
   planDataElement
