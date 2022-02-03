@@ -30,6 +30,7 @@ function addDish(dish = new classes.Dish()) {
   dishDiv.find(".dishUnit").val(dish.unit);
 
   $(this).closest(".mealDiv").append(dishDiv); // adding the dishDiv html
+  setupClickHandlers();
 }
 
 function saveChanges() {
@@ -64,7 +65,7 @@ function saveChanges() {
   $(".modal-title").val("");
   $("#mealModal").modal("hide");
   cleanModal(); // cleaning the modal
-  if(allPlans.length===1){
+  if (allPlans.length === 1) {
     $(".header").html("Name Workout");
   }
 }
@@ -152,5 +153,27 @@ function setupClickHandlers() {
   $(".add-dish") // add dish button
     .off("click")
     .click(addDish);
+
+  $(".delBtn").off("click").click(deleteDiv);
+}
+
+function deleteDiv() {
+  if (this.classList.contains("delMeal")) this.closest(".mealDiv").remove();
+  if (this.classList.contains("delDish")) this.closest(".dishDiv").remove();
+  if (this.classList.contains("delPlan")) {
+    deletePlan(this);
+  }
+  setupClickHandlers();
+}
+
+function deletePlan(planDiv) {
+  const plan = getCurPlanData(planDiv);
+  planDiv.closest(".planData").remove();
+
+  allPlans.splice(
+    allPlans.findIndex((p) => p === plan),
+    1
+  );
+  console.log(allPlans);
 }
 export { allPlans };
