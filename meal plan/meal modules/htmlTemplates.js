@@ -65,6 +65,7 @@ export let planDataHtml = `
           >
               edit
           </button>
+          <button class="btn btn-primary delBtn delPlan" style="float: right;">X</button>
         </div>
       </div>
         <div class="collapse window row first">

@@ -14,7 +14,7 @@ function addMeal(name, dishes = []) {
   else addDish.call(meal);
 
   $(".mealsContainer").append(meal);
-  console.log(name);
+
   if (name === undefined) {
     name = `meal ${$(".mealDiv").length}`;
   }
@@ -112,7 +112,7 @@ function editPlan() {
 
 function getCurPlanData(el) {
   const curPlanDiv = el.closest(".planData");
-  console.log(curPlanDiv);
+
   const plansList = Array(...$(".planData"));
   const curPlanIndex = plansList.findIndex((p) => p === curPlanDiv);
   const curPlanData = allPlans[curPlanIndex];
@@ -124,7 +124,6 @@ function createPlan() {
   if (allPlans.find((p) => p.name === planName)) {
     alert(`can't use the same plan name twice`);
   } else {
-    console.log(planName);
     $(".modal").modal("show");
     $(".modal-title").text($(".dailyName").val());
     if ($(".mealDiv").length === 0) {
@@ -157,9 +156,22 @@ function setupClickHandlers() {
 }
 
 function deleteDiv() {
-  console.log(this);
   if (this.classList.contains("delMeal")) this.closest(".mealDiv").remove();
   if (this.classList.contains("delDish")) this.closest(".dishDiv").remove();
+  if (this.classList.contains("delPlan")) {
+    deletePlan(this);
+  }
   setupClickHandlers();
+}
+
+function deletePlan(planDiv) {
+  const plan = getCurPlanData(planDiv);
+  planDiv.closest(".planData").remove();
+
+  allPlans.splice(
+    allPlans.findIndex((p) => p === plan),
+    1
+  );
+  console.log(allPlans);
 }
 export { allPlans };
