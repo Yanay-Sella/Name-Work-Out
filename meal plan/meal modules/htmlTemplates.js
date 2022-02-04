@@ -1,7 +1,7 @@
 export let dishHtml = `
     <div class="container-fluid dishDiv input-group mb-3" id="dish">
         <label for="dishList" class="form-label"></label>
-        <button class="btn btn-primary delBtn delDish">X</button>
+        <button class="iconBtn delBtn delDish"><i class="bi bi-trash"></i></button>
         <input class="form-control dishName" list="datalistOptions" id="dishList" placeholder="Search dish...">
         <datalist id="datalistOptions">
             <option value="Tomato">
@@ -19,6 +19,24 @@ export let dishHtml = `
             <option value="liters">
             <option value="micrograms">
         </datalist>
+        <span class="input-group-text">
+          <div class="dropdown">
+            <button
+              class="btn dropdown-toggle"
+              type="button"
+              id="dishMacroMenu"
+              data-bs-toggle="dropdown"
+              aria-expanded="false"
+            >
+            macros
+            </button>
+            <ul class="dropdown-menu" aria-labelledby="modalMacroMenu">
+              <li><span class="dropdown-item-text">Calories:</span></li>
+              <li><span class="dropdown-item-text">Proteins:</span></li>
+              <li><span class="dropdown-item-text">Carbs:</span></li>
+            </ul>
+          </div>
+        </span>
     </div>
 `;
 //~~~~~~~~Dish Div
@@ -32,12 +50,14 @@ export let mealHtml = `
             <input type="text" class="form-control mealName" placeholder="meal name" style="border: none">  
           </th>
           <th scope="col">
-            <button class="btn btn-primary delBtn delMeal" style="float: right;">X</button>
+            <button class="iconBtn delBtn delMeal"><i class="bi bi-trash"></i></button>
           </th>
         </thead>
       </table>
-      <div>
-        <button class="btn btn-primary add-dish">add dish</button>
+
+
+      <div class="dishContainer" style="text-align:center;">
+        <button class="iconBtn add-dish"><i class="bi bi-plus-circle addDishCircle"></i></button>
       </div>
     </div>
     `;
@@ -46,8 +66,8 @@ export let mealHtml = `
 //~~~~~~~~~~~~~~Daily description scrolldown
 export let planDataHtml = `
     <div class="container-fluid planData">
-      <div class="row container-fluid planDataHeader bg-dark">
-        <div class="col-3 planDataName desTitle"><p class="centerW dayName">name</p></div>
+      <div class="row planDataHeader bg-dark">
+        <div class="col-4 planDataName desTitle"><p class="centerW dayName">name</p></div>
         <div class="col-3 planDataMacros desTitle">
           <div class="dropdown">
             <button
@@ -59,7 +79,7 @@ export let planDataHtml = `
             >
               macros
             </button>
-            <ul class="dropdown-menu" aria-labelledby="modalMacroMenu">
+            <ul class="dropdown-menu" aria-labelledby="DataMacroMenu">
               <li><span class="dropdown-item-text">Calories:</span></li>
               <li><span class="dropdown-item-text">Proteins:</span></li>
               <li><span class="dropdown-item-text">Carbs:</span></li>
@@ -67,22 +87,34 @@ export let planDataHtml = `
           </div>
         </div>
         <div class="col-3 planDataDate desTitle"><p class="centerW planDataDate">date</p></div>
-        <div class="col-3 desTitle">
-          <button
-            class="btn btn-light collapseB"
-            type="button"
-            data-bs-toggle="collapse"
-            data-bs-target= ""
-            aria-expanded="false"
-          >
-            open/close
-          </button>
-          <button
-              class="btn btn-light planEditBtn" 
-          >
-              edit
-          </button>
-          <button class="btn btn-primary delBtn delPlan" style="float: right;">X</button>
+        <div class="col-2 desTitle">
+          <div class="row">
+            <div class="col-4">
+            <button
+              class="whiteIconBtn collapseB"
+              type="button"
+              data-bs-toggle="collapse"
+              data-bs-target= ""
+              aria-expanded="false"
+            >
+              <i class="bi bi-arrow-bar-down"></i>  
+            </button>
+            </div>
+            <div class="col-4">
+            <button
+              class="whiteIconBtn planEditBtn" 
+            >
+            <i class="bi bi-pencil-square"></i>
+            </button>
+            </div>
+            <div class="col-4">
+              <button class="iconBtn delBtn whiteIconBtn" style="float: right;"><i class="bi bi-trash"></i></button>
+            </div>
+          </div>
+          
+
+          
+          
         </div>
       </div>
         <div class="collapse window row first">

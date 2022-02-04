@@ -23,6 +23,7 @@
       rel="stylesheet"
       href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.8.0/font/bootstrap-icons.css"
     />
+    
     <script
       src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"
       integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM"
@@ -67,11 +68,14 @@
 
       <div class="allPlansContainer container-fluid" style="width: 90%">
         <!-- here supposed to be all the description -->
+        <div class="openBtnDiv">
+          <button type="button" class="iconBtn" data-bs-target="#mealModal" id="openModal">
+            <i class="bi bi-plus-circle addPlanCircle"></i>
+          </button>
+        </div>
       </div>
 
-      <button type="button" data-bs-target="#mealModal" id="openModal">
-        <i class="bi bi-plus-circle"></i>
-      </button>
+      
     </div>
 
     <div
@@ -96,7 +100,7 @@
                     placeholder="Meal Plan"
                   />
                 </div>
-                <div class="col-lg-6">
+                <div class="col-lg-6 modalHeaderMacro">
                   <div class="dropdown">
                     <button
                       class="btn dropdown-toggle"
@@ -105,7 +109,7 @@
                       data-bs-toggle="dropdown"
                       aria-expanded="false"
                     >
-                      macros
+                      total meal macros
                     </button>
                     <ul class="dropdown-menu" aria-labelledby="modalMacroMenu">
                       <li><span class="dropdown-item-text">Calories:</span></li>
@@ -129,7 +133,7 @@
             <div class="mealsContainer">
               <!--to add with js-->
             </div>
-            <button class="btn btn-dark addMeal">Add Meal!</button>
+            <button class="btn btn-dark addMeal">add meal</i></button>
           </div>
           <!--~~~~~modal-body~~~~~-->
           <div class="modal-footer">

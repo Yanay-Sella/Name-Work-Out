@@ -175,6 +175,7 @@
 }
 
 .planDataHeader{
+  width: 60%;
   border: 1px black solid;
   border-radius: 0.2rem;
   color: white;
@@ -205,19 +206,47 @@
 .header{
   /* font-family: 'Josefin Sans', sans-serif;
   font-family: 'Merriweather', serif; */
-}
-
-.welcome{
   text-align: center;
 }
 
-.bi-plus-circle{
+.openBtnDiv{
+  text-align: center;
+}
+.openBtnDivAfter{
+  text-align: left;
+}
+
+.addPlanCircle{
   font-size: 60px;
 }
 
-#openModal{
-  background-color: white;
-  border: white;
+.addDishCircle{
+  font-size: 35px;
+}
+
+.dishContainer{
+  padding-top: 15px;
+}
+
+.modalHeaderMacro{
+  text-align: right;
+}
+
+#dishMacroMenu{
+  padding: 0;
+  margin: 0;
+}
+
+.iconBtn{
+  background-color: transparent;
+  border: transparent;
+}
+
+.whiteIconBtn{
+  background-color: transparent;
+  border: transparent;
+  color: white;
+  margin-top: 12px;
 }
 
 #collapseDes{
