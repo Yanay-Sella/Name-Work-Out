@@ -180,4 +180,30 @@ function deletePlan(planDiv) {
     $(".header").html("Click + to add plans");
   }
 }
+
+const API_KEY = "b1oBKkfsRfpbbbIZFfVrN7m5q9jhK6mdvyL4010F";
+
+async function transformFoodData(des) {
+  const req = await fetch(
+    `https://api.nal.usda.gov/fdc/v1/foods/search?api_key=${API_KEY}&query=${des}`
+  );
+  const data = await req.json();
+  return data;
+}
+
+async function getFoodMacros(des) {
+  const data = await transformFoodData(des);
+  const food = data.foods[0];
+  const name = food.description;
+  const macros = food.foodNutrients;
+  // const {}
+
+  return {
+    name,
+    macros,
+  };
+}
+
+getFoodMacros("honey").then((v) => console.log(v));
+
 export { allPlans };

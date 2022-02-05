@@ -1,15 +1,19 @@
 export let dishHtml = `
+    
     <div class="container-fluid dishDiv input-group mb-3" id="dish">
         <label for="dishList" class="form-label"></label>
         <button class="iconBtn delBtn delDish"><i class="bi bi-trash"></i></button>
-        <input class="form-control dishName" list="datalistOptions" id="dishList" placeholder="Search dish...">
-        <datalist id="datalistOptions">
-            <option value="Tomato">
-            <option value="Potato">
-            <option value="Apple">
-            <option value="Chicken Breast">
-            <option value="Bread">
-        </datalist>
+
+         <input class="form-control dishName" id="dishList" placeholder="Search dish...">
+         <button class="searchFood btn-dark me-2" id="dropdownMenuLink" data-bs-toggle="dropdown" aria-expanded="false">
+          <i class="bi bi-search"></i>
+        </button>
+         <ul class="dropdown-menu" aria-labelledby="dropdownMenuLink">
+           <li><a class="dropdown-item" href="#">Action</a></li>
+          <li><a class="dropdown-item" href="#">Another action</a></li>
+           <li><a class="dropdown-item" href="#">Something else here</a></li>
+        </ul>
+            
         <input type="number" class="dishAmount form-control" placeholder="0.00">
         <input class="form-control dishUnit" list="unitDataList" id="unitList" placeholder="unit">
         <datalist id="unitDataList">
