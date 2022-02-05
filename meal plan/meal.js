@@ -88,7 +88,7 @@ function updatePlans() {
   plans.each((_, p) => p.remove());
 
   allPlans.forEach((plan) => {
-    $(".allPlansContainer").prepend(createPlanDiv(plan));
+    $(".allPlansContainer").append(createPlanDiv(plan));
   });
   setupClickHandlers();
 }
@@ -175,7 +175,7 @@ function deletePlan(planDiv) {
     1
   );
   console.log(allPlans);
-  if(allPlans.length === 0 && $(".openBtnDiv").hasClass("openBtnDivAfter")){
+  if (allPlans.length === 0 && $(".openBtnDiv").hasClass("openBtnDivAfter")) {
     $(".openBtnDiv").removeClass("openBtnDivAfter");
     $(".header").html("Click + to add plans");
   }

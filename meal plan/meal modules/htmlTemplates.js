@@ -108,7 +108,7 @@ export let planDataHtml = `
             </button>
             </div>
             <div class="col-4">
-              <button class="iconBtn delBtn whiteIconBtn" style="float: right;"><i class="bi bi-trash"></i></button>
+              <button class="iconBtn delBtn delPlan whiteIconBtn" style="float: right;"><i class="bi bi-trash"></i></button>
             </div>
           </div>
           
