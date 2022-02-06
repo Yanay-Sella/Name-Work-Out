@@ -188,13 +188,15 @@ function cleanArray(arr) {
 async function findFood() {
   const dishDiv = $(this).closest(".dishDiv");
   const dropdownMenu = dishDiv.find(".food-dropdown-menu");
+
+  dropdownMenu.empty();
+
   const nameInput = dishDiv.find(".dishName");
   const query = nameInput.val().toString();
   const searchFinds = await getFoods(query);
   console.log(searchFinds);
   const foodsDes = cleanArray(searchFinds.foods.map((f) => f.description));
 
-  dropdownMenu.empty();
   foodsDes.forEach((f, i) => {
     const foodDiv = $(
       `<li><a class="dropdown-item" href="#" data-fdcid=${searchFinds.foods[i].fdcId}>${f}</a></li>`
@@ -208,19 +210,29 @@ async function findFood() {
 
 function selectFood(e, input) {
   const el = $(e.target);
-  console.log(el.data("fdcid"));
-  input.attr("data-fdcid", el.data("fdcid"));
+  const id = el.data("fdcid");
+  input.attr("data-fdcid", id);
   input.val(el.html());
+  loadMacros(id);
+}
+
+let foodItem = "";
+async function loadMacros(id) {
+  if (!id) return;
+  foodItem = await getFoodByfdcId(id);
 }
 
 async function renderMacros() {
   const dishDiv = $(this).closest(".dishDiv");
+
   const foodId = dishDiv.find(".dishName").attr("data-fdcid");
-  const foodItem = await getFoodByfdcId(foodId);
+  if (!foodId) return;
+  loadMacros();
+
+  if (!foodItem) return;
   const macros = getMacrosFromFood(foodItem);
 
   dishDiv.find(".macros-dropdown-menu").toggleClass("show");
-
   dishDiv.find(".dropdown-cal").text(`Calories: ${macros.calories}`);
   dishDiv.find(".dropdown-prot").text(`Protein: ${macros.protien}`);
   dishDiv.find(".dropdown-carbs").text(`Carbs: ${macros.carbs}`);
@@ -233,6 +245,8 @@ function getMacrosFromFood(food) {
   if (!food) return;
   const macros = food.labelNutrients;
   console.log(macros);
+
+  if (!macros) return;
   return {
     calories: macros.calories.value,
     carbs: macros.carbohydrates.value,
