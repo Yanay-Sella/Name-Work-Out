@@ -26,13 +26,12 @@ export let dishHtml = `
             <button
               class="btn dropdown-toggle macros-dropdown-menu"
               type="button"
-              id="dishMacroMenu"
-              data-bs-toggle="dropdown"
+              id="dishMacroMenu"             
               aria-expanded="false"
             >
             macros
             </button>
-            <ul class="dropdown-menu " aria-labelledby="modalMacroMenu">
+            <ul class="dropdown-menu macros-dropdown-menu" aria-labelledby="modalMacroMenu">
               <li><span class="dropdown-item-text dropdown-cal">Calories:</span></li>
               <li><span class="dropdown-item-text dropdown-prot">Proteins:</span></li>
               <li><span class="dropdown-item-text dropdown-carbs">Carbs:</span></li>
@@ -113,10 +112,7 @@ export let planDataHtml = `
               <button class="iconBtn delBtn delPlan whiteIconBtn" style="float: right;"><i class="bi bi-trash"></i></button>
             </div>
           </div>
-          
 
-          
-          
         </div>
       </div>
         <div class="collapse window row first">

@@ -43,13 +43,8 @@ function saveChanges() {
       mealDiv
     );
   });
-  const placeNumber = $(".modal").attr(`class`).search("planNumber-") + 11;
-  const index = $(".modal")
-    .attr(`class`)
-    .slice(placeNumber, placeNumber + 1);
-  console.log(index);
+  const index = $(".modal").attr(`planNum`);
   const curPlan = allPlans[index];
-  console.log(curPlan);
   if (!curPlan) {
     allPlans.push(
       new classes.Plan(planName, "", allMeals, allPlans.length, $(".mealDiv"))
@@ -103,7 +98,7 @@ function cleanModal() {
 function editPlan() {
   const planData = getCurPlanData(this);
   $("#mealModal").modal("toggle");
-  $(".modal").addClass(`planNumber-${planData.placeNumber}`);
+  $(".modal").attr(`planNum`, planData.placeNumber);
   $(".mealDiv").each((_, m) => m.remove());
   $(".modal-title").val(planData.name);
   $("#mealModal").find(".mealsContainer").append(planData.div);
@@ -127,7 +122,7 @@ function createPlan() {
     alert(`can't use the same plan name twice`);
   } else {
     $(".modal").modal("show");
-    $(".modal").addClass(`planNumber-${allPlans.length}`);
+    $(".modal").attr(`planNum`, allPlans.length);
     $(".modal-title").text($(".dailyName").val());
     if ($(".mealDiv").length === 0) {
       addMeal();
@@ -151,7 +146,6 @@ function deletePlan(planDiv) {
     allPlans.findIndex((p) => p === plan),
     1
   );
-  console.log(allPlans);
   if (allPlans.length === 0 && $(".openBtnDiv").hasClass("openBtnDivAfter")) {
     $(".openBtnDiv").removeClass("openBtnDivAfter");
     $(".header").html("Click + to add plans");
@@ -170,7 +164,7 @@ async function getFoodByName(des) {
 
 async function getFoodByfdcId(id) {
   const req = await fetch(
-    `https://api.nal.usda.gov/fdc/v1/foods/${id}?api_key=${API_KEY}`
+    `https://api.nal.usda.gov/fdc/v1/food/${id}?api_key=${API_KEY}`
   );
   const data = await req.json();
   return data;
@@ -203,7 +197,7 @@ async function findFood() {
   dropdownMenu.empty();
   foodsDes.forEach((f, i) => {
     const foodDiv = $(
-      `<li><a class="dropdown-item" href="#${searchFinds.foods[i].fdcId}">${f}</a></li>`
+      `<li><a class="dropdown-item" href="#" data-fdcid=${searchFinds.foods[i].fdcId}>${f}</a></li>`
     );
     dropdownMenu.append(foodDiv);
     foodDiv.click((e) => {
@@ -214,19 +208,37 @@ async function findFood() {
 
 function selectFood(e, input) {
   const el = $(e.target);
-  console.log(el.attr("href"));
-  input.attr("data-fdcid", el.attr("href").slice(1));
+  console.log(el.data("fdcid"));
+  input.attr("data-fdcid", el.data("fdcid"));
   input.val(el.html());
 }
 
 async function renderMacros() {
   const dishDiv = $(this).closest(".dishDiv");
   const foodId = dishDiv.find(".dishName").attr("data-fdcid");
-  console.log(foodId);
-  console.log(await getFoodByfdcId(foodId));
+  const foodItem = await getFoodByfdcId(foodId);
+  const macros = getMacrosFromFood(foodItem);
+
+  dishDiv.find(".macros-dropdown-menu").toggleClass("show");
+
+  dishDiv.find(".dropdown-cal").text(`Calories: ${macros.calories}`);
+  dishDiv.find(".dropdown-prot").text(`Protein: ${macros.protien}`);
+  dishDiv.find(".dropdown-carbs").text(`Carbs: ${macros.carbs}`);
+
+  console.log(foodItem);
+  //labelNutrients
 }
 
-// getFoodMacros("honey").then((v) => console.log(v));
+function getMacrosFromFood(food) {
+  if (!food) return;
+  const macros = food.labelNutrients;
+  console.log(macros);
+  return {
+    calories: macros.calories.value,
+    carbs: macros.carbohydrates.value,
+    protien: macros.protein.value,
+  };
+}
 
 function setupClickHandlers() {
   //daily plan modal button
