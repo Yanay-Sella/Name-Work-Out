@@ -135,29 +135,6 @@ function createPlan() {
   }
 }
 
-function setupClickHandlers() {
-  //daily plan modal button
-  $("#openModal").off("click").click(createPlan);
-  //add meal to daily plan button
-  $(".addMeal")
-    .off("click")
-    .click(() => addMeal());
-
-  //save daily changes button
-  $(".savePlanBtn").off("click").click(saveChanges);
-  $(".closeModalBtn")
-    .off("click")
-    .click(() => cleanModal());
-
-  $(".planEditBtn").off("click").click(editPlan);
-
-  $(".add-dish") // add dish button
-    .off("click")
-    .click(addDish);
-
-  $(".delBtn").off("click").click(deleteDiv);
-}
-
 function deleteDiv() {
   if (this.classList.contains("delMeal")) this.closest(".mealDiv").remove();
   if (this.classList.contains("delDish")) this.closest(".dishDiv").remove();
@@ -181,9 +158,9 @@ function deletePlan(planDiv) {
   }
 }
 
-const API_KEY = "b1oBKkfsRfpbbbIZFfVrN7m5q9jhK6mdvyL4010F";
-
 async function transformFoodData(des) {
+  const API_KEY = "b1oBKkfsRfpbbbIZFfVrN7m5q9jhK6mdvyL4010F";
+
   const req = await fetch(
     `https://api.nal.usda.gov/fdc/v1/foods/search?api_key=${API_KEY}&query=${des}`
   );
@@ -191,19 +168,72 @@ async function transformFoodData(des) {
   return data;
 }
 
-async function getFoodMacros(des) {
+async function getFoods(des) {
   const data = await transformFoodData(des);
-  const food = data.foods[0];
-  const name = food.description;
-  const macros = food.foodNutrients;
-  // const {}
-
+  const foods = data.foods;
+  const name = foods[0].description;
+  // const macros = food.foodNutrients;
   return {
     name,
-    macros,
+    foods,
   };
 }
 
-getFoodMacros("honey").then((v) => console.log(v));
+function cleanArray(arr) {
+  return [...new Set(arr)];
+}
+
+async function findFood() {
+  const dishDiv = $(this).closest(".dishDiv");
+  const dropdownMenu = dishDiv.find(".food-dropdown-menu");
+  const nameInput = dishDiv.find(".dishName");
+  const query = nameInput.val().toString();
+  const searchFinds = await getFoods(query);
+  const foodsDes = cleanArray(searchFinds.foods.map((f) => f.description));
+
+  dropdownMenu.empty();
+  foodsDes.forEach((f, i) => {
+    const foodDiv = $(
+      `<li><a class="dropdown-item" href="#${i}">${f}</a></li>`
+    );
+    dropdownMenu.append(foodDiv);
+    foodDiv.click((e) => {
+      selectFood(e, nameInput);
+    });
+  });
+}
+
+function selectFood(e, input) {
+  console.log(input);
+  const el = $(e.target);
+  input.val(el.html());
+}
+
+// getFoodMacros("honey").then((v) => console.log(v));
+
+function setupClickHandlers() {
+  //daily plan modal button
+  $("#openModal").off("click").click(createPlan);
+  //add meal to daily plan button
+  $(".addMeal")
+    .off("click")
+    .click(() => addMeal());
+
+  //save daily changes button
+  $(".savePlanBtn").off("click").click(saveChanges);
+  $(".closeModalBtn")
+    .off("click")
+    .click(() => cleanModal());
+
+  $(".planEditBtn").off("click").click(editPlan);
+
+  $(".add-dish") // add dish button
+    .off("click")
+    .click(addDish);
+
+  $(".delBtn").off("click").click(deleteDiv);
+
+  $(".searchFood").off("click").click(findFood);
+}
 
 export { allPlans };

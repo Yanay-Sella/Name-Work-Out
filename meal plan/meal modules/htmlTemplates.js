@@ -4,14 +4,12 @@ export let dishHtml = `
         <label for="dishList" class="form-label"></label>
         <button class="iconBtn delBtn delDish"><i class="bi bi-trash"></i></button>
 
-         <input class="form-control dishName" id="dishList" placeholder="Search dish...">
-         <button class="searchFood btn-dark me-2" id="dropdownMenuLink" data-bs-toggle="dropdown" aria-expanded="false">
+        <input class="form-control dishName" id="dishList" placeholder="Search dish...">
+        <button class="searchFood btn-dark me-2" id="dropdownMenuLink" data-bs-toggle="dropdown" aria-expanded="false">
           <i class="bi bi-search"></i>
         </button>
-         <ul class="dropdown-menu" aria-labelledby="dropdownMenuLink">
-           <li><a class="dropdown-item" href="#">Action</a></li>
-          <li><a class="dropdown-item" href="#">Another action</a></li>
-           <li><a class="dropdown-item" href="#">Something else here</a></li>
+        <ul class="dropdown-menu food-dropdown-menu" aria-labelledby="dropdownMenuLink">
+          
         </ul>
             
         <input type="number" class="dishAmount form-control" placeholder="0.00">
@@ -34,7 +32,7 @@ export let dishHtml = `
             >
             macros
             </button>
-            <ul class="dropdown-menu" aria-labelledby="modalMacroMenu">
+            <ul class="dropdown-menu macros-dropdown-menu" aria-labelledby="modalMacroMenu">
               <li><span class="dropdown-item-text">Calories:</span></li>
               <li><span class="dropdown-item-text">Proteins:</span></li>
               <li><span class="dropdown-item-text">Carbs:</span></li>
@@ -161,3 +159,6 @@ export let dishDataHtml = `
                   </td>
                 </tr>             
 `;
+
+export const foodItemHtml = `
+<li><a class="dropdown-item" href="#">Action</a></li>`;
