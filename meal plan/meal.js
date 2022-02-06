@@ -158,9 +158,9 @@ function deletePlan(planDiv) {
   }
 }
 
-async function transformFoodData(des) {
-  const API_KEY = "b1oBKkfsRfpbbbIZFfVrN7m5q9jhK6mdvyL4010F";
+const API_KEY = "b1oBKkfsRfpbbbIZFfVrN7m5q9jhK6mdvyL4010F";
 
+async function getFoodByName(des) {
   const req = await fetch(
     `https://api.nal.usda.gov/fdc/v1/foods/search?api_key=${API_KEY}&query=${des}`
   );
@@ -168,8 +168,16 @@ async function transformFoodData(des) {
   return data;
 }
 
+async function getFoodByfdcId(id) {
+  const req = await fetch(
+    `https://api.nal.usda.gov/fdc/v1/foods/${id}?api_key=${API_KEY}`
+  );
+  const data = await req.json();
+  return data;
+}
+
 async function getFoods(des) {
-  const data = await transformFoodData(des);
+  const data = await getFoodByName(des);
   const foods = data.foods;
   const name = foods[0].description;
   // const macros = food.foodNutrients;
@@ -189,12 +197,13 @@ async function findFood() {
   const nameInput = dishDiv.find(".dishName");
   const query = nameInput.val().toString();
   const searchFinds = await getFoods(query);
+  console.log(searchFinds);
   const foodsDes = cleanArray(searchFinds.foods.map((f) => f.description));
 
   dropdownMenu.empty();
   foodsDes.forEach((f, i) => {
     const foodDiv = $(
-      `<li><a class="dropdown-item" href="#${i}">${f}</a></li>`
+      `<li><a class="dropdown-item" href="#${searchFinds.foods[i].fdcId}">${f}</a></li>`
     );
     dropdownMenu.append(foodDiv);
     foodDiv.click((e) => {
@@ -204,9 +213,17 @@ async function findFood() {
 }
 
 function selectFood(e, input) {
-  console.log(input);
   const el = $(e.target);
+  console.log(el.attr("href"));
+  input.attr("data-fdcid", el.attr("href").slice(1));
   input.val(el.html());
+}
+
+async function renderMacros() {
+  const dishDiv = $(this).closest(".dishDiv");
+  const foodId = dishDiv.find(".dishName").attr("data-fdcid");
+  console.log(foodId);
+  console.log(await getFoodByfdcId(foodId));
 }
 
 // getFoodMacros("honey").then((v) => console.log(v));
@@ -234,6 +251,8 @@ function setupClickHandlers() {
   $(".delBtn").off("click").click(deleteDiv);
 
   $(".searchFood").off("click").click(findFood);
+
+  $(".macros-dropdown-menu").off("click").click(renderMacros);
 }
 
 export { allPlans };
