@@ -9,7 +9,7 @@ export let dishHtml = `
           <i class="bi bi-search"></i>
         </button>
         <ul class="dropdown-menu food-dropdown-menu" aria-labelledby="dropdownMenuLink">
-          
+          <p>loading...</p>
         </ul>
             
         <input type="number" class="dishAmount form-control" placeholder="0.00">
@@ -24,15 +24,15 @@ export let dishHtml = `
         <span class="input-group-text">
           <div class="dropdown">
             <button
-              class="btn dropdown-toggle macros-dropdown-menu"
+              class="btn dropdown-toggle"
               type="button"
-              id="dishMacroMenu"
+              id="modalMacroMenu"
               data-bs-toggle="dropdown"
               aria-expanded="false"
             >
             macros
             </button>
-            <ul class="dropdown-menu " aria-labelledby="modalMacroMenu">
+            <ul class="dropdown-menu" aria-labelledby="modalMacroMenu">
               <li><span class="dropdown-item-text dropdown-cal">Calories:</span></li>
               <li><span class="dropdown-item-text dropdown-prot">Proteins:</span></li>
               <li><span class="dropdown-item-text dropdown-carbs">Carbs:</span></li>
