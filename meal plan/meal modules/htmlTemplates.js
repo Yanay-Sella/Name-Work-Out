@@ -4,7 +4,7 @@ export let dishHtml = `
         <label for="dishList" class="form-label"></label>
         <button class="iconBtn delBtn delDish"><i class="bi bi-trash"></i></button>
 
-        <input class="form-control dishName" id="dishList" placeholder="Search dish..." data-fdcId="">
+        <input class="form-control dishName" id="dishList" placeholder="Search dish..." data-fdcid="">
         <button class="searchFood btn-dark me-2" id="dropdownMenuLink" data-bs-toggle="dropdown" aria-expanded="false">
           <i class="bi bi-search"></i>
         </button>
@@ -26,12 +26,13 @@ export let dishHtml = `
             <button
               class="btn dropdown-toggle macros-dropdown-menu"
               type="button"
-              id="dishMacroMenu"             
+              id="dishMacroMenu"
+              data-bs-toggle="dropdown"
               aria-expanded="false"
             >
             macros
             </button>
-            <ul class="dropdown-menu macros-dropdown-menu" aria-labelledby="modalMacroMenu">
+            <ul class="dropdown-menu " aria-labelledby="modalMacroMenu">
               <li><span class="dropdown-item-text dropdown-cal">Calories:</span></li>
               <li><span class="dropdown-item-text dropdown-prot">Proteins:</span></li>
               <li><span class="dropdown-item-text dropdown-carbs">Carbs:</span></li>
@@ -112,7 +113,10 @@ export let planDataHtml = `
               <button class="iconBtn delBtn delPlan whiteIconBtn" style="float: right;"><i class="bi bi-trash"></i></button>
             </div>
           </div>
+          
 
+          
+          
         </div>
       </div>
         <div class="collapse window row first">

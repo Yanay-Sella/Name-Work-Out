@@ -213,26 +213,32 @@ function selectFood(e, input) {
   const id = el.data("fdcid");
   input.attr("data-fdcid", id);
   input.val(el.html());
-  loadMacros(id);
+  renderMacros(el, id);
 }
 
-let foodItem = "";
-async function loadMacros(id) {
-  if (!id) return;
-  foodItem = await getFoodByfdcId(id);
-}
+async function renderMacros(el, id) {
+  const dishDiv = $(el).closest(".dishDiv");
+  console.log(dishDiv);
 
-async function renderMacros() {
-  const dishDiv = $(this).closest(".dishDiv");
+  // const foodId = dishDiv.find(".dishName").attr("data-fdcid");
+  if (!id) {
+    console.log("no id");
+    return;
+  }
 
-  const foodId = dishDiv.find(".dishName").attr("data-fdcid");
-  if (!foodId) return;
-  loadMacros();
+  dishDiv.find(".dropdown-cal").text(`loading...`);
+  dishDiv.find(".dropdown-prot").text(`loading...`);
+  dishDiv.find(".dropdown-carbs").text(`loading...`);
+  const foodItem = await getFoodByfdcId(id);
 
-  if (!foodItem) return;
+  if (!foodItem) {
+    console.log("no food found");
+    return;
+  }
   const macros = getMacrosFromFood(foodItem);
+  if (!macros) return;
 
-  dishDiv.find(".macros-dropdown-menu").toggleClass("show");
+  // dishDiv.find(".macros-dropdown-menu").toggleClass("show");
   dishDiv.find(".dropdown-cal").text(`Calories: ${macros.calories}`);
   dishDiv.find(".dropdown-prot").text(`Protein: ${macros.protien}`);
   dishDiv.find(".dropdown-carbs").text(`Carbs: ${macros.carbs}`);
@@ -243,14 +249,24 @@ async function renderMacros() {
 
 function getMacrosFromFood(food) {
   if (!food) return;
-  const macros = food.labelNutrients;
+  const macros = food.foodNutrients;
   console.log(macros);
 
-  if (!macros) return;
+  if (!macros) {
+    console.log("no macros found");
+    return;
+  }
+
+  // const calories = macros.find((n) => {
+  //   console.log(n.nutrient.name == "Energy");
+  //   return n.nutrient.name == "Energy";
+  // });
+  // console.log(calories);
+
   return {
-    calories: macros.calories.value,
-    carbs: macros.carbohydrates.value,
-    protien: macros.protein.value,
+    calories: macros.find((n) => n.nutrient.name == "Energy").amount ?? 0,
+    carbs: macros.find((n) => n.nutrient.name == "Carbohydrates")?.amount ?? 0,
+    protien: macros.find((n) => n.nutrient.name == "Protein").amount ?? 0,
   };
 }
 
@@ -278,7 +294,7 @@ function setupClickHandlers() {
 
   $(".searchFood").off("click").click(findFood);
 
-  $(".macros-dropdown-menu").off("click").click(renderMacros);
+  // $(".macros-dropdown-menu").off("click").click(renderMacros);
 }
 
 export { allPlans };
