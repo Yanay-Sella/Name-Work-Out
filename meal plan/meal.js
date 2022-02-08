@@ -1,120 +1,10 @@
-import * as classes from "./meal modules/classes.js";
-import * as templates from "./meal modules/htmlTemplates.js";
-import { createPlanDiv } from "./meal modules/divCreation.js";
 import { findFood } from "./meal modules/foodMacros.js";
+import * as modal from "./meal modules/modal.js";
+
 let allPlans = [];
 
 setupClickHandlers();
 //~~~~~~~~~~~~~~Daily description scrolldown
-
-function addMeal(name, dishes = []) {
-  const meal = $(templates.mealHtml);
-
-  if (dishes.length > 0) dishes.forEach((dish) => addDish.call(meal, dish));
-  else addDish.call(meal);
-
-  $(".mealsContainer").append(meal);
-  if (name === undefined) {
-    name = `meal ${$(".mealDiv").length}`;
-  }
-  meal.find(".mealName").val(name);
-
-  setupClickHandlers();
-}
-
-function addDish(dish = new classes.Dish()) {
-  const dishDiv = $(templates.dishHtml);
-
-  dishDiv.find(".dishName").val(dish.name);
-  dishDiv.find(".dishAmount").val(dish.amount);
-  dishDiv.find(".dishUnit").val(dish.unit);
-
-  $(this).closest(".mealDiv").find(".add-dish").before(dishDiv); // adding the dishDiv html
-  setupClickHandlers();
-}
-
-function saveChanges() {
-  let planName = $(".modal-title").val();
-  const allMealsDivs = $(".mealDiv"); //this is an array
-  const allMeals = allMealsDivs.map((_, mealDiv) => {
-    return new classes.Meal(
-      $(mealDiv).find(".mealName").val(),
-      dishDivArrToDataDishArr($(mealDiv).find(".dishDiv")),
-      mealDiv
-    );
-  });
-  const index = $(".modal").attr(`planNum`);
-  const curPlan = allPlans[index];
-  if (!curPlan) {
-    allPlans.push(
-      new classes.Plan(planName, "", allMeals, allPlans.length, $(".mealDiv"))
-    );
-  } else {
-    curPlan.name = planName;
-    curPlan.meals = allMeals;
-    curPlan.div = $(".mealDiv");
-    allPlans[allPlans.findIndex((p) => p === curPlan)] = curPlan;
-  }
-  updatePlans();
-  $(".modal").removeClass(`planNumber-${index}`);
-  $(".modal-title").val("");
-  $("#mealModal").modal("hide");
-  cleanModal(); // cleaning the modal
-  if (allPlans.length === 1) {
-    $(".header").html("Name Workout");
-    $(".openBtnDiv").addClass("openBtnDivAfter");
-  }
-}
-
-function dishDivArrToDataDishArr(divArr) {
-  return divArr.map(
-    (_, div) =>
-      new classes.Dish(
-        $(div).find(".dishName").val(),
-        $(div).find(".dishAmount").val(),
-        $(div).find(".dishUnit").val(),
-        div
-      )
-  );
-}
-
-function updatePlans() {
-  const plans = $(".planData");
-  plans.each((_, p) => p.remove());
-
-  allPlans.forEach((plan) => {
-    $(".allPlansContainer").append(createPlanDiv(plan));
-  });
-  setupClickHandlers();
-}
-
-//cleans the modal to use when closing/saving the modal
-function cleanModal() {
-  setTimeout(() => {
-    $(".mealsContainer").html("");
-  }, 130);
-}
-
-function editPlan() {
-  const planData = getCurPlanData(this);
-  $("#mealModal").modal("toggle");
-  $(".modal").attr(`planNum`, planData.placeNumber);
-  $(".mealDiv").each((_, m) => m.remove());
-  $(".modal-title").val(planData.name);
-  $("#mealModal").find(".mealsContainer").append(planData.div);
-  setupClickHandlers();
-  // Array(...planData.meals).forEach((meal) =>
-  //   addMeal(meal.name, Array(...meal.dishes))
-  // );
-}
-
-function getCurPlanData(el) {
-  const curPlanDiv = el.closest(".planData");
-  const plansList = Array(...$(".planData"));
-  const curPlanIndex = plansList.findIndex((p) => p === curPlanDiv);
-  const curPlanData = allPlans[curPlanIndex];
-  return curPlanData;
-}
 
 function createPlan() {
   const planName = $(".dailyName").val();
@@ -125,7 +15,7 @@ function createPlan() {
     $(".modal").attr(`planNum`, allPlans.length);
     $(".modal-title").text($(".dailyName").val());
     if ($(".mealDiv").length === 0) {
-      addMeal();
+      modal.addMeal();
     }
   }
 }
@@ -152,25 +42,33 @@ function deletePlan(planDiv) {
   }
 }
 
+function getCurPlanData(el) {
+  const curPlanDiv = el.closest(".planData");
+  const plansList = Array(...$(".planData"));
+  const curPlanIndex = plansList.findIndex((p) => p === curPlanDiv);
+  const curPlanData = allPlans[curPlanIndex];
+  return curPlanData;
+}
+
 function setupClickHandlers() {
   //daily plan modal button
   $("#openModal").off("click").click(createPlan);
   //add meal to daily plan button
   $(".addMeal")
     .off("click")
-    .click(() => addMeal());
+    .click(() => modal.addMeal());
 
   //save daily changes button
-  $(".savePlanBtn").off("click").click(saveChanges);
+  $(".savePlanBtn").off("click").click(modal.saveChanges);
   $(".closeModalBtn")
     .off("click")
-    .click(() => cleanModal());
+    .click(() => modal.cleanModal());
 
-  $(".planEditBtn").off("click").click(editPlan);
+  $(".planEditBtn").off("click").click(modal.editPlan);
 
   $(".add-dish") // add dish button
     .off("click")
-    .click(addDish);
+    .click(modal.addDish);
 
   $(".delBtn").off("click").click(deleteDiv);
 
@@ -181,4 +79,4 @@ function setupClickHandlers() {
   // $(".macros-dropdown-menu").off("click").click(renderMacros);
 }
 
-export { allPlans };
+export { allPlans, setupClickHandlers, getCurPlanData };
