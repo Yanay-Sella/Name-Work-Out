@@ -176,6 +176,8 @@ function setupClickHandlers() {
 
   $(".searchFood").off("click").click(findFood);
 
+  $(".dishName").on("input", findFood);
+
   // $(".macros-dropdown-menu").off("click").click(renderMacros);
 }
 

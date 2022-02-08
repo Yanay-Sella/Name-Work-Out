@@ -1,15 +1,14 @@
 export let dishHtml = `
     
     <div class="container-fluid dishDiv input-group mb-3" id="dish">
-        <label for="dishList" class="form-label"></label>
+        <label for=".dishList" class="form-label"></label>
         <button class="iconBtn delBtn delDish"><i class="bi bi-trash"></i></button>
 
-        <input class="form-control dishName" id="dishList" placeholder="Search dish..." data-fdcid="">
+        <input class="form-control dishName dishList" id="id="dropdownMenuLink"" placeholder="Search dish..." data-fdcid="" data-bs-toggle="dropdown">
         <button class="searchFood btn-dark me-2" id="dropdownMenuLink" data-bs-toggle="dropdown" aria-expanded="false">
           <i class="bi bi-search"></i>
         </button>
         <ul class="dropdown-menu food-dropdown-menu" aria-labelledby="dropdownMenuLink">
-          <p>loading...</p>
         </ul>
             
         <input type="number" class="dishAmount form-control" placeholder="0.00">
@@ -26,7 +25,7 @@ export let dishHtml = `
             <button
               class="btn dropdown-toggle"
               type="button"
-              id="modalMacroMenu"
+              id="dishMacroMenu"
               data-bs-toggle="dropdown"
               aria-expanded="false"
             >
@@ -36,6 +35,7 @@ export let dishHtml = `
               <li><span class="dropdown-item-text dropdown-cal">Calories:</span></li>
               <li><span class="dropdown-item-text dropdown-prot">Proteins:</span></li>
               <li><span class="dropdown-item-text dropdown-carbs">Carbs:</span></li>
+              
             </ul>
           </div>
         </span>
