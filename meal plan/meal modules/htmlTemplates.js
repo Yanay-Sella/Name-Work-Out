@@ -16,14 +16,13 @@ export let dishHtml = `
         <datalist id="unitDataList">
             <option value="kg">
             <option value="grams">
-            <option value="ml">
             <option value="liters">
-            <option value="micrograms">
+            <option value="ml">
         </datalist>
         <span class="input-group-text">
           <div class="dropdown">
             <button
-              class="btn dropdown-toggle"
+              class="btn dropdown-toggle macrosMenu"
               type="button"
               id="dishMacroMenu"
               data-bs-toggle="dropdown"
@@ -32,9 +31,9 @@ export let dishHtml = `
             macros
             </button>
             <ul class="dropdown-menu" aria-labelledby="modalMacroMenu">
-              <li><span class="dropdown-item-text dropdown-cal">Calories:</span></li>
-              <li><span class="dropdown-item-text dropdown-prot">Proteins:</span></li>
-              <li><span class="dropdown-item-text dropdown-carbs">Carbs:</span></li>
+              <li><span class="dropdown-item-text dropdown-cal" data-value="">Calories:</span></li>
+              <li><span class="dropdown-item-text dropdown-prot" data-value="">Proteins:</span></li>
+              <li><span class="dropdown-item-text dropdown-carbs" data-value="">Carbs:</span></li>
               
             </ul>
           </div>
