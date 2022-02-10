@@ -10,95 +10,70 @@ export async function findFood() {
   if (!query) dropdownMenu.append(`<li><a>Searh food name...</a></li>`);
   else dropdownMenu.append(`<li><a>looading...</a></li>`);
 
-  const searchFinds = await getFoods(query);
-  if (!searchFinds) return;
+  const foodList = await getFoods(query);
+  if (!foodList) return;
 
   dropdownMenu.empty();
 
-  const foodsDes = cleanArray(searchFinds.foods.map((f) => f.description));
+  const foodsDes = cleanArray(foodList.map((f) => f.description));
+
   foodsDes.forEach((f, i) => {
     const foodDiv = $(
       `<li><a class="dropdown-item" href="#" data-index=${i}>${f}</a></li>`
     );
     dropdownMenu.append(foodDiv);
     foodDiv.click((e) => {
-      selectFood(e, nameInput, searchFinds.foods);
+      selectFood(e, nameInput, foodList);
     });
   });
 }
 
-async function getFoods(des) {
-  const data = await getFoodByName(des);
-  if (!des || !data) return;
-
-  const foods = data.foods;
-
-  if (!foods.length) return;
-
-  const name = foods[0].description;
-  // const macros = food.foodNutrients;
-  return {
-    name,
-    foods,
-  };
-}
 function selectFood(e, input, foods) {
-  const el = $(e.target);
-  const index = el.data("index");
-  input.attr("data-index", index);
-  input.val(el.html());
+  const selectedFood = $(e.target);
+  const selectedFoodI = selectedFood.data("index");
 
-  renderMacros(el, foods[index]);
+  input.attr("data-index", selectedFoodI);
+  input.val(selectedFood.html());
+
+  const macros = getMacrosFromFoodItem(foods[selectedFoodI]);
+  setMacrosDataOnDropdown(input.closest(".dishDiv"), macros);
 }
 
-async function renderMacros(el, foodItem) {
-  const dishDiv = $(el).closest(".dishDiv");
-
-  if (!foodItem) {
-    console.log("no food found");
-    return;
-  }
-  let macros = getMacrosFromFood(foodItem);
-  if (!macros) return;
-
-  macros = calcMacros("", dishDiv, macros);
-
-  displayMacros(dishDiv, macros.calories, macros.protien, macros.carbs);
-}
-
-function getMacrosFromFood(food) {
-  if (!food) return;
-  const macros = food.foodNutrients;
-  console.log(macros);
-
-  if (!macros) {
-    console.log("no macros found");
-    return;
-  }
+function getMacrosFromFoodItem(food) {
+  console.log(food);
   return {
-    calories: macros.find((n) => n.nutrientName.includes("Energy")).value ?? 0,
+    calories:
+      food.foodNutrients.find((n) => n.nutrientName.includes("Energy")).value ??
+      0,
     carbs:
-      macros.find((n) => n.nutrientName.includes("Carbohydrate"))?.value ?? 0,
-    protien: macros.find((n) => n.nutrientName.includes("Protein")).value ?? 0,
+      food.foodNutrients.find((n) => n.nutrientName.includes("Carbohydrate"))
+        ?.value ?? 0,
+    protien:
+      food.foodNutrients.find((n) => n.nutrientName.includes("Protein"))
+        .value ?? 0,
   };
 }
 
-export function calcMacros(_, dishDiv = $(this.closest(".dishDiv")), macros) {
-  if (!macros) {
-    macros = {
-      calories: dishDiv.find(".dropdown-cal").attr("data-value"),
-      protien: dishDiv.find(".dropdown-prot").attr("data-value"),
-      carbs: dishDiv.find(".dropdown-carbs").attr("data-value"),
-    };
-    console.log("new");
-    console.log(macros);
-  }
+function setMacrosDataOnDropdown(dishDiv, macros) {
+  dishDiv.find(".dropdown-cal").attr("data-value", macros.calories);
+  dishDiv.find(".dropdown-prot").attr("data-value", macros.protien);
+  dishDiv.find(".dropdown-carbs").attr("data-value", macros.carbs);
+}
 
-  console.log(macros);
+function getMacrosFromDropdown(dishDiv) {
+  return {
+    calories: dishDiv.find(".dropdown-cal").attr("data-value"),
+    protien: dishDiv.find(".dropdown-prot").attr("data-value"),
+    carbs: dishDiv.find(".dropdown-carbs").attr("data-value"),
+  };
+}
 
+function calcMacors(dishDiv, macros) {
   const amount = dishDiv.find(".dishAmount").val();
   const unit = dishDiv.find(".dishUnit").val();
+
   if (!amount || !unit) return macros;
+
   console.log(`amount: ${amount} unit: ${unit}`);
 
   if (unit == "kg" || unit == "liters") {
@@ -108,50 +83,50 @@ export function calcMacros(_, dishDiv = $(this.closest(".dishDiv")), macros) {
   }
 
   if (unit == "grams" || unit == "ml") {
-    macros.calories *= amount;
-    macros.protien *= amount;
-    macros.carbs *= amount;
+    macros.calories *= amount / 100;
+    macros.protien *= amount / 100;
+    macros.carbs *= amount / 100;
   }
   console.log(macros);
 
-  displayMacros(dishDiv, macros.calories, macros.protien, macros.carbs);
-
+  macros = roundMacros(macros);
   return macros;
 }
 
-function displayMacros(dishDiv, cal, prot, carbs) {
-  const calD = dishDiv.find(".dropdown-cal");
-  console.log(dishDiv);
-  calD.attr("data-value", cal);
-  calD.text(`Calories: ${cal}`);
-
-  const carD = dishDiv.find(".dropdown-prot");
-  carD.attr("data-value", carbs);
-  carD.text(`Carbs: ${carbs}`);
-
-  const protD = dishDiv.find(".dropdown-carbs");
-  protD.attr("data-value", prot);
-  protD.text(`Protien: ${prot}`);
+function roundMacros(macros) {
+  return {
+    calories: macros.calories.toFixed(2),
+    protien: macros.protien.toFixed(2),
+    carbs: macros.carbs.toFixed(2),
+  };
 }
 
-const API_KEY = "b1oBKkfsRfpbbbIZFfVrN7m5q9jhK6mdvyL4010F";
+function displayMacros(dishDiv, macros) {
+  dishDiv.find(".dropdown-cal").text(`Calories: ${macros.calories}`);
+  dishDiv.find(".dropdown-prot").text(`Protien: ${macros.protien}`);
+  dishDiv.find(".dropdown-carbs").text(`Carbs: ${macros.carbs}`);
+}
 
-async function getFoodByName(des) {
+export function updateMacros(e) {
+  const dishdiv = $(e.target.closest(".dishDiv"));
+  console.log(dishdiv);
+  const basicMacros = getMacrosFromDropdown(dishdiv);
+  const newMacros = calcMacors(dishdiv, basicMacros);
+  console.log(basicMacros, newMacros);
+  displayMacros(dishdiv, newMacros);
+}
+
+async function getFoods(des) {
+  const API_KEY = "b1oBKkfsRfpbbbIZFfVrN7m5q9jhK6mdvyL4010F";
+
+  if (!des) return;
   const req = await fetch(
     `https://api.nal.usda.gov/fdc/v1/foods/search?api_key=${API_KEY}&query=${des}`
   );
   const data = await req.json();
-  return data;
+  return data.foods;
 }
 
 function cleanArray(arr) {
   return [...new Set(arr)];
 }
-
-// async function getFoodByfdcId(id) {
-//   const req = await fetch(
-//     `https://api.nal.usda.gov/fdc/v1/food/${id}?api_key=${API_KEY}`
-//   );
-//   const data = await req.json();
-//   return data;
-// }

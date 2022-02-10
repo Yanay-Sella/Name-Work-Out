@@ -1,4 +1,4 @@
-import { findFood, calcMacros } from "./meal modules/foodMacros.js";
+import { findFood, updateMacros } from "./meal modules/foodMacros.js";
 import * as modal from "./meal modules/modal.js";
 
 let allPlans = [];
@@ -76,7 +76,9 @@ function setupClickHandlers() {
 
   $(".dishName").on("input", findFood);
 
-  $(".macrosMenu").off("click").click(calcMacros);
+  $(".dishAmount").on("input", updateMacros);
+
+  $(".dishUnit").on("input", updateMacros);
 
   // $(".macros-dropdown-menu").off("click").click(renderMacros);
 }
