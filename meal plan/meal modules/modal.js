@@ -2,6 +2,7 @@ import * as templates from "./htmlTemplates.js";
 import { setupClickHandlers, allPlans, getCurPlanData } from "../meal.js";
 import * as classes from "./classes.js";
 import * as divCreation from "./divCreation.js";
+
 export function addMeal(name, dishes = []) {
   const meal = $(templates.mealHtml);
 
