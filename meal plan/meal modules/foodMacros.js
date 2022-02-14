@@ -37,6 +37,7 @@ function selectFood(e, input, foods) {
 
   const macros = getMacrosFromFoodItem(foods[selectedFoodI]);
   setMacrosDataOnDropdown(input.closest(".dishDiv"), macros);
+  0;
 }
 
 function getMacrosFromFoodItem(food) {
@@ -74,8 +75,6 @@ function calcMacors(dishDiv, macros) {
 
   if (!amount || !unit) return macros;
 
-  console.log(`amount: ${amount} unit: ${unit}`);
-
   if (unit == "kg" || unit == "liters") {
     macros.calories *= amount * 10;
     macros.protien *= amount * 10;
@@ -109,10 +108,8 @@ function displayMacros(dishDiv, macros) {
 
 export function updateMacros(e) {
   const dishdiv = $(e.target.closest(".dishDiv"));
-  console.log(dishdiv);
   const basicMacros = getMacrosFromDropdown(dishdiv);
   const newMacros = calcMacors(dishdiv, basicMacros);
-  console.log(basicMacros, newMacros);
   displayMacros(dishdiv, newMacros);
 }
 
