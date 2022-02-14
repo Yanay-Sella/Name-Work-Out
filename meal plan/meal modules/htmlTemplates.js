@@ -4,15 +4,15 @@ export let dishHtml = `
         <label for=".dishList" class="form-label"></label>
         <button class="iconBtn delBtn delDish"><i class="bi bi-trash"></i></button>
 
-        <input class="form-control dishName dishList" id="id="dropdownMenuLink"" placeholder="Search dish..." data-fdcid="" data-bs-toggle="dropdown">
+        <input class="form-control dishName dishList" id="id="dropdownMenuLink"" placeholder="Search dish..." data-fdcid="" data-bs-toggle="dropdown" autocomplete="off">
         <button class="searchFood btn-dark me-2" id="dropdownMenuLink" data-bs-toggle="dropdown" aria-expanded="false">
           <i class="bi bi-search"></i>
         </button>
         <ul class="dropdown-menu food-dropdown-menu" aria-labelledby="dropdownMenuLink">
         </ul>
             
-        <input type="number" class="dishAmount form-control" placeholder="0.00">
-        <input class="form-control dishUnit" list="unitDataList" id="unitList" placeholder="unit">
+        <input type="number" class="dishAmount form-control" placeholder="0.00" autocomplete="off">
+        <input class="form-control dishUnit" list="unitDataList" id="unitList" placeholder="unit" autocomplete="off">
         <datalist id="unitDataList">
             <option value="kg">
             <option value="grams">
@@ -81,9 +81,9 @@ export let planDataHtml = `
               macros
             </button>
             <ul class="dropdown-menu" aria-labelledby="DataMacroMenu">
-              <li><span class="dropdown-item-text">Calories:</span></li>
-              <li><span class="dropdown-item-text">Proteins:</span></li>
-              <li><span class="dropdown-item-text">Carbs:</span></li>
+              <li><span class="dropdown-item-text plan-dropdown-cal">Calories:</span></li>
+              <li><span class="dropdown-item-text plan-dropdown-prot">Proteins:</span></li>
+              <li><span class="dropdown-item-text plan-dropdown-carbs">Carbs:</span></li>
             </ul>
           </div>
         </div>
