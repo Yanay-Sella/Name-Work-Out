@@ -41,17 +41,22 @@ export function saveChanges() {
   });
   const index = $(".modal").attr(`planNum`);
   const curPlan = allPlans[index];
-  if (!curPlan) {
-    allPlans.push(
-      new classes.Plan(planName, "", allMeals, allPlans.length, $(".mealDiv"))
-    );
-  } else {
-    curPlan.name = planName;
-    curPlan.meals = allMeals;
-    curPlan.div = $(".mealDiv");
-    allPlans[allPlans.findIndex((p) => p === curPlan)] = curPlan;
-  }
+
+  const planMacros = savePlanMacros();
+
+  const newPlan = new classes.Plan(
+    planName,
+    planMacros,
+    allMeals,
+    allPlans.length,
+    $(".mealDiv")
+  );
+
+  if (!curPlan) allPlans.push(newPlan);
+  else allPlans[index] = newPlan;
+
   updatePlans();
+
   $(".modal").removeClass(`planNumber-${index}`);
   $(".modal-title").val("");
   $("#mealModal").modal("hide");
@@ -60,6 +65,20 @@ export function saveChanges() {
     $(".header").html("Name Workout");
     $(".openBtnDiv").addClass("openBtnDivAfter");
   }
+}
+
+function savePlanMacros() {
+  return {
+    calories: $(".plan-dropdown-cal")
+      .html()
+      .slice($(".plan-dropdown-cal").html().indexOf(": ") + 2),
+    protein: $(".plan-dropdown-prot")
+      .html()
+      .slice($(".plan-dropdown-prot").html().indexOf(": ") + 2),
+    carbs: $(".plan-dropdown-carbs")
+      .html()
+      .slice($(".plan-dropdown-carbs").html().indexOf(": ") + 2),
+  };
 }
 
 export function cleanModal() {

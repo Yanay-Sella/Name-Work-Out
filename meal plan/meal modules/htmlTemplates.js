@@ -81,9 +81,9 @@ export let planDataHtml = `
               macros
             </button>
             <ul class="dropdown-menu" aria-labelledby="DataMacroMenu">
-              <li><span class="dropdown-item-text">Calories:</span></li>
-              <li><span class="dropdown-item-text">Proteins:</span></li>
-              <li><span class="dropdown-item-text">Carbs:</span></li>
+              <li><span class="dropdown-item-text plan-dropdown-cal">Calories:</span></li>
+              <li><span class="dropdown-item-text plan-dropdown-prot">Proteins:</span></li>
+              <li><span class="dropdown-item-text plan-dropdown-carbs">Carbs:</span></li>
             </ul>
           </div>
         </div>
