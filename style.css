@@ -161,9 +161,17 @@
   font-weight: 600;
 }
 
+.mealData {
+  border-radius: 0.5rem 0.5rem 0 0;
+}
+
+.mealData:nth-child(odd) {
+  background-color: rgb(187, 218, 215);
+}
+/* 
 .mealDataDark {
   background-color: rgb(187, 218, 215);
-  /* border-radius: 0.5rem; */
+  border-radius: 0.5rem;
 }
 .mealDataDarkFirst {
   background-color: rgb(187, 218, 215);
@@ -172,7 +180,7 @@
 .mealDataDarkLast {
   background-color: rgb(187, 218, 215);
   border-radius: 0 0 0.5rem 0.5rem;
-}
+} */
 
 .planDataHeader {
   width: 60%;

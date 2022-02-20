@@ -42,16 +42,16 @@ function setPlanNameDate(planDiv, plan, name) {
 function setMealColor(planDiv, meals) {
   meals.each((i, mealDiv) => {
     planDiv.find(".planDataBody").append(mealDiv);
-    if (i % 2 === 0) {
-      if (i === 0) {
-        $(planDiv.find(".mealData")[i]).addClass("mealDataDarkFirst");
-      }
-      if (i === meals.length - 1) {
-        $(planDiv.find(".mealData")[i]).addClass("mealDataDarkLast");
-      } else {
-        $(planDiv.find(".mealData")[i]).addClass("mealDataDark");
-      }
-    }
+    // if (i % 2 === 0) {
+    //   if (i === 0) {
+    //     $(planDiv.find(".mealData")[i]).addClass("mealDataDarkFirst");
+    //   }
+    //   if (i === meals.length - 1) {
+    //     $(planDiv.find(".mealData")[i]).addClass("mealDataDarkLast");
+    //   } else {
+    //     $(planDiv.find(".mealData")[i]).addClass("mealDataDark");
+    //   }
+    // }
   });
 }
 
