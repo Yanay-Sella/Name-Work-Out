@@ -93,7 +93,8 @@ function updatePlans() {
   plans.each((_, p) => p.remove());
 
   allPlans.forEach((plan) => {
-    $(".allPlansContainer").append(divCreation.createPlanDiv(plan));
+    $(".allPlansContainer").find(".openBtnContainer").before(divCreation.createPlanDiv(plan));
+    // $(".openBtnDiv").before(divCreation.createPlanDiv(plan));
   });
   setupClickHandlers();
 }

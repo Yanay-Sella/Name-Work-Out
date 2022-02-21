@@ -66,7 +66,7 @@ export let mealHtml = `
 
 //~~~~~~~~~~~~~~Daily description scrolldown
 export let planDataHtml = `
-    <div class="container-fluid planData" planNum="">
+    <div class="container-fluid planData" style="margin: 15px 0 15px 0;" planNum="">
       <div class="row planDataHeader bg-dark">
         <div class="col-4 planDataName desTitle">
           <p class="centerW dayName">name</p>
@@ -107,28 +107,27 @@ export let planDataHtml = `
         <div class="col-2 desTitle">
           <div class="row">
             <div class="col-4">
-              <button
-                class="whiteIconBtn collapseB"
-                type="button"
-                data-bs-toggle="collapse"
-                data-bs-target=""
-                aria-expanded="false"
-              >
-                <i class="bi bi-arrow-bar-down"></i>
-              </button>
+            <button
+              class="whiteIconBtn collapseB"
+              type="button"
+              data-bs-toggle="collapse"
+              data-bs-target= ""
+              aria-expanded="false"
+              style="margin-top: 6px;"
+            >
+              <i class="bi bi-arrow-bar-down"></i>  
+            </button>
             </div>
             <div class="col-4">
-              <button class="whiteIconBtn planEditBtn">
-                <i class="bi bi-pencil-square"></i>
-              </button>
+            <button
+              class="whiteIconBtn planEditBtn" 
+              style="margin-top: 6px;"
+            >
+            <i class="bi bi-pencil-square"></i>
+            </button>
             </div>
             <div class="col-4">
-              <button
-                class="iconBtn delBtn delPlan whiteIconBtn"
-                style="float: right"
-              >
-                <i class="bi bi-trash"></i>
-              </button>
+              <button class="iconBtn delBtn delPlan whiteIconBtn" style="float: right; margin-top: 6px;"><i class="bi bi-trash"></i></button>
             </div>
           </div>
         </div>
@@ -140,7 +139,7 @@ export let planDataHtml = `
 
 export let mealDataHtml = `
             <div class="mealData">
-              <hr style="margin: 0;">
+
               <h2 class="text-center mealDataName">meal name</h2>
               <table class="table table-striped" style="margin-bottom:0">
               <thead>
