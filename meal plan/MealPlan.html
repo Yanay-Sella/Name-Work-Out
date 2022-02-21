@@ -4,6 +4,13 @@
     <meta charset="UTF-8" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+    <!-- font -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Josefin+Sans:wght@700&family=Merriweather:wght@300&display=swap" rel="stylesheet">
+    <!-- font -->
+    
     <link href="../style.css" rel="stylesheet" />
     <link
       href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css"
@@ -11,6 +18,12 @@
       integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3"
       crossorigin="anonymous"
     />
+    <!--bootstrap icons-->
+    <link
+      rel="stylesheet"
+      href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.8.0/font/bootstrap-icons.css"
+    />
+    
     <script
       src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"
       integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM"
@@ -50,27 +63,26 @@
     <!--End Navigation Bar-->
 
     <!--open modal button-->
-    <div class="container-fluid input-group mb-3">
-      <button
-        class="btn btn-dark"
-        data-bs-toggle="modal"
-        data-bs-target="#mealModal"
-        id="openModal"
-      >
-        Creat daily plan
-      </button>
-      <input
-        type="text"
-        class="form-control dailyName"
-        placeholder="Daily Plan Name"
-        aria-describedby="openModal"
-      />
+    <div class="welcome">
+      <h1 class="header">Create your own customized meal plan!</h1>
+      <div class="allPlan container-fluid">
+        <div class="allPlansContainer " style="width: 90%">
+          <!-- here supposed to be all the description -->
+          
+        </div>
+        <div class="openBtnDiv">
+          <button type="button" class="iconBtn" data-bs-target="#mealModal" id="openModal">
+            <i class="bi bi-plus-circle addPlanCircle"></i>
+          </button>
+        </div>
+
+      </div>
     </div>
-    <!--open modal button-->
 
     <div
       class="modal fade"
       id="mealModal"
+      data-planNum = ""
       data-bs-backdrop="static"
       data-bs-keyboard="false"
       tabindex="-1"
@@ -80,11 +92,40 @@
       <div class="modal-dialog modal-lg">
         <div class="modal-content">
           <div class="modal-header">
-            <h5 class="modal-title" id="mealModalLabel">Modal title</h5>
+            <div class="container-fluid">
+              <div class="row">
+                <div class="col-lg-6">
+                  <input
+                    type="text"
+                    class="form-control modal-title"
+                    id="mealModalLabel"
+                    placeholder="Meal Plan"
+                  />
+                </div>
+                <div class="col-lg-6 modalHeaderMacro">
+                  <div class="dropdown">
+                    <button
+                      class="btn dropdown-toggle"
+                      type="button"
+                      id="modalMacroMenu"
+                      data-bs-toggle="dropdown"
+                      aria-expanded="false"
+                    >
+                      total plan macros
+                    </button>
+                    <ul class="dropdown-menu" aria-labelledby="modalMacroMenu">
+                      <li><span class="dropdown-item-text plan-dropdown-cal">Calories:</span></li>
+                      <li><span class="dropdown-item-text plan-dropdown-prot">Proteins:</span></li>
+                      <li><span class="dropdown-item-text plan-dropdown-carbs">Carbs:</span></li>
+                    </ul>
+                  </div>
+                </div>
+              </div>
+            </div>
             <!--daily name-->
             <button
               type="button"
-              class="btn-close"
+              class="btn-close closeModalBtn"
               data-bs-dismiss="modal"
               aria-label="Close"
             ></button>
@@ -94,13 +135,13 @@
             <div class="mealsContainer">
               <!--to add with js-->
             </div>
-            <button class="btn btn-dark" id="addMeal">Add Meal!</button>
+            <button class="btn btn-dark addMeal">add meal</i></button>
           </div>
           <!--~~~~~modal-body~~~~~-->
           <div class="modal-footer">
             <button
               type="button"
-              class="btn btn-secondary"
+              class="btn btn-secondary closeModalBtn"
               data-bs-dismiss="modal"
             >
               Close
@@ -112,15 +153,20 @@
         </div>
       </div>
     </div>
-    <div class="allPlansContainer container-fluid" style="width: 90%">
-      <!-- here supposed to be all the description -->
-    </div>
-    <!--More stuff-->
+    
 
-    <!-- food div-->
+    <!-- <img class="workout-image" src="../images/theStone.gif" alt="demo" /> -->
+    <script type="module" src="meal.js"></script>
+  </body>
+</html>
 
-    <!--dish div-->
-    <!-- <div class="container-fluid dishDiv">
+<!--some useless stuff-->
+<!--More stuff-->
+
+<!-- food div-->
+
+<!--dish div-->
+<!-- <div class="container-fluid dishDiv">
       <label for="dishList" class="form-label"></label>
       <input
         class="form-control"
@@ -137,7 +183,7 @@
       </datalist>
     </div> -->
 
-    <!-- <div class="container-fluid planData">
+<!-- <div class="container-fluid planData">
       <div class="row container-fluid planDataHeader">
         <div class="col planDataName form-control">name</div>
         <div class="col planDataMacros form-control">macros</div>
@@ -186,7 +232,3 @@
         </button>
       </div>
     </div> -->
-    <img class="workout-image" src="../images/theStone.gif" alt="demo" />
-    <script type="module" src="meal.js"></script>
-  </body>
-</html>

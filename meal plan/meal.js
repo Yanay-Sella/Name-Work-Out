@@ -1,88 +1,86 @@
-import { Plan, Meal, Dish, Macros } from "./meal modules/classes.js";
-import {
-  mealHtml,
-  mealDataHtml,
-  dishHtml,
-  dishDataHtml,
-  planDataHtml,
-} from "./meal modules/htmlTemplates.js";
-import { createPlanDiv } from "./meal modules/divCreation.js";
+import { findFood, updateMacros } from "./meal modules/foodMacros.js";
+import * as modal from "./meal modules/modal.js";
 
-let meals = 0;
 let allPlans = [];
 
-//daily plan modal button
-$("#openModal").click(function (e) {
-  const title = $(".modal-title").text($(".dailyName").val());
-  if (meals === 0) {
-    addMealPlan();
-  }
-});
-
-//add meal to daily plan button
-$("#addMeal").click(function (e) {
-  addMealPlan();
-});
-
-//save daily changes button
-$(".savePlanBtn").click(function (e) {
-  saveChanges();
-});
-
+setupClickHandlers();
 //~~~~~~~~~~~~~~Daily description scrolldown
 
-function addMealPlan() {
-  meals++;
-  const meal = $(mealHtml);
-  meal.find(".mealName").val(`meal ${meals}`);
-  $(".mealsContainer").append(meal);
+function createPlan() {
+  const planName = $(".dailyName").val();
+  if (allPlans.find((p) => p.name === planName)) {
+    alert(`can't use the same plan name twice`);
+  } else {
+    $(".modal").modal("show");
+    $(".modal").attr(`planNum`, allPlans.length);
+    $(".modal-title").text($(".dailyName").val());
+    if ($(".mealDiv").length === 0) {
+      modal.addMeal();
+    }
+  }
+}
+
+function deleteDiv() {
+  if (this.classList.contains("delMeal")) this.closest(".mealDiv").remove();
+  if (this.classList.contains("delDish")) this.closest(".dishDiv").remove();
+  if (this.classList.contains("delPlan")) {
+    deletePlan(this);
+  }
+  setupClickHandlers();
+}
+
+function deletePlan(planDiv) {
+  const plan = getCurPlanData(planDiv);
+  planDiv.closest(".planData").remove();
+  allPlans.splice(
+    allPlans.findIndex((p) => p === plan),
+    1
+  );
+  if (allPlans.length === 0 && $(".openBtnDiv").hasClass("openBtnDivAfter")) {
+    $(".openBtnDiv").removeClass("openBtnDivAfter");
+    $(".header").html("Click + to add plans");
+  }
+}
+
+function getCurPlanData(el) {
+  const curPlanDiv = $(el.closest(".planData"));
+  const curPlanIndex = curPlanDiv.attr("planNum");
+  const curPlanData = allPlans[curPlanIndex];
+  console.log(curPlanData);
+  return curPlanData;
+}
+
+function setupClickHandlers() {
+  //daily plan modal button
+  $("#openModal").off("click").click(createPlan);
+  //add meal to daily plan button
+  $(".addMeal")
+    .off("click")
+    .click(() => modal.addMeal());
+
+  //save daily changes button
+  $(".savePlanBtn").off("click").click(modal.saveChanges);
+  $(".closeModalBtn")
+    .off("click")
+    .click(() => modal.cleanModal());
+
+  $(".planEditBtn").off("click").click(modal.editPlan);
+
   $(".add-dish") // add dish button
     .off("click")
-    .click(function () {
-      addDish(this);
-    });
+    .click(modal.addDish);
+
+  $(".delBtn").off("click").click(deleteDiv);
+
+  $(".searchFood").off("click").click(findFood);
+
+  $(".dishName").on("input", findFood);
+
+  $(".dishAmount").on("input", updateMacros);
+
+  $(".dishUnit").on("input", updateMacros);
+
+  // $(".macros-dropdown-menu").off("click").click(renderMacros);
 }
 
-function addDish(button) {
-  button.closest(".mealDiv").insertAdjacentHTML("beforeend", dishHtml); // adding the dishDiv html
-}
-
-function saveChanges() {
-  let planName = $(".modal-title").text();
-  const allMealsDivs = $(".mealDiv"); //this is an array
-  const allMeals = allMealsDivs.map((_, mealDiv) => {
-    return new Meal(
-      $(mealDiv).find(".mealName").val(),
-      dishDivArrToDataDishArr($(mealDiv).find(".dishDiv"))
-    );
-  });
-  allPlans.push(new Plan(planName, "", allMeals, allPlans.length + 1));
-  createPlanData();
-  $("#mealModal").modal("hide");
-  setTimeout(() => {
-    meals = 0;
-    $(".mealsContainer").html("");
-  }, 130);
-}
-
-function dishDivArrToDataDishArr(divArr) {
-  return divArr.map(
-    (_, div) =>
-      new Dish(
-        $(div).find(".dishName").val(),
-        $(div).find(".dishAmount").val(),
-        $(div).find(".dishUnit").val()
-      )
-  );
-}
-
-function createPlanData() {
-  allPlans.forEach((plan) => {
-    if (plan.placeNumber >= allPlans.length) {
-      console.log(plan.placeNumber);
-      $(".allPlansContainer").append(createPlanDiv(plan));
-    }
-  });
-}
-
-export { allPlans };
+export { allPlans, setupClickHandlers, getCurPlanData };

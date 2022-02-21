@@ -148,35 +148,53 @@
   border-radius: 0.5rem;
 }
 
-.desTitle{
+.desTitle {
   text-align: center;
   position: relative;
 }
 
-.mealData{
-  /* border: 1px black solid;
-  border-radius: 0.5rem; */
+.planData {
+  margin: 35px 0 0 0;
 }
 
-.mealDataDark{
+.dayName {
+  font-weight: 600;
+}
+
+.mealData {
+  border-radius: 0.5rem 0.5rem 0 0;
+}
+
+.mealData:nth-child(odd) {
   background-color: rgb(187, 218, 215);
-  /* border-radius: 0.5rem; */
 }
-.mealDataDarkFirst{
-  background-color: rgb(187, 218, 215);;
-  border-radius:0.5rem 0.5rem 0 0;
+.mealData:first-child {
+  border-radius: 0.5rem 0.5rem 0 0;
 }
-.mealDataDarkLast{
-  background-color: rgb(187, 218, 215);;
+.mealData:last-child {
   border-radius: 0 0 0.5rem 0.5rem;
 }
+/* 
+.mealDataDark {
+  background-color: rgb(187, 218, 215);
+  border-radius: 0.5rem;
+}
+.mealDataDarkFirst {
+  background-color: rgb(187, 218, 215);
+  border-radius: 0.5rem 0.5rem 0 0;
+}
+.mealDataDarkLast {
+  background-color: rgb(187, 218, 215);
+  border-radius: 0 0 0.5rem 0.5rem;
+} */
 
-.planDataHeader{
+.planDataHeader {
+  width: 60%;
   border: 1px black solid;
   border-radius: 0.2rem;
   color: white;
 }
-.window{
+.window {
   width: 67%;
 }
 
@@ -194,13 +212,68 @@
   transform: translate(-50%, -50%);
 }
 
-.mealDataName{
+.mealDataName {
+  text-align: center;
+  padding: 10px 0 10px 0;
+}
+
+.header {
+  /* font-family: 'Josefin Sans', sans-serif;
+  font-family: 'Merriweather', serif; */
   text-align: center;
 }
 
-#collapseDes{
+.openBtnDiv {
+  text-align: center;
+}
+.openBtnDivAfter {
+  text-align: center;
+}
+
+.addPlanCircle {
+  font-size: 60px;
+}
+
+.addDishCircle {
+  font-size: 35px;
+}
+
+.dishContainer {
+  padding-top: 15px;
+}
+
+.modalHeaderMacro {
+  text-align: right;
+}
+
+#dishMacroMenu {
+  padding: 0;
+  margin: 0;
+}
+
+.iconBtn {
+  background-color: transparent;
+  border: transparent;
+}
+
+.whiteIconBtn {
+  background-color: transparent;
+  border: transparent;
+  color: white;
+  margin-top: 12px;
+}
+
+#collapseDes {
   border-style: solid;
   border-width: 0.1rem;
   border-color: rgb(3, 8, 15);
   border-radius: 0.35rem;
+}
+
+.welcome {
+  text-align: center;
+}
+
+.searchFood {
+  background-color: #0d6efd;
 }
