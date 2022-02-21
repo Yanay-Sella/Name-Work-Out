@@ -40,6 +40,14 @@ function deletePlan(planDiv) {
     $(".openBtnDiv").removeClass("openBtnDivAfter");
     $(".header").html("Click + to add plans");
   }
+  updatePlansAfterDel();
+}
+
+function updatePlansAfterDel() {
+  $(".planData").each((i, p) => {
+    $(p).attr("planNum", i);
+    getCurPlanData(p).placeNumber = i;
+  });
 }
 
 function getCurPlanData(el) {
