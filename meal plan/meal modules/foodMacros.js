@@ -67,7 +67,7 @@ function displayDishMacros(dishDiv, macros) {
 export function updateMacros(e) {
   const dishdiv = $(e.target.closest(".dishDiv"));
   const basicMacros = getMacrosFromDropdown(dishdiv);
-  const newMacros = basicMacros.calcMacors();
+  const newMacros = basicMacros.calcMacros();
 
   displayDishMacros(dishdiv, newMacros);
   displayPlanMacros(getAllMacros());

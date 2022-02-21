@@ -278,3 +278,8 @@
 .searchFood {
   background-color: #0d6efd;
 }
+
+.dropdown-menu {
+  max-height: 280px;
+  overflow-y: auto;
+}

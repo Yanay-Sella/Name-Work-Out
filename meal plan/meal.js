@@ -40,13 +40,21 @@ function deletePlan(planDiv) {
     $(".openBtnDiv").removeClass("openBtnDivAfter");
     $(".header").html("Click + to add plans");
   }
+  updatePlansAfterDel();
+}
+
+function updatePlansAfterDel() {
+  $(".planData").each((i, p) => {
+    $(p).attr("planNum", i);
+    getCurPlanData(p).placeNumber = i;
+  });
 }
 
 function getCurPlanData(el) {
-  const curPlanDiv = el.closest(".planData");
-  const plansList = Array(...$(".planData"));
-  const curPlanIndex = plansList.findIndex((p) => p === curPlanDiv);
+  const curPlanDiv = $(el.closest(".planData"));
+  const curPlanIndex = curPlanDiv.attr("planNum");
   const curPlanData = allPlans[curPlanIndex];
+  console.log(curPlanData);
   return curPlanData;
 }
 
