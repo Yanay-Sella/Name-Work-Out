@@ -10,6 +10,7 @@ export function saveChanges() {
   createPlanFromModal(curPlan, index);
   updatePlans();
   closeModalAfterSave(index);
+  console.log(allPlans);
 }
 
 function createPlanFromModal(curPlan, index) {
@@ -29,7 +30,7 @@ function createPlanFromModal(curPlan, index) {
     planName,
     planMacros,
     allMeals,
-    allPlans.length,
+    $(".modal").attr("planNum"),
     $(".mealDiv")
   );
 

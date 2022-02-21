@@ -35,7 +35,7 @@ class Macros {
     this.dishDiv = dishDiv;
   }
 
-  calcMacors() {
+  calcMacros() {
     const amount = this.dishDiv.find(".dishAmount").val();
     const unit = this.dishDiv.find(".dishUnit").val();
 

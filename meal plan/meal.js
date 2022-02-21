@@ -43,10 +43,10 @@ function deletePlan(planDiv) {
 }
 
 function getCurPlanData(el) {
-  const curPlanDiv = el.closest(".planData");
-  const plansList = Array(...$(".planData"));
-  const curPlanIndex = plansList.findIndex((p) => p === curPlanDiv);
+  const curPlanDiv = $(el.closest(".planData"));
+  const curPlanIndex = curPlanDiv.attr("planNum");
   const curPlanData = allPlans[curPlanIndex];
+  console.log(curPlanData);
   return curPlanData;
 }
 

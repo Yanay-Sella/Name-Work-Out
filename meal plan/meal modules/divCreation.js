@@ -12,6 +12,8 @@ const createPlanDiv = function (plan) {
   const meals = plan.meals.map((_, meal) => createMealDiv(meal)); //array
   const planDataElement = $(planDataHtml);
 
+  planDataElement.attr("planNum", plan.placeNumber);
+
   planDataElement
     .find(".collapseB")
     .attr("data-bs-target", `.collapse${plan.placeNumber}`);

@@ -66,9 +66,11 @@ export let mealHtml = `
 
 //~~~~~~~~~~~~~~Daily description scrolldown
 export let planDataHtml = `
-    <div class="container-fluid planData">
+    <div class="container-fluid planData" planNum="">
       <div class="row planDataHeader bg-dark">
-        <div class="col-4 planDataName desTitle"><p class="centerW dayName">name</p></div>
+        <div class="col-4 planDataName desTitle">
+          <p class="centerW dayName">name</p>
+        </div>
         <div class="col-3 planDataMacros desTitle">
           <div class="dropdown">
             <button
@@ -81,51 +83,59 @@ export let planDataHtml = `
               macros
             </button>
             <ul class="dropdown-menu" aria-labelledby="DataMacroMenu">
-              <li><span class="dropdown-item-text plan-dropdown-cal">Calories:</span></li>
-              <li><span class="dropdown-item-text plan-dropdown-prot">Proteins:</span></li>
-              <li><span class="dropdown-item-text plan-dropdown-carbs">Carbs:</span></li>
+              <li>
+                <span class="dropdown-item-text plan-dropdown-cal"
+                  >Calories:</span
+                >
+              </li>
+              <li>
+                <span class="dropdown-item-text plan-dropdown-prot"
+                  >Proteins:</span
+                >
+              </li>
+              <li>
+                <span class="dropdown-item-text plan-dropdown-carbs"
+                  >Carbs:</span
+                >
+              </li>
             </ul>
           </div>
         </div>
-        <div class="col-3 planDataDate desTitle"><p class="centerW planDataDate">date</p></div>
+        <div class="col-3 planDataDate desTitle">
+          <p class="centerW planDataDate">date</p>
+        </div>
         <div class="col-2 desTitle">
           <div class="row">
             <div class="col-4">
-            <button
-              class="whiteIconBtn collapseB"
-              type="button"
-              data-bs-toggle="collapse"
-              data-bs-target= ""
-              aria-expanded="false"
-            >
-              <i class="bi bi-arrow-bar-down"></i>  
-            </button>
+              <button
+                class="whiteIconBtn collapseB"
+                type="button"
+                data-bs-toggle="collapse"
+                data-bs-target=""
+                aria-expanded="false"
+              >
+                <i class="bi bi-arrow-bar-down"></i>
+              </button>
             </div>
             <div class="col-4">
-            <button
-              class="whiteIconBtn planEditBtn" 
-            >
-            <i class="bi bi-pencil-square"></i>
-            </button>
+              <button class="whiteIconBtn planEditBtn">
+                <i class="bi bi-pencil-square"></i>
+              </button>
             </div>
             <div class="col-4">
-              <button class="iconBtn delBtn delPlan whiteIconBtn" style="float: right;"><i class="bi bi-trash"></i></button>
+              <button
+                class="iconBtn delBtn delPlan whiteIconBtn"
+                style="float: right"
+              >
+                <i class="bi bi-trash"></i>
+              </button>
             </div>
           </div>
-          
-
-          
-          
         </div>
       </div>
-        <div class="collapse window row first">
-            <div class="container-fluid planDataBody" style="padding: 0;">
-              
-            </div>
-        </div>
-        
-      
-      
+      <div class="collapse window row first">
+        <div class="container-fluid planDataBody" style="padding: 0"></div>
+      </div>
     </div>`;
 
 export let mealDataHtml = `
