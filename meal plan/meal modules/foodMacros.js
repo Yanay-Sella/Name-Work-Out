@@ -1,3 +1,5 @@
+import { Macros } from "./classes.js";
+
 export async function findFood() {
   const dishDiv = $(this).closest(".dishDiv");
   const dropdownMenu = dishDiv.find(".food-dropdown-menu");
@@ -35,22 +37,10 @@ function selectFood(e, input, foods) {
   input.attr("data-index", selectedFoodI);
   input.val(selectedFood.html());
 
-  const macros = getMacrosFromFoodItem(foods[selectedFoodI]);
+  const macros = new Macros(0, 0, 0, input.closest(".dishDiv"));
+  macros.getMacrosFromFoodItem(foods[selectedFoodI]);
   setMacrosDataOnDropdown(input.closest(".dishDiv"), macros);
   0;
-}
-
-function getMacrosFromFoodItem(food) {
-  console.log(food);
-
-  return createMacorObj(
-    food.foodNutrients.find((n) => n.nutrientName.includes("Energy")).value ??
-      0,
-    food.foodNutrients.find((n) => n.nutrientName.includes("Protein")).value ??
-      0,
-    food.foodNutrients.find((n) => n.nutrientName.includes("Carbohydrate"))
-      ?.value ?? 0
-  );
 }
 
 function setMacrosDataOnDropdown(dishDiv, macros) {
@@ -60,36 +50,11 @@ function setMacrosDataOnDropdown(dishDiv, macros) {
 }
 
 function getMacrosFromDropdown(dishDiv) {
-  return createMacorObj(
+  return new Macros(
     dishDiv.find(".dropdown-cal").attr("data-value"),
     dishDiv.find(".dropdown-prot").attr("data-value"),
-    dishDiv.find(".dropdown-carbs").attr("data-value")
-  );
-}
-
-function calcMacors(dishDiv, baseMacros) {
-  const amount = dishDiv.find(".dishAmount").val();
-  const unit = dishDiv.find(".dishUnit").val();
-
-  if (!amount || !unit) return baseMacros;
-
-  if (unit == "kg" || unit == "liters") {
-    baseMacros.calories *= amount * 10;
-    baseMacros.protein *= amount * 10;
-    baseMacros.carbs *= amount * 10;
-  }
-
-  if (unit == "grams" || unit == "ml") {
-    baseMacros.calories *= amount / 100;
-    baseMacros.protein *= amount / 100;
-    baseMacros.carbs *= amount / 100;
-  }
-
-  console.log(baseMacros);
-  return createMacorObj(
-    baseMacros.calories,
-    baseMacros.protein,
-    baseMacros.carbs
+    dishDiv.find(".dropdown-carbs").attr("data-value"),
+    dishDiv
   );
 }
 
@@ -102,7 +67,7 @@ function displayDishMacros(dishDiv, macros) {
 export function updateMacros(e) {
   const dishdiv = $(e.target.closest(".dishDiv"));
   const basicMacros = getMacrosFromDropdown(dishdiv);
-  const newMacros = calcMacors(dishdiv, basicMacros);
+  const newMacros = basicMacros.calcMacors();
 
   displayDishMacros(dishdiv, newMacros);
   displayPlanMacros(getAllMacros());
@@ -118,15 +83,6 @@ async function getFoods(des) {
   const data = await req.json();
   return data.foods;
 }
-
-function createMacorObj(calories, protein, carbs) {
-  return {
-    calories: Math.round(+calories),
-    protein: Math.round(+protein),
-    carbs: Math.round(+carbs),
-  };
-}
-
 function cleanArray(arr) {
   return [...new Set(arr)];
 }
@@ -141,7 +97,7 @@ function getAllMacros() {
   const cal = getNamedMacro("cal");
   const prot = getNamedMacro("prot");
   const carbs = getNamedMacro("carbs");
-  const allMacros = createMacorObj(cal, prot, carbs);
+  const allMacros = new Macros(cal, prot, carbs);
   console.log(allMacros);
   return allMacros;
 }

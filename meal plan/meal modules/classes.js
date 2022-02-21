@@ -18,20 +18,57 @@ class Meal {
 }
 
 class Dish {
-  constructor(name, amount, unit, div) {
+  constructor(name, amount, unit, div, macros) {
     this.name = name;
     this.amount = amount;
     this.unit = unit;
     this.div = div;
+    this.macros = macros;
   }
 }
 
 class Macros {
-  constructor(calories, protien, carbs, fats) {
+  constructor(calories, protein, carbs, dishDiv) {
     this.calories = calories;
-    this.protien = protien;
+    this.protein = protein;
     this.carbs = carbs;
-    this.fats = fats;
+    this.dishDiv = dishDiv;
+  }
+
+  calcMacors() {
+    const amount = this.dishDiv.find(".dishAmount").val();
+    const unit = this.dishDiv.find(".dishUnit").val();
+
+    if (!amount || !unit) return this;
+
+    if (unit == "kg" || unit == "liters") {
+      this.calories *= amount * 10;
+      this.protein *= amount * 10;
+      this.carbs *= amount * 10;
+    }
+
+    if (unit == "grams" || unit == "ml") {
+      this.calories *= amount / 100;
+      this.protein *= amount / 100;
+      this.carbs *= amount / 100;
+    }
+    return this;
+  }
+
+  getMacrosFromFoodItem(food) {
+    console.log(food);
+
+    (this.calories =
+      food.foodNutrients.find((n) => n.nutrientName.includes("Energy")).value ??
+      0),
+      (this.protein =
+        food.foodNutrients.find((n) => n.nutrientName.includes("Protein"))
+          .value ?? 0),
+      (this.carbs =
+        food.foodNutrients.find((n) => n.nutrientName.includes("Carbohydrate"))
+          ?.value ?? 0);
+
+    return this;
   }
 }
 

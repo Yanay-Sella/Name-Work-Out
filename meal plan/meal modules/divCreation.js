@@ -40,30 +40,29 @@ function setPlanNameDate(planDiv, plan, name) {
 }
 
 function setMealColor(planDiv, meals) {
-  meals.each((i, mealDiv) => {
+  meals.each((_, mealDiv) => {
     planDiv.find(".planDataBody").append(mealDiv);
-    // if (i % 2 === 0) {
-    //   if (i === 0) {
-    //     $(planDiv.find(".mealData")[i]).addClass("mealDataDarkFirst");
-    //   }
-    //   if (i === meals.length - 1) {
-    //     $(planDiv.find(".mealData")[i]).addClass("mealDataDarkLast");
-    //   } else {
-    //     $(planDiv.find(".mealData")[i]).addClass("mealDataDark");
-    //   }
-    // }
   });
 }
 
 function displayPlanMacros(planDiv, macros) {
-  planDiv.find(".plan-dropdown-cal").text(`Calories: ${macros.calories}`);
-  planDiv.find(".plan-dropdown-prot").text(`protein: ${macros.protein}`);
-  planDiv.find(".plan-dropdown-carbs").text(`Carbs: ${macros.carbs}`);
+  if (
+    Number.isInteger(macros.calories) &&
+    Number.isInteger(macros.protein) &&
+    Number.isInteger(macros.carbs)
+  ) {
+    planDiv.find(".plan-dropdown-cal").text(`Calories: ${macros.calories}`);
+    planDiv.find(".plan-dropdown-prot").text(`protein: ${macros.protein}`);
+    planDiv.find(".plan-dropdown-carbs").text(`Carbs: ${macros.carbs}`);
+  }
 }
 
 const createMealDiv = function (meal) {
   const name = meal.name;
   const dishes = meal.dishes.map((_, dish) => $(createDishDiv(dish)));
+
+  if (dishes.length === 0 || meal.dishes.length === 0) return;
+
   const mealDataElement = $(mealDataHtml); //class mealData
   mealDataElement.find(".mealDataName").html(name);
   dishes.each((_, dishDiv) => {
@@ -76,6 +75,8 @@ const createDishDiv = function (dish) {
   const name = dish.name;
   const amount = dish.amount;
   const unit = dish.unit;
+
+  if (!name && !amount && !unit) return;
 
   const dishDataElement = $(dishDataHtml);
   dishDataElement.find(".dishDataName").html(name);

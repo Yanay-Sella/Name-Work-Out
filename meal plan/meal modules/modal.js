@@ -3,6 +3,100 @@ import { setupClickHandlers, allPlans, getCurPlanData } from "../meal.js";
 import * as classes from "./classes.js";
 import * as divCreation from "./divCreation.js";
 
+export function saveChanges() {
+  const index = $(".modal").attr(`planNum`);
+  const curPlan = allPlans[index];
+
+  createPlanFromModal(curPlan, index);
+  updatePlans();
+  closeModalAfterSave(index);
+}
+
+function createPlanFromModal(curPlan, index) {
+  let planName = $(".modal-title").val();
+  const allMealsDivs = $(".mealDiv"); //this is an array
+  const allMeals = allMealsDivs.map((_, mealDiv) => {
+    return new classes.Meal(
+      $(mealDiv).find(".mealName").val(),
+      createDishArr($(mealDiv).find(".dishDiv")),
+      mealDiv
+    );
+  });
+
+  const planMacros = savePlanMacros();
+
+  const newPlan = new classes.Plan(
+    planName,
+    planMacros,
+    allMeals,
+    allPlans.length,
+    $(".mealDiv")
+  );
+
+  if (!curPlan) allPlans.push(newPlan);
+  else allPlans[index] = newPlan;
+}
+
+function closeModalAfterSave(index) {
+  $(".modal").removeClass(`planNumber-${index}`);
+  $(".modal-title").val("");
+  $("#mealModal").modal("hide");
+  cleanModal(); // cleaning the modal
+  if (allPlans.length === 1) {
+    $(".header").html("Name Workout");
+    $(".openBtnDiv").addClass("openBtnDivAfter");
+  }
+}
+
+function savePlanMacros() {
+  return {
+    calories: Number(
+      $(".plan-dropdown-cal")
+        .html()
+        .slice($(".plan-dropdown-cal").html().indexOf(": ") + 2)
+    ),
+    protein: Number(
+      $(".plan-dropdown-prot")
+        .html()
+        .slice($(".plan-dropdown-prot").html().indexOf(": ") + 2)
+    ),
+    carbs: Number(
+      $(".plan-dropdown-carbs")
+        .html()
+        .slice($(".plan-dropdown-carbs").html().indexOf(": ") + 2)
+    ),
+  };
+}
+
+export function cleanModal() {
+  setTimeout(() => {
+    $(".mealsContainer").html("");
+  }, 130);
+}
+
+function createDishArr(divArr) {
+  return divArr.map(
+    (_, div) =>
+      new classes.Dish(
+        $(div).find(".dishName").val(),
+        $(div).find(".dishAmount").val(),
+        $(div).find(".dishUnit").val(),
+        div,
+        divArr.find()
+      )
+  );
+}
+
+function updatePlans() {
+  const plans = $(".planData");
+  plans.each((_, p) => p.remove());
+
+  allPlans.forEach((plan) => {
+    $(".allPlansContainer").append(divCreation.createPlanDiv(plan));
+  });
+  setupClickHandlers();
+}
+
 export function addMeal(name, dishes = []) {
   const meal = $(templates.mealHtml);
 
@@ -26,86 +120,6 @@ export function addDish(dish = new classes.Dish()) {
   dishDiv.find(".dishUnit").val(dish.unit);
 
   $(this).closest(".mealDiv").find(".add-dish").before(dishDiv); // adding the dishDiv html
-  setupClickHandlers();
-}
-
-export function saveChanges() {
-  let planName = $(".modal-title").val();
-  const allMealsDivs = $(".mealDiv"); //this is an array
-  const allMeals = allMealsDivs.map((_, mealDiv) => {
-    return new classes.Meal(
-      $(mealDiv).find(".mealName").val(),
-      dishDivArrToDataDishArr($(mealDiv).find(".dishDiv")),
-      mealDiv
-    );
-  });
-  const index = $(".modal").attr(`planNum`);
-  const curPlan = allPlans[index];
-
-  const planMacros = savePlanMacros();
-
-  const newPlan = new classes.Plan(
-    planName,
-    planMacros,
-    allMeals,
-    allPlans.length,
-    $(".mealDiv")
-  );
-
-  if (!curPlan) allPlans.push(newPlan);
-  else allPlans[index] = newPlan;
-
-  updatePlans();
-
-  $(".modal").removeClass(`planNumber-${index}`);
-  $(".modal-title").val("");
-  $("#mealModal").modal("hide");
-  cleanModal(); // cleaning the modal
-  if (allPlans.length === 1) {
-    $(".header").html("Name Workout");
-    $(".openBtnDiv").addClass("openBtnDivAfter");
-  }
-}
-
-function savePlanMacros() {
-  return {
-    calories: $(".plan-dropdown-cal")
-      .html()
-      .slice($(".plan-dropdown-cal").html().indexOf(": ") + 2),
-    protein: $(".plan-dropdown-prot")
-      .html()
-      .slice($(".plan-dropdown-prot").html().indexOf(": ") + 2),
-    carbs: $(".plan-dropdown-carbs")
-      .html()
-      .slice($(".plan-dropdown-carbs").html().indexOf(": ") + 2),
-  };
-}
-
-export function cleanModal() {
-  setTimeout(() => {
-    $(".mealsContainer").html("");
-  }, 130);
-}
-
-function dishDivArrToDataDishArr(divArr) {
-  return divArr.map(
-    (_, div) =>
-      new classes.Dish(
-        $(div).find(".dishName").val(),
-        $(div).find(".dishAmount").val(),
-        $(div).find(".dishUnit").val(),
-        div
-      )
-  );
-}
-
-function updatePlans() {
-  const plans = $(".planData");
-  plans.each((_, p) => p.remove());
-
-  allPlans.forEach((plan) => {
-    $(".allPlansContainer").append(divCreation.createPlanDiv(plan));
-  });
   setupClickHandlers();
 }
 
