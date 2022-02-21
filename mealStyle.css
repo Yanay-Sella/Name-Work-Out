@@ -1,0 +1,170 @@
+body{
+    background: #779292;
+    background: -moz-linear-gradient(left, #779292 0%, #394646 31%, #1A2020 100%);
+    background: -webkit-linear-gradient(left, #779292 0%, #394646 31%, #1A2020 100%);
+    background: linear-gradient(to right, #779292 0%, #394646 31%, #1A2020 100%);
+}
+
+.modal-content{
+    background: #AFD7D7;
+    background: -moz-linear-gradient(left, #AFD7D7 0%, #91B3B3 31%, #586C6C 100%);
+    background: -webkit-linear-gradient(left, #AFD7D7 0%, #91B3B3 31%, #586C6C 100%);
+    background: linear-gradient(to right, #AFD7D7 0%, #91B3B3 31%, #586C6C 100%);
+}
+
+input{
+    background-color: transparent;
+}
+
+.navi-bar {
+    margin-bottom: 3rem;
+}
+
+.mealDiv {
+    margin: 25px 0 25px 0;
+    border-style: solid;
+    border-width: 0.1rem;
+    border-color: rgb(3, 8, 15);
+    border-radius: 0.35rem;
+  }
+  
+  .planDataBody {
+    padding: 0;
+    border: 1px black solid;
+    border-radius: 0.5rem;
+  }
+  
+  .desTitle {
+    text-align: center;
+    position: relative;
+  }
+  
+  .planData {
+    margin: 35px 0 0 0;
+  }
+  
+  .dayName {
+    font-weight: 600;
+  }
+  
+  .mealData {
+    border-radius: 0.5rem 0.5rem 0 0;
+  }
+  
+  .mealData:nth-child(odd) {
+    background-color: rgb(187, 218, 215);
+  }
+  .mealData:first-child {
+    border-radius: 0.5rem 0.5rem 0 0;
+  }
+  .mealData:last-child {
+    border-radius: 0 0 0.5rem 0.5rem;
+  }
+  /* 
+  .mealDataDark {
+    background-color: rgb(187, 218, 215);
+    border-radius: 0.5rem;
+  }
+  .mealDataDarkFirst {
+    background-color: rgb(187, 218, 215);
+    border-radius: 0.5rem 0.5rem 0 0;
+  }
+  .mealDataDarkLast {
+    background-color: rgb(187, 218, 215);
+    border-radius: 0 0 0.5rem 0.5rem;
+  } */
+  
+  .planDataHeader {
+    border: 1px black solid;
+    border-radius: 0.2rem;
+    color: white;
+  }
+  .window {
+    width: 80%;
+  }
+  
+  .containerW {
+    height: 200px;
+    position: relative;
+    border: 3px solid green;
+  }
+  
+  .centerW {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    -ms-transform: translate(-50%, -50%);
+    transform: translate(-50%, -50%);
+  }
+  
+  .mealDataName {
+    text-align: center;
+    padding: 10px 0 10px 0;
+  }
+  
+  .header {
+    /* font-family: 'Josefin Sans', sans-serif;
+    font-family: 'Merriweather', serif; */
+    text-align: center;
+    font-size: 300%;
+    color: rgb(201, 201, 201);
+  }
+  
+  .openBtnDiv {
+    position: absolute;
+  }
+  .openBtnDivAfter {
+    text-align: center;
+    margin-left: 1rem;
+    position: relative;
+  }
+  
+  .addPlanCircle {
+    font-size: 60px;
+  }
+  
+  .addDishCircle {
+    font-size: 35px;
+  }
+  
+  .dishContainer {
+    padding-top: 15px;
+  }
+  
+  .modalHeaderMacro {
+    text-align: right;
+  }
+  
+  #dishMacroMenu {
+    padding: 0;
+    margin: 0;
+  }
+  
+  .iconBtn {
+    background-color: transparent;
+    border: transparent;
+    width: fit-content;
+  }
+  
+  .whiteIconBtn {
+    background-color: transparent;
+    border: transparent;
+    color: white;
+    margin-top: 12px;
+    width: fit-content;
+  }
+  
+  #collapseDes {
+    border-style: solid;
+    border-width: 0.1rem;
+    border-color: rgb(3, 8, 15);
+    border-radius: 0.35rem;
+  }
+  
+  .welcome {
+    text-align: center;
+  }
+  
+  .searchFood {
+    background-color: #0d6efd;
+  }
