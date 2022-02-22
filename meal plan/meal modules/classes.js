@@ -52,6 +52,11 @@ class Macros {
       this.protein *= amount / 100;
       this.carbs *= amount / 100;
     }
+
+    this.calories = Math.round(this.calories);
+    this.protein = Math.round(this.protein);
+    this.carbs = Math.round(this.carbs);
+
     return this;
   }
 
