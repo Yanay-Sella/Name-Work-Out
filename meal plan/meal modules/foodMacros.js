@@ -59,9 +59,9 @@ function getMacrosFromDropdown(dishDiv) {
 }
 
 function displayDishMacros(dishDiv, macros) {
-  dishDiv.find(".dropdown-cal").text(`Calories: ${macros.calories}`);
-  dishDiv.find(".dropdown-prot").text(`protein: ${macros.protein}`);
-  dishDiv.find(".dropdown-carbs").text(`Carbs: ${macros.carbs}`);
+  dishDiv.find(".dropdown-cal").text(`Calories: ${macros.calories}cal`);
+  dishDiv.find(".dropdown-prot").text(`protein: ${macros.protein}g`);
+  dishDiv.find(".dropdown-carbs").text(`Carbs: ${macros.carbs}g`);
 }
 
 export function updateMacros(e) {
@@ -88,9 +88,9 @@ function cleanArray(arr) {
 }
 
 function displayPlanMacros(macros) {
-  $(".plan-dropdown-cal").text(`Calories: ${macros.calories}`);
-  $(".plan-dropdown-prot").text(`protein: ${macros.protein}`);
-  $(".plan-dropdown-carbs").text(`Carbs: ${macros.carbs}`);
+  $(".plan-dropdown-cal").text(`Calories: ${macros.calories}cal`);
+  $(".plan-dropdown-prot").text(`protein: ${macros.protein}g`);
+  $(".plan-dropdown-carbs").text(`Carbs: ${macros.carbs}g`);
 }
 
 function getAllMacros() {
