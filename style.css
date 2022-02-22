@@ -82,39 +82,44 @@
 
 /************for home page **********/
 
-#title {
-  background-color: #bbe1fa;
+
+body{
+  color: white;
 }
 
-#workout-features {
-  background-color: #3282b8;
-}
-
-#meal-features {
-  background-color: #bbe1fa;
+.titleBody{
+  padding: 30px 50px 30px 50px;
 }
 
 #footer {
   text-align: center;
-  margin-top: 5rem;
+  padding: 80px 0 20px 0;
+}
+
+#meal-features{
+  padding: 30px 50px 30px 50px;
+}
+
+#workout-features{
+  padding: 30px 50px 30px 50px;
+  text-align: right;
 }
 
 .title-image {
   max-width: 100%;
   height: auto;
-  padding: 0 2rem 2rem 0;
 }
 
 .workout-image {
-  max-width: 100%;
+  max-width: 60%;
   height: auto;
-  padding: 2rem 0 2rem 2rem;
+  float: left;
 }
 
 .meal-image {
   max-width: 100%;
   height: auto;
-  padding: 2rem 2rem 2rem 0;
+  float: right;
 }
 
 .foot-icon {
@@ -130,4 +135,17 @@
   margin-left: 2.5rem;
   padding-right: 15rem;
   font-size: 4rem;
+}
+
+.bg1{
+  background: #779292;
+  background: -moz-linear-gradient(top, #779292 0%, #394646 50%, #1A2020 100%);
+  background: -webkit-linear-gradient(top, #779292 0%, #394646 50%, #1A2020 100%);
+  background: linear-gradient(to bottom, #779292 0%, #394646 50%, #1A2020 100%);
+}
+.bg2{
+  background: #1a2020;
+  background: -moz-linear-gradient(top, #1a2020 0%, #394646 50%, #779292 100%);
+  background: -webkit-linear-gradient(top, #1a2020 0%, #394646 50%, #779292 100%);
+  background: linear-gradient(to bottom, #1a2020 0%, #394646 50%, #779292 100%);
 }

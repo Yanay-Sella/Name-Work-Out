@@ -22,6 +22,11 @@ body {
   background: linear-gradient(to right, #afd7d7 0%, #91b3b3 31%, #586c6c 100%);
 }
 
+.imgDiv{
+  text-align: center;
+  padding-top: 100px;
+}
+
 .allPlan {
   text-align: center;
 }
