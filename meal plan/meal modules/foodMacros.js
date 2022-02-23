@@ -70,7 +70,7 @@ export function updateMacros(e) {
   const newMacros = basicMacros.calcMacros();
 
   displayDishMacros(dishdiv, newMacros);
-  // displayPlanMacros(getAllMacros());
+  displayPlanMacros(getAllMacros());
 }
 
 async function getFoods(des) {
