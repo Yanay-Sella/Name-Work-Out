@@ -70,7 +70,7 @@ export function updateMacros(e) {
   const newMacros = basicMacros.calcMacros();
 
   displayDishMacros(dishdiv, newMacros);
-  displayPlanMacros(getAllMacros());
+  // displayPlanMacros(getAllMacros());
 }
 
 async function getFoods(des) {
@@ -88,6 +88,7 @@ function cleanArray(arr) {
 }
 
 function displayPlanMacros(macros) {
+  console.log(macros, $(".plan-dropdown-cal"));
   $(".plan-dropdown-cal").text(`Calories: ${macros.calories}cal`);
   $(".plan-dropdown-prot").text(`protein: ${macros.protein}g`);
   $(".plan-dropdown-carbs").text(`Carbs: ${macros.carbs}g`);
@@ -106,7 +107,7 @@ function getNamedMacro(name) {
   return [...$(`.dropdown-${name}`)]
     .map((span) => {
       const str = $(span).html();
-      return +str.slice(str.indexOf(": ") + 2);
+      return +str.match(/\d+/);
     })
     .reduce((sum, val) => sum + val);
 }
