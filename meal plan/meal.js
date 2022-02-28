@@ -58,6 +58,25 @@ function getCurPlanData(el) {
   return curPlanData;
 }
 
+function updateAddPlanButtonPicIn() {
+  $(this).removeClass("bi-plus-circle");
+  $(this).addClass("bi-plus-circle-fill");
+}
+
+function updateAddPlanButtonPicOut() {
+  $(this).removeClass("bi-plus-circle-fill");
+  $(this).addClass("bi-plus-circle ");
+}
+
+function updateTrashButtonIn() {
+  $(this).removeClass("bi-trash");
+  $(this).addClass("bi-trash-fill ");
+}
+function updateTrashButtonOut() {
+  $(this).removeClass("bi-trash-fill");
+  $(this).addClass("bi-trash ");
+}
+
 function setupClickHandlers() {
   //daily plan modal button
   $("#openModal").off("click").click(createPlan);
@@ -88,6 +107,9 @@ function setupClickHandlers() {
 
   $(".dishUnit").on("input", updateMacros);
 
+  $(".addCircle").hover(updateAddPlanButtonPicIn, updateAddPlanButtonPicOut);
+
+  $(".trashBtn").hover(updateTrashButtonIn, updateTrashButtonOut);
   // $(".macros-dropdown-menu").off("click").click(renderMacros);
 }
 

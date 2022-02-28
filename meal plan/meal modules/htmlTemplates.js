@@ -2,7 +2,7 @@ export let dishHtml = `
     
     <div class="container-fluid dishDiv input-group mb-3" id="dish">
         <label for=".dishList" class="form-label"></label>
-        <button class="iconBtn delBtn delDish"><i class="bi bi-trash"></i></button>
+        <button class="iconBtn delBtn delDish"><i class="bi bi-trash trashBtn"></i></button>
 
         <input class="form-control dishName dishList" id="id="dropdownMenuLink"" placeholder="Search dish..." data-fdcid="" data-bs-toggle="dropdown" autocomplete="off">
         <button class="searchFood btn-dark me-2" id="dropdownMenuLink" data-bs-toggle="dropdown" aria-expanded="false">
@@ -51,14 +51,14 @@ export let mealHtml = `
             <input type="text" class="form-control mealName" placeholder="meal name" style="border: none">  
           </th>
           <th scope="col">
-            <button class="iconBtn delBtn delMeal"><i class="bi bi-trash"></i></button>
+            <button class="iconBtn delBtn delMeal"><i class="bi bi-trash trashBtn"></i></button>
           </th>
         </thead>
       </table>
 
 
       <div class="dishContainer" style="text-align:center;">
-        <button class="iconBtn add-dish"><i class="bi bi-plus-circle addDishCircle"></i></button>
+        <button class="iconBtn add-dish"><i class="bi bi-plus-circle addDishCircle addCircle"></i></button>
       </div>
     </div>
     `;
@@ -127,7 +127,7 @@ export let planDataHtml = `
             </button>
             </div>
             <div class="col-4">
-              <button class="iconBtn delBtn delPlan whiteIconBtn" style="float: right; margin-top: 6px;"><i class="bi bi-trash"></i></button>
+              <button class="iconBtn delBtn delPlan whiteIconBtn" style="float: right; margin-top: 6px;"><i class="bi bi-trash trashBtn"></i></button>
             </div>
           </div>
         </div>
