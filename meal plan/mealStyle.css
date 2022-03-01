@@ -8,6 +8,8 @@ body {
     #1a2020 100%
   );
   background: linear-gradient(to right, #779292 0%, #394646 31%, #1a2020 100%);
+  position: relative;
+  height: 100vh;
 }
 
 .modal-content {
@@ -106,8 +108,6 @@ body {
 }
 
 .header {
-  /* font-family: 'Josefin Sans', sans-serif;
-    font-family: 'Merriweather', serif; */
   text-align: center;
   font-size: 300%;
   color: rgb(201, 201, 201);
@@ -200,4 +200,37 @@ body {
 .delPlan:hover {
   border: 1.5px solid white;
   border-radius: 5px;
+}
+
+#footer {
+  text-align: center;
+  padding: 80px 0 20px 0;
+  margin-top: 50vh;
+}
+
+.foot-icon {
+  margin: 0.5rem;
+}
+
+.bg1 {
+  background: #779292;
+  background: -moz-linear-gradient(top, #779292 0%, #394646 50%, #1a2020 100%);
+  background: -webkit-linear-gradient(
+    top,
+    #779292 0%,
+    #394646 50%,
+    #1a2020 100%
+  );
+  background: linear-gradient(to bottom, #779292 0%, #394646 50%, #1a2020 100%);
+}
+.bg2 {
+  background: #1a2020;
+  background: -moz-linear-gradient(top, #1a2020 0%, #394646 50%, #779292 100%);
+  background: -webkit-linear-gradient(
+    top,
+    #1a2020 0%,
+    #394646 50%,
+    #779292 100%
+  );
+  background: linear-gradient(to bottom, #1a2020 0%, #394646 50%, #779292 100%);
 }
