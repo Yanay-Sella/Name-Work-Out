@@ -11,18 +11,11 @@ body {
 }
 
 .modal-content {
-  background: #afd7d7;
-  background: -moz-linear-gradient(left, #afd7d7 0%, #91b3b3 31%, #586c6c 100%);
-  background: -webkit-linear-gradient(
-    left,
-    #afd7d7 0%,
-    #91b3b3 31%,
-    #586c6c 100%
-  );
-  background: linear-gradient(to right, #afd7d7 0%, #91b3b3 31%, #586c6c 100%);
+  background-color: rgb(192, 192, 192) !important;
+  border: 2px solid rgb(255, 255, 255) !important;
 }
 
-.imgDiv{
+.imgDiv {
   text-align: center;
   padding-top: 100px;
 }
@@ -44,6 +37,7 @@ body {
   border-width: 0.1rem;
   border-color: rgb(3, 8, 15);
   border-radius: 0.35rem;
+  background-color: rgb(214, 212, 212);
 }
 
 .planDataBody {
@@ -149,6 +143,10 @@ body {
 #dishMacroMenu {
   padding: 0;
   margin: 0;
+}
+
+.delMeal {
+  margin-bottom: 4.2px;
 }
 
 .iconBtn {

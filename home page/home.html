@@ -10,27 +10,25 @@
       integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC"
       crossorigin="anonymous"
     />
-    <link rel="stylesheet" href="../style.css" />
+    <link rel="stylesheet" href="./homeStyle.css" />
     <script
       src="https://kit.fontawesome.com/0ef2ca37d3.js"
       crossorigin="anonymous"
     ></script>
-    <!--Fonts-->
-    <link rel="preconnect" href="https://fonts.googleapis.com" />
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <!-- bootstrap icons -->
     <link
-      href="https://fonts.googleapis.com/css2?family=Dosis:wght@700&display=swap"
       rel="stylesheet"
+      href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.8.0/font/bootstrap-icons.css"
     />
 
+    <title>Home - Name Workout</title>
+    <link rel="icon" type="image/x-icon" href="/images/NW-final.ico" />
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
 
     <title>Document</title>
   </head>
   <body>
     <section id="title" class="bg1">
-      <!--we can put all of this in one container to be smaller and less spreaded out-->
-
       <!--Navigation Bar-->
       <nav class="navbar navbar-expand-md navbar-dark bg-dark navi-bar">
         <a class="navbar-brand h1 mb-0 mx-3" href="#">Name Workout</a>
@@ -69,7 +67,13 @@
         </div>
         <div class="col-lg-6">
           <!--picture title-->
-          <img class="title-image" src="../images/greg.jpg" alt="workout" />
+          <div style="text-align: right">
+            <img
+              class="title-image"
+              src="../images/mainImg.jpg"
+              alt="workout"
+            />
+          </div>
         </div>
       </div>
     </section>
@@ -79,11 +83,11 @@
         <div class="col-lg-6">
           <img class="workout-image" src="../images/gymImg.jpg" alt="demo" />
         </div>
-        <div class="col-lg-6">
+        <div class="col-lg-6 workout-text">
           <h1>Workout Plans</h1>
           <p>
             Create your own customized workout plan! <br />
-            Or choose one of our pre-made workout plans for your goals!
+            coming soon!
           </p>
           <button type="button" class="btn btn-dark" id="workout-button">
             Create workout plan
@@ -98,7 +102,11 @@
           <h1>Meal Plans</h1>
           <p>
             Create your own diet plan to be more consistent with it. <br />
-            Add foods and use our healthy, tasty, guilt-free recepies!
+            Our flexible, comfortable and easy to use meal planner will help you
+            <br />
+            to create your own daily meal plans and calculate all the macros
+            <br />
+            so you could track your progress and reach your goals!
           </p>
           <button type="button" class="btn btn-dark" id="meal-button">
             Create meal plan
@@ -111,12 +119,12 @@
     </section>
 
     <section id="footer" class="bg2">
-      <i class="fab fa-instagram foot-icon"></i>
-      <i class="fab fa-instagram foot-icon"></i>
-      <i class="fab fa-instagram foot-icon"></i>
-      <i class="fab fa-instagram foot-icon"></i>
+      <i class="bi bi-instagram foot-icon"></i>
+      <i class="bi bi-whatsapp foot-icon"></i>
+      <i class="bi bi-facebook foot-icon"></i>
+      <i class="bi bi-twitter foot-icon"></i>
 
-      <p>© Copyright 2022 NameWorkout</p>
+      <p style="margin-top: 1rem">© Copyright 2022 NameWorkout</p>
     </section>
 
     <script src="home.js"></script>
