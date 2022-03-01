@@ -181,4 +181,23 @@ body {
 .dropdown-menu {
   max-height: 280px;
   overflow-y: auto;
+  max-width: 50%;
+  overflow-x: auto;
+}
+
+.planEditBtn {
+}
+.planEditBtn:hover {
+  border: 1.5px solid white;
+  border-radius: 5px;
+}
+
+.collapseB:hover {
+  border: 1.5px solid white;
+  border-radius: 5px;
+}
+
+.delPlan:hover {
+  border: 1.5px solid white;
+  border-radius: 5px;
 }

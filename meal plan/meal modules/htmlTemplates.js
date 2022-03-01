@@ -77,7 +77,7 @@ export let mealHtml = `
               class="iconBtn add-dish"
               data-bs-toggle="tooltip"
               data-bs-html="true"
-              title = "add meal">
+              title = "add dish">
           <i class="bi bi-plus-circle addDishCircle addCircle"></i></button>
       </div>
     </div>
@@ -141,7 +141,7 @@ export let planDataHtml = `
               <i class="bi bi-arrow-bar-down"></i>  
             </button>
             </div>
-            <div class="col-4">
+            <div class="col-4" style="padding:0;">
             <button
               class="whiteIconBtn planEditBtn" 
               style="margin-top: 6px;"
@@ -160,7 +160,7 @@ export let planDataHtml = `
                 data-bs-html="true"
                 title = "delete"
                 >
-                  <i class="bi bi-trash trashBtn"></i>
+                  <i class="bi bi-trash "></i>
               </button>
             </div>
           </div>
