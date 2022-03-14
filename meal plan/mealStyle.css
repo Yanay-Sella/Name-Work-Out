@@ -8,18 +8,18 @@ body {
     #1a2020 100%
   );
   background: linear-gradient(to right, #779292 0%, #394646 31%, #1a2020 100%);
+  position: relative;
+  height: 100vh;
 }
 
 .modal-content {
-  background: #afd7d7;
-  background: -moz-linear-gradient(left, #afd7d7 0%, #91b3b3 31%, #586c6c 100%);
-  background: -webkit-linear-gradient(
-    left,
-    #afd7d7 0%,
-    #91b3b3 31%,
-    #586c6c 100%
-  );
-  background: linear-gradient(to right, #afd7d7 0%, #91b3b3 31%, #586c6c 100%);
+  background-color: rgb(192, 192, 192) !important;
+  border: 2px solid rgb(255, 255, 255) !important;
+}
+
+.imgDiv {
+  text-align: center;
+  padding-top: 100px;
 }
 
 .allPlan {
@@ -39,6 +39,7 @@ body {
   border-width: 0.1rem;
   border-color: rgb(3, 8, 15);
   border-radius: 0.35rem;
+  background-color: rgb(214, 212, 212);
 }
 
 .planDataBody {
@@ -107,8 +108,6 @@ body {
 }
 
 .header {
-  /* font-family: 'Josefin Sans', sans-serif;
-    font-family: 'Merriweather', serif; */
   text-align: center;
   font-size: 300%;
   color: rgb(201, 201, 201);
@@ -146,6 +145,10 @@ body {
   margin: 0;
 }
 
+.delMeal {
+  margin-bottom: 4.2px;
+}
+
 .iconBtn {
   background-color: transparent;
   border: transparent;
@@ -178,4 +181,56 @@ body {
 .dropdown-menu {
   max-height: 280px;
   overflow-y: auto;
+  max-width: 50%;
+  overflow-x: auto;
+}
+
+.planEditBtn {
+}
+.planEditBtn:hover {
+  border: 1.5px solid white;
+  border-radius: 5px;
+}
+
+.collapseB:hover {
+  border: 1.5px solid white;
+  border-radius: 5px;
+}
+
+.delPlan:hover {
+  border: 1.5px solid white;
+  border-radius: 5px;
+}
+
+#footer {
+  text-align: center;
+  padding: 80px 0 20px 0;
+  margin-top: 50vh;
+}
+
+.foot-icon {
+  margin: 0.5rem;
+}
+
+.bg1 {
+  background: #779292;
+  background: -moz-linear-gradient(top, #779292 0%, #394646 50%, #1a2020 100%);
+  background: -webkit-linear-gradient(
+    top,
+    #779292 0%,
+    #394646 50%,
+    #1a2020 100%
+  );
+  background: linear-gradient(to bottom, #779292 0%, #394646 50%, #1a2020 100%);
+}
+.bg2 {
+  background: #1a2020;
+  background: -moz-linear-gradient(top, #1a2020 0%, #394646 50%, #779292 100%);
+  background: -webkit-linear-gradient(
+    top,
+    #1a2020 0%,
+    #394646 50%,
+    #779292 100%
+  );
+  background: linear-gradient(to bottom, #1a2020 0%, #394646 50%, #779292 100%);
 }

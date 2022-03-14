@@ -48,15 +48,15 @@ function setMealColor(planDiv, meals) {
 }
 
 function displayPlanMacros(planDiv, macros) {
-  if (
-    Number.isInteger(macros.calories) &&
-    Number.isInteger(macros.protein) &&
-    Number.isInteger(macros.carbs)
-  ) {
-    planDiv.find(".plan-dropdown-cal").text(`Calories: ${macros.calories}`);
-    planDiv.find(".plan-dropdown-prot").text(`protein: ${macros.protein}`);
-    planDiv.find(".plan-dropdown-carbs").text(`Carbs: ${macros.carbs}`);
-  }
+  // if (
+  //   Number.isInteger(macros.calories) &&
+  //   Number.isInteger(macros.protein) &&
+  //   Number.isInteger(macros.carbs)
+  // ) {
+  planDiv.find(".plan-dropdown-cal").text(`Calories: ${macros.calories}cal`);
+  planDiv.find(".plan-dropdown-prot").text(`protein: ${macros.protein}g`);
+  planDiv.find(".plan-dropdown-carbs").text(`Carbs: ${macros.carbs}g`);
+  // }
 }
 
 const createMealDiv = function (meal) {

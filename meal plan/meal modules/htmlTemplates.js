@@ -1,8 +1,16 @@
+//~~~~~~~~Dish Div
 export let dishHtml = `
     
     <div class="container-fluid dishDiv input-group mb-3" id="dish">
         <label for=".dishList" class="form-label"></label>
-        <button class="iconBtn delBtn delDish"><i class="bi bi-trash"></i></button>
+        <button
+          class="iconBtn delBtn delDish"
+          data-bs-toggle="tooltip"
+          data-bs-html="true"
+          title = "delete"
+        >
+          <i class="bi bi-trash trashBtn"></i>
+        </button>
 
         <input class="form-control dishName dishList" id="id="dropdownMenuLink"" placeholder="Search dish..." data-fdcid="" data-bs-toggle="dropdown" autocomplete="off">
         <button class="searchFood btn-dark me-2" id="dropdownMenuLink" data-bs-toggle="dropdown" aria-expanded="false">
@@ -51,14 +59,26 @@ export let mealHtml = `
             <input type="text" class="form-control mealName" placeholder="meal name" style="border: none">  
           </th>
           <th scope="col">
-            <button class="iconBtn delBtn delMeal"><i class="bi bi-trash"></i></button>
+            <button
+            class="iconBtn delBtn delMeal"
+              data-bs-toggle="tooltip"
+              data-bs-html="true"
+              title = "delete"
+            >
+              <i class="bi bi-trash trashBtn"></i>
+            </button>
           </th>
         </thead>
       </table>
 
 
       <div class="dishContainer" style="text-align:center;">
-        <button class="iconBtn add-dish"><i class="bi bi-plus-circle addDishCircle"></i></button>
+        <button 
+              class="iconBtn add-dish"
+              data-bs-toggle="tooltip"
+              data-bs-html="true"
+              title = "add dish">
+          <i class="bi bi-plus-circle addDishCircle addCircle"></i></button>
       </div>
     </div>
     `;
@@ -112,22 +132,36 @@ export let planDataHtml = `
               type="button"
               data-bs-toggle="collapse"
               data-bs-target= ""
+              data-bs-toggle="tooltip"
+              data-bs-html="true"
+              title = "expand/collapse"
               aria-expanded="false"
               style="margin-top: 6px;"
             >
               <i class="bi bi-arrow-bar-down"></i>  
             </button>
             </div>
-            <div class="col-4">
+            <div class="col-4" style="padding:0;">
             <button
               class="whiteIconBtn planEditBtn" 
               style="margin-top: 6px;"
+              data-bs-toggle="tooltip"
+              data-bs-html="true"
+              title = "edit"
             >
             <i class="bi bi-pencil-square"></i>
             </button>
             </div>
             <div class="col-4">
-              <button class="iconBtn delBtn delPlan whiteIconBtn" style="float: right; margin-top: 6px;"><i class="bi bi-trash"></i></button>
+              <button
+                class="iconBtn delBtn delPlan whiteIconBtn"  
+                style="float: right; margin-top: 6px;"
+                data-bs-toggle="tooltip"
+                data-bs-html="true"
+                title = "delete"
+                >
+                  <i class="bi bi-trash "></i>
+              </button>
             </div>
           </div>
         </div>

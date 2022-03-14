@@ -51,21 +51,9 @@ function closeModalAfterSave(index) {
 
 function savePlanMacros() {
   return {
-    calories: Number(
-      $(".plan-dropdown-cal")
-        .html()
-        .slice($(".plan-dropdown-cal").html().indexOf(": ") + 2)
-    ),
-    protein: Number(
-      $(".plan-dropdown-prot")
-        .html()
-        .slice($(".plan-dropdown-prot").html().indexOf(": ") + 2)
-    ),
-    carbs: Number(
-      $(".plan-dropdown-carbs")
-        .html()
-        .slice($(".plan-dropdown-carbs").html().indexOf(": ") + 2)
-    ),
+    calories: Number($(".plan-dropdown-cal").html().match(/\d+/)),
+    protein: Number($(".plan-dropdown-prot").html().match(/\d+/)),
+    carbs: Number($(".plan-dropdown-carbs").html().match(/\d+/)),
   };
 }
 
@@ -93,7 +81,9 @@ function updatePlans() {
   plans.each((_, p) => p.remove());
 
   allPlans.forEach((plan) => {
-    $(".allPlansContainer").find(".openBtnContainer").before(divCreation.createPlanDiv(plan));
+    $(".allPlansContainer")
+      .find(".openBtnContainer")
+      .before(divCreation.createPlanDiv(plan));
     // $(".openBtnDiv").before(divCreation.createPlanDiv(plan));
   });
   setupClickHandlers();
