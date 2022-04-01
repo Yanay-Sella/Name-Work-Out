@@ -1,0 +1,165 @@
+.workout {
+  box-sizing: border-box;
+  display: grid;
+  width: fit-content;
+  margin: 10px;
+}
+.workout_header {
+  box-sizing: border-box;
+  padding: 20px;
+  margin-top: 10px;
+  width: fit-content;
+  border: 2px solid black;
+  display: flex;
+  gap: 20px;
+}
+
+.workout_body {
+  box-sizing: border-box;
+  padding: 0px;
+  margin-bottom: 10px;
+  display: inline-block;
+  width: fit-content;
+  height: fit-content;
+  border: 2px solid black;
+}
+
+.exercise_number {
+  display: inline-block;
+  padding: 0;
+  margin: 0;
+  box-sizing: border-box;
+  width: fit-content;
+  height: fit-content;
+  margin: 10px;
+}
+
+.workout_body_header {
+  box-sizing: border-box;
+  margin: 10px;
+}
+
+.workout_body_main {
+  box-sizing: border-box;
+  padding: 0;
+  margin: 20px;
+  margin-left: 1rem;
+}
+
+.workout_body_end {
+  text-align: center;
+  box-sizing: border-box;
+  margin: 10px;
+}
+
+.hidden {
+  opacity: 0%;
+  width: 0;
+  height: 0;
+  display: none;
+}
+
+.set {
+  margin: 10px;
+  display: flex;
+  padding: 0;
+  box-sizing: border-box;
+  width: fit-content;
+  height: fit-content;
+}
+
+.switch {
+  float: right;
+}
+
+.btn {
+  margin: 5px;
+}
+
+.form-control {
+  display: inline;
+}
+
+/************for home page **********/
+
+body {
+  color: white;
+}
+
+.titleBody {
+  padding: 30px 50px 30px 50px;
+}
+
+.workout-text {
+  clear: both;
+}
+
+#footer {
+  text-align: center;
+  padding: 80px 0 20px 0;
+}
+
+#meal-features {
+  padding: 30px 50px 30px 50px;
+}
+
+#workout-features {
+  padding: 30px 50px 30px 50px;
+  text-align: left;
+}
+
+.title-image {
+  max-width: 70%;
+  height: auto;
+}
+
+.workout-image {
+  max-width: 60%;
+  height: auto;
+}
+
+.meal-image {
+  max-width: 100%;
+  height: auto;
+  float: right;
+}
+
+.foot-icon {
+  margin: 0.5rem;
+}
+
+.navi-bar {
+  margin-bottom: 3rem;
+}
+
+.main-title {
+  margin-left: 2.5rem;
+  padding-right: 15rem;
+  font-size: 4rem;
+}
+
+.bg1 {
+  background: #779292;
+  background: -moz-linear-gradient(top, #779292 0%, #394646 50%, #1a2020 100%);
+  background: -webkit-linear-gradient(
+    top,
+    #779292 0%,
+    #394646 50%,
+    #1a2020 100%
+  );
+  background: linear-gradient(to bottom, #779292 0%, #394646 50%, #1a2020 100%);
+}
+.bg2 {
+  background: #1a2020;
+  background: -moz-linear-gradient(top, #1a2020 0%, #394646 50%, #779292 100%);
+  background: -webkit-linear-gradient(
+    top,
+    #1a2020 0%,
+    #394646 50%,
+    #779292 100%
+  );
+  background: linear-gradient(to bottom, #1a2020 0%, #394646 50%, #779292 100%);
+}
+
+
+/*# sourceMappingURL=/homeStyle.373999c1.css.map */

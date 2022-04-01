@@ -1,0 +1,23 @@
+{
+  "name": "name-work-out",
+  "version": "1.0.0",
+  "description": "",
+  "main": "home.html",
+  "scripts": {
+    "dev": "parcel home-page/home.html",
+    "build": "parcel build home-page/home.html"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/o6mer/Name-Work-Out.git"
+  },
+  "author": "Omer Liraz and Yanay Sella",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/o6mer/Name-Work-Out/issues"
+  },
+  "homepage": "https://github.com/o6mer/Name-Work-Out#readme",
+  "devDependencies": {
+    "parcel-bundler": "^1.12.5"
+  }
+}

@@ -1,0 +1,28 @@
+body {
+  background: #1a2020;
+  background: -moz-radial-gradient(
+    center,
+    #1a2020 0%,
+    #394646 50%,
+    #779292 100%
+  );
+  background: -webkit-radial-gradient(
+    center,
+    #1a2020 0%,
+    #394646 50%,
+    #779292 100%
+  );
+  background: radial-gradient(
+    ellipse at center,
+    #1a2020 0%,
+    #394646 50%,
+    #779292 100%
+  );
+}
+
+h1 {
+  color: white;
+}
+
+
+/*# sourceMappingURL=/workoutStyle.b7fafa88.css.map */
